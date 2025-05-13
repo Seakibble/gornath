@@ -1,0 +1,21 @@
+.stats {
+    border: 4px solid var(--darkbrown);
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.stats__icon {
+    text-align: center;
+}
+
+.stats__stat {
+    display: grid;
+    justify-content: start;
+    grid-template-columns: 2em 5em auto;
+}
+
+
+.stats__value {
+    font-weight: bold;
+    color: var(--orange);
+}

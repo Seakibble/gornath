@@ -1,0 +1,19 @@
+h1 {
+    color:var(--green);
+}
+
+h2 {
+    color:var(--crimson);
+}
+h3 {
+    color:var(--orange);
+}
+
+p {
+    margin-bottom: 2em;
+}
+
+.italic {
+    color: var(--brown);
+    font-style: italic;
+}

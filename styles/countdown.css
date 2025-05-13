@@ -1,0 +1,74 @@
+.countdown {
+    display: grid;
+    grid-auto-flow: column;
+    padding: 0.5em 0;
+}
+
+.countdown__pip {
+    position: relative;
+    background: #222;
+    height: 3em;
+    border: 2px solid var(--darkbrown);
+    border-top: 4px solid var(--darkbrown);
+    border-bottom: 4px solid var(--darkbrown);
+    
+    transition: background 0.5s;
+}
+.countdown__pip:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 4px solid var(--darkbrown);
+}
+.countdown__pip:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 4px solid var(--darkbrown);
+
+    &.active {
+        background: var(--purple)
+    }
+}
+
+.countdown__pip.active {
+    background: var(--crimson);
+}
+
+.countdown__icon {
+    position:absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.days {
+    color: var(--crimson);
+    font-weight: bold;
+}
+
+@media screen and (width < 650px) {
+    .countdown {
+        grid-template-columns: repeat(15, auto);
+        grid-template-rows: 2;
+        grid-auto-flow:initial;
+    }
+
+    .countdown__pip {
+        border-width: 4px;
+    }
+    .countdown__pip:first-child {
+        border-bottom-left-radius: 0;
+    }
+    .countdown__pip:last-child {
+        border-top-right-radius: 0;
+    }
+}
+
+@media screen and (width < 450px) {
+    .countdown {
+        grid-template-columns: repeat(10, auto);
+        grid-template-rows: 3;
+        grid-auto-flow:initial;
+
+    }
+}
