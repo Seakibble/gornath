@@ -1,37 +1,94 @@
-:root {
-    background: black;
-    font-size: 18px;
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
+:root {
+    /* background: black; */
+    font-size: 18px;
+    font-family: 'Crimson Pro', sans-serif;
+
+    --black: #000;
     --beige: #ffdda9;
     --brown: #97794a;
     --darkbrown: #3f3320;
     --crimson: #ef3434;
-    --purple: #a700d1;
+    --purple: #cc00ff;
     --green: #7cff44;
     --orange: #ffb90e;
 
     color:var(--beige);
 }
 
+html {
+    --s: 80px;
+    /* control the size*/
+    --c1: #0a0a0a;
+    --c2: #000000;
+
+    --_s: calc(2*var(--s)) calc(2*var(--s));
+    --_g: 35.36% 35.36% at;
+    --_c: #0000 66%, var(--c2) 68% 70%, #0000 72%;
+    background:
+        radial-gradient(var(--_g) 100% 25%, var(--_c)) var(--s) var(--s)/var(--_s),
+        radial-gradient(var(--_g) 0 75%, var(--_c)) var(--s) var(--s)/var(--_s),
+        radial-gradient(var(--_g) 100% 25%, var(--_c)) 0 0/var(--_s),
+        radial-gradient(var(--_g) 0 75%, var(--_c)) 0 0/var(--_s),
+        repeating-conic-gradient(var(--c1) 0 25%, #0000 0 50%) 0 0/var(--_s),
+        radial-gradient(var(--_c)) 0 calc(var(--s)/2)/var(--s) var(--s) var(--c1);
+}
+
 body {
-    max-width: 1000px;
+    /* max-width: 1200px; */
     margin: 0 auto;
     padding: 1em;
 }
 
 button {
     color:var(--crimson);
+    font-size: 1.2em;
     border: 4px solid var(--crimson);
     background-color: black;
     font-weight: bold;
     border-radius: 5px;
-    margin: 1em 0;
-    padding: 0.5em;
+    margin: 0.8em 0 0.5em;
+    padding: 5px 10px;
 
-    transition: color 0.25s, background 0.25s;
+    transition: color 0.25s, background 0.25s, transform 0.15s;
 }
+
 button:hover {
     cursor: pointer;
     background: var(--crimson);
     color: black;
+    transform: translateY(-5px);
+}
+
+button:disabled {
+    background: #333;
+    color: var(--crimson);
+    filter:grayscale(1);
+
+    &:hover {
+        transform: translateY(0);
+    }
+}
+
+.daysRow {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1em;
+}
+
+.box {    
+    border: 4px solid var(--darkbrown);
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 1em 0;
+    background-color: black;
+}
+
+
+@media screen and (width > 1200px) {
+    :root {
+        font-size: 20px;
+    }
 }

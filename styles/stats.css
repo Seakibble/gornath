@@ -1,11 +1,10 @@
 .stats {
-    border: 4px solid var(--darkbrown);
-    padding: 1em;
-    margin: 1em 0;
+    font-size: 1.25em;
 }
 
 .stats__icon {
     text-align: center;
+    transform: scale(1.1);
 }
 
 .stats__stat {
@@ -14,8 +13,13 @@
     grid-template-columns: 2em 5em auto;
 }
 
+.stats__name {
+    font-weight: bold;
+    color: var(--green);
+}
 
 .stats__value {
     font-weight: bold;
     color: var(--orange);
+    transform: scale(1.2);
 }

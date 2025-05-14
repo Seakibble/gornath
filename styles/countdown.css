@@ -1,18 +1,27 @@
 .countdown {
     display: grid;
+    grid-template-columns: repeat(30, 1fr);
     grid-auto-flow: column;
-    padding: 0.5em 0;
+    box-shadow: 0 0 10px black;
+    margin: 1em 0 1em;
+    font-size: 1.5em;
 }
 
 .countdown__pip {
     position: relative;
-    background: #222;
-    height: 3em;
+    background: #111;
+    color: var(--darkbrown);
+    
+    height: 60px;
     border: 2px solid var(--darkbrown);
     border-top: 4px solid var(--darkbrown);
     border-bottom: 4px solid var(--darkbrown);
     
-    transition: background 0.5s;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+    
+    transition: background-color 0.5s, transform 0.25s, border-radius 0.25, border 0.25s;
 }
 .countdown__pip:first-child {
     border-top-left-radius: 5px;
@@ -25,21 +34,49 @@
     border-right: 4px solid var(--darkbrown);
 
     &.active {
-        background: var(--purple)
+        background: black;
     }
 }
 
 .countdown__pip.active {
-    background: var(--crimson);
+    transition: background-color 0.5s ease-out, transform 0.25s ease-in-out, border-radius 0.25s, border 0.25s;
+}
+.countdown__pip.active {
+    z-index: 1;
+}
+.countdown__pip.now {
+    background: black;
+    transform: scale(1.3);
+    border-width: 4px;
+    border-radius: 5px;
+    z-index: 2;
+    /* box-shadow: 0 0 5px black; */
+}
+.countdown__icon {
+    display: grid;
+    place-content: center;
 }
 
-.countdown__icon {
-    position:absolute;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    text-align: center;
+.countdown__date {
+    position: relative;
+    top: -0.05em;
 }
+
+/* .countdown__pip.active .countdown__date {
+    color: var(--beige);
+} */
+
+.countdown__pip.active { background: var(--black); }
+.countdown__pip.active.early  { color: var(--green); }
+.countdown__pip.active.mid { color: var(--orange); }
+.countdown__pip.active.late { color: var(--crimson); }
+.countdown__pip.active.end { color: var(--purple); }
+
+.countdown__pip.active.now { color: var(--black); }
+.countdown__pip.active.now.early { background: var(--green); }
+.countdown__pip.active.now.mid { background: var(--orange); }
+.countdown__pip.active.now.late { background: var(--crimson); }
+.countdown__pip.active.now.end { background: var(--purple); }
 
 .days {
     color: var(--crimson);
@@ -48,7 +85,7 @@
 
 @media screen and (width < 650px) {
     .countdown {
-        grid-template-columns: repeat(15, auto);
+        grid-template-columns: repeat(15, 1fr);
         grid-template-rows: 2;
         grid-auto-flow:initial;
     }
@@ -66,7 +103,7 @@
 
 @media screen and (width < 450px) {
     .countdown {
-        grid-template-columns: repeat(10, auto);
+        grid-template-columns: repeat(10, 1fr);
         grid-template-rows: 3;
         grid-auto-flow:initial;
 
