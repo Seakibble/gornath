@@ -17,27 +17,23 @@
     <div class="header">
         <!-- <h1>The Battle of Gornath</h1> -->
         <div id="countdown" class="countdown"></div>
-        <div class="daysRow">
-            <button id="next" onclick="game.nextDay()">⌛ End Day</button>
-            <!-- <div> -->
-                <h2 id="days"></h2>
-                <!-- <p class="italic" style="margin: 0">It will not be long before Logus attacks Gornath. We must be ready for the invasion...</p> -->
-            <!-- </div> -->
+    </div>
+    <main>
+        <div class="sidebar">
+            <div id="stats" class="stats box">
+                <div class="stats__subtitle">—&nbsp;THE&nbsp;CITY&nbsp;OF&nbsp;—</div>
+                <h1 class="stats__title">GORNATH</h1>
+            </div>
+            <button id="next" onclick="game.nextDay()">⌛ Next Day</button>
         </div>
-    </div>
-
-    <div id="stats" class="stats box"></div>
-    
-    <div class="box">
-        <h2>Stats</h2>
-        <p>If <b>Military</b> drops to 0, we will be unable to defend ourselves from the demon's attack - Gornath will fall, and
-            there will be nothing anyone can do about it.</p>
-        <p>If <b>Loyalty</b> drops to 0, Bokaz may be overthrown. Gornath will go on, but someone will replace him, and your
-            roles as the Voice of the Chief may not be honoured.</p>
-        <p>If <b>Economy</b> drops to 0, our merchants will leave.</p>
-        <p>If <b>Stability</b> drops to 0, all of Gornath's stats will deteriorate as time goes on.</p>
-    </div>
-    
+        <div id="panel" class="box">
+            <h2>Stats</h2>
+            <p><b>Military:</b> The effectiveness of Gornath's defenses. If it drops to 0, we will be unable to defend ourselves from the demons' attack - Gornath will fall, and there will be nothing anyone can do about it.</p>
+            <p><b>Loyalty:</b> The trust and respect Gornath has for Bokaz. If it drops to 0, Bokaz may be overthrown. Gornath will go on, but someone will replace him, and your roles as the Voice of the Chief may not be honoured.</p>
+            <p><b>Stability:</b> The state of the economy, civic order, and general morale. If it drops to 0, the city will descend into chaos and anarchy. The population will flee and abandon the city.</p>
+            <p><b>Reverence:</b> The faith the city has for the Gods. If it drops to 0, the people of Gornath will abandon the old gods and turn to other sources of power out of desperation - the demons, Iron Sorcery, Cleovaross, etc.</p>
+        </div>
+    </main>    
 
     <script src="scripts/utils.js"></script>
     <script src="scripts/main.js"></script>
