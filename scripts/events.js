@@ -122,6 +122,56 @@ let events = [
             },
         ]
     },
+    {
+        title: "LOGUS ATTACKS",
+        type: "fight",
+        text: "Logus as appeared suddenly and is attacking the town!.",
+        options: [
+            {
+                title: "Fight him off!",
+                test: "Combat",
+                outcomes: [{
+                    name: 'Pass',
+                    m: 0,
+                    l: 0,
+                    s: 0,
+                    r: 0,
+                    other: ""
+                },
+                {
+                    name: 'Fail',
+                    m: 0,
+                    l: -3,
+                    s: -3,
+                    r: 0,
+                    other: ""
+                }
+                ]
+            },
+            {
+                title: "Send in the Warriors",
+                test: "DC 20 Military",
+                outcomes: [
+                    {
+                        name: 'Pass',
+                        m: -2,
+                        l: 0,
+                        s: 0,
+                        r: 0,
+                        other: ""
+                    },
+                    {
+                        name: 'Fail',
+                        m: -5,
+                        l: -1,
+                        s: -3,
+                        r: 0,
+                        other: ""
+                    }
+                ]
+            },
+        ]
+    },
 ]
 
 let i = 0

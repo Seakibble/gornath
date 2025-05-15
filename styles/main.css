@@ -10,6 +10,7 @@
     --brown: #97794a;
     --darkbrown: #3f3320;
     --crimson: #ef3434;
+    --blue: #34a1ef;
     --purple: #cc00ff;
     --green: hsl(102, 100%, 63%);
     --orange: #ffb90e;
@@ -20,8 +21,8 @@
 html {
     --s: 80px;
     /* control the size*/
-    --c1: #333;
-    --c2: #222;
+    --c1: #1c130b;
+    --c2: #0a0807;
 
     --_s: calc(2*var(--s)) calc(2*var(--s));
     --_g: 35.36% 35.36% at;
@@ -63,6 +64,13 @@ main {
     }
 }
 
+.sidebar__buttons {
+
+    display: grid;
+    gap: 1em;
+    align-content: space-between;
+}
+
 button {
     color:var(--crimson);
     font-size: 1.2em;
@@ -71,6 +79,8 @@ button {
     font-weight: bold;
     border-radius: 5px;
     padding: 5px 10px;
+
+    box-shadow: 0 0 10px black;
 
     transition: color 0.25s, background 0.25s, transform 0.15s;
 }
@@ -89,6 +99,16 @@ button:disabled {
 
     &:hover {
         transform: translateY(0);
+    }
+}
+
+#gate, #rest {
+    color: var(--blue);
+    border-color: var(--blue);
+
+    &:hover:not(:disabled) {
+        background: var(--blue);
+        color: black;
     }
 }
 
@@ -112,11 +132,45 @@ button:disabled {
     padding: 0.5em;
     /* margin: 1em 0; */
     background-color: black;
+    box-shadow: 0 0 10px black;
 }
 
 
-@media screen and (width > 1600px) {
+@media screen and (width > 1700px) {
     :root {
         font-size: 20px;
     }
 }
+
+@media screen and (width < 1500px) {
+    body {
+        overflow: auto;
+    }
+    div#panel {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-flow: row;
+        justify-self: center;
+    }
+}
+
+@media screen and (width < 1200px) {
+    :root {
+        font-size: 14px;
+    }
+    main {
+        display: block;
+    }
+    .sidebar {
+        grid-auto-flow: column;
+    }
+    div#panel {
+        margin: 2em 0;
+        grid-template-columns: 1fr;
+        grid-auto-flow: row;
+        gap: 2em;
+    }
+}
+
+@media screen and (width < 500px) {}
+
+@media screen and (width < 300px) {}

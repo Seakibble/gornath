@@ -25,9 +25,11 @@
                 <h1 class="stats__title">GORNATH</h1>
                 <div class="stats__subtitle">—&nbsp;THE&nbsp;DEAD&nbsp;CITY&nbsp;—</div>
             </div>
-            <button id="gate" onclick="game.useGate()"><div>🌀</div> <div>Use Gate</div></button>
-            <button id="rest" onclick="game.rest()"><div>🛏️</div> <div class="text">Party Rest</div></button>
-            <button id="next" onclick="game.nextDay()"><div>⌛</div> <div>Next Day</div></button>
+            <div class="sidebar__buttons">
+                <button id="gate" onclick="game.useGate()"><div>🌀</div> <div>Activate Gate</div></button>
+                <button id="rest" onclick="game.rest()"><div>💤</div> <div class="text">Begin Rest</div></button>
+                <button id="next" onclick="game.nextDay()"><div>⌛</div> <div>End the Day</div></button>
+            </div>
         </div>
         <div id="panel">
 

@@ -8,7 +8,7 @@ const ICONS = {
     gate: "🌀",
     time: "⌛",
     fight: "⚔️",
-    rest: '🛏️',
+    rest: '💤',
     
     crisis: "💥",
     dilemma: "❓",
@@ -19,7 +19,7 @@ let game = {
     days: 30,
     data: {
         cards: 0,
-        gateCooldown: -1,
+        gateCooldown: 2,
         restCooldown: -1,
         day: 3,
         stats: {
@@ -53,7 +53,7 @@ let game = {
             this.tickRest()
             
             if (this.data.day == this.days - 1) {
-                this.elements.$next.innerHTML = `${ICONS['fight']} Begin Battle`
+                this.elements.$next.innerHTML = `${ICONS['fight']} <div>Begin Battle</div>`
             }
             this.elements.$next.disabled = true
 
@@ -65,11 +65,11 @@ let game = {
     dealCards: function() {
         let x = Math.floor(Math.random()*3)+1
         for (let i = 0; i < x; i++) {
-            setTimeout(()=>{
-                this.elements.$panel.innerHTML += makeCard(events[i])
-                this.data.cards++
-                this.checkCards()
-            }, i*500)
+            let $card = makeCard(events[Math.floor(Math.random() * events.length)])
+
+            this.elements.$panel.appendChild($card)
+            this.data.cards++
+            this.checkCards()
         }
     },
     checkCards: function() {
@@ -125,21 +125,30 @@ let game = {
         }
     },
     addIcon: function (icon, day) {
+        let $pip = this.elements.$pips[day]
+        if (!$pip) {
+            console.log("COULDN'T FIND PIP " + icon + ", " + day)
+            return
+        }
         switch(icon) {
             case 'gate':
-                this.elements.$pips[day].innerHTML += `<div class='countdown__icon countdown__icon--${icon}'><div class='spin'>${ICONS[icon]}</div></div>`
+                $pip.innerHTML = `<div class='countdown__icon countdown__icon--${icon}'><div class='spin'>${ICONS[icon]}</div></div>` + $pip.innerHTML
                 break
             case 'logus':
-                this.elements.$pips[day].innerHTML += `<div class='countdown__icon countdown__icon--${icon}'><div class='pulse'>${ICONS[icon]}</div></div>`
+                $pip.innerHTML = `<div class='countdown__icon countdown__icon--${icon}'><div class='pulse'>${ICONS[icon]}</div></div>` + $pip.innerHTML
+                break
+            case 'rest':
+                $pip.innerHTML = `<div class='countdown__icon countdown__icon--${icon}'><div class='pulse'>${ICONS[icon]}</div></div>` + $pip.innerHTML
                 break
             default:
-                this.elements.$pips[day].innerHTML += `<div class='countdown__icon countdown__icon--${icon}'><div>${ICONS[icon]}</div></div>`
+                $pip.innerHTML = `<div class='countdown__icon countdown__icon--${icon}'><div>${ICONS[icon]}</div></div>` + $pip.innerHTML
                 break
         }
     },
     initCountdown: function() {
         this.elements.$countdown = document.getElementById('countdown')
         this.elements.$next = document.getElementById('next')
+        this.elements.$next.disabled = true
 
         for (let i = 0; i < this.days; i++) {
             let icon = ""
@@ -160,6 +169,7 @@ let game = {
             if (i == this.data.day - 1) {
                 setTimeout(() => {
                     this.elements.$pips[i].classList.add('now')
+                    this.elements.$next.disabled = false
                 }, i * 200 + 800)
             }
         }
@@ -173,7 +183,7 @@ let game = {
 
         setTimeout(() => {
             this.addIcon('logus', 29)
-        }, this.data.day * 200 + 2500)
+        }, this.data.day * 200 + 1500)
 
         for (let i = 0; i < this.days; i++) {
             if (i < 10) {

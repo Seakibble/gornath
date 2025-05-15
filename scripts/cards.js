@@ -42,19 +42,24 @@ function makeOptions(options) {
 }
 
 function makeCard(card) {
-    return `
-        <div class='card-wrapper'><div class='card ${card.type} flipped'>
-            <div class=''>
-                <h2>${ICONS[card.type]} ${card.title}</h2>
+    let $card = document.createElement('div')
+    $card.classList.add('card-wrapper')
+    $card.innerHTML = `
+        <div class='card-bumper'>
+            <div class='card ${card.type} flipped'>
+                <div class=''>
+                    <h2>${ICONS[card.type]} <span>${card.title}</span></h2>
+                </div>
+                <div class='inner'>
+                    <p><i>${card.text}</i></p>
+                </div>
+                
+                ${makeOptions(card.options)}
+                <div class="front"></div>
             </div>
-            <div class='inner'>
-                <p><i>${card.text}</i></p>
-            </div>
-            
-            ${makeOptions(card.options)}
-            <div class="front"></div>
-        </div></div>
+        </div>
     `
+    return $card
 }
 
 game.elements.$panel = document.getElementById('panel')
@@ -64,17 +69,22 @@ game.elements.$panel.addEventListener('click', (e) => {
     if (!$card) {
         return
     }
-    if ($card.classList.contains('card') && e.target.tagName !== 'BUTTON' && !$card.classList.contains('locked')) {
+    if ($card.classList.contains('card')
+        && e.target.tagName !== 'BUTTON'
+        && e.target.parentElement.tagName !== 'BUTTON'
+        && !$card.classList.contains('locked'))
+    {
         $card.classList.toggle('flipped')
         $card.classList.add('locked')
+        $card.parentElement.classList.add('bump')
         
         setTimeout(() => {
             $card.classList.toggle('hide')
+            $card.parentElement.classList.remove('bump')
         }, 500)
 
         setTimeout(()=> {
             $card.classList.remove('locked')
-
         }, 900)
     }
 
@@ -91,7 +101,16 @@ function resolve(button) {
     game.changeStat('stability', button.dataset.s)
     game.changeStat('reverence', button.dataset.r)
 
-    $card.remove()
-    game.data.cards--
-    game.checkCards()
+    $card.classList.add('remove')
+    $card.addEventListener('animationend', cleanupCard)
 } 
+
+function cleanupCard(e) {
+    if (e.target.classList.contains('card-wrapper')) {
+        e.target.remove()
+        game.data.cards--
+        game.checkCards()
+
+        e.target.removeEventListener('animationend', cleanupCard)
+    }
+}
