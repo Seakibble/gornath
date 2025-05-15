@@ -1,0 +1,185 @@
+#panel {
+    display: grid;
+    grid-auto-flow: column;
+    place-content: center;
+    gap: 4em;
+    
+}
+
+.card-wrapper {
+    transition: transform 0.25s;
+    transition-delay: 0.1s;
+    perspective: 5000px;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.card {
+    position: relative;
+    
+    --s: 38px;
+    /* control the size*/
+    --c1: #050505;
+    --c2: #111;
+
+    --l: var(--c1) 20%, #0000 0;
+    --g: 35%, var(--c2) 0 45%, var(--c1) 0;
+    background:
+        linear-gradient(45deg, var(--l) 45%, var(--c1) 0 70%, #0000 0),
+        linear-gradient(-45deg, var(--l) var(--g) 70%, #0000 0),
+        linear-gradient(45deg, var(--c1) var(--g));
+    background-size: var(--s) var(--s);
+    border: 5px solid #111;
+    display: grid;
+    
+    padding: 0.5em;
+    border-radius: 1em;
+
+    box-shadow: 0 0 1em black;
+
+    --size: 0.75;
+    width: calc(27.5em * var(--size));
+    height: calc(47.5em * var(--size));
+
+    transition: transform 0.8s cubic-bezier(0.645, 0, 0.355, 1);
+    transition-delay: 0.1s;
+
+    cursor: pointer;
+    
+    /* transform-origin: top; */
+
+    &:hover {
+        /* transform: scale(1.2); */
+    }
+}
+
+.card.dilemma {
+    --c1: #220f05;
+    --c2: #44200c;
+    border-color: #332011;
+}
+
+.card.crisis {
+    --c1: #110505;
+    --c2: #330c0c;
+    border-color: #211;
+}
+
+.card.opportunity {
+    --c1: #050511;
+    --c2: #0c0c33;
+    border-color: #112;
+}
+
+
+.card .inner {
+    background: #000b;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.card h2 {
+    font-size: 1.4em;
+    /* text-align: center; */
+    color: var(--white);
+    margin-bottom: 0.5em;
+}
+
+.card h3 {
+    font-size: 1.1em;
+    text-align: center;
+    margin: 2em 0 0.5em;
+    color: var(--orange);
+    line-height: 1em;
+}
+
+.card p {
+    padding: 0.25em;
+    margin: 0 0 0.5em;
+    text-indent: 0;
+    color: var(--brown);
+    border-radius: 0.25em;
+}
+.card b {
+    color: var(--beige);
+    padding-right: 0.35em;
+}
+
+.card button {
+    border: none;
+    display: block;
+    font-weight: normal;
+
+    font-size: 1em;
+    color: var(--brown);
+    background: #111a;
+    border-left: 0.25em solid var(--brown);
+
+    width: 100%;
+    text-align: left;
+    
+    margin-bottom: 0.5em;
+    padding: 0 0.5em;
+    
+    & span {
+        color: var(--beige);
+        font-weight: bold;
+        padding-right: 0.35em;
+    }
+
+    & .success {
+        color: var(--green);
+    }
+    & .failure {
+        color: var(--crimson);
+    }
+
+    &:hover {
+        transform: translateX(5px);
+        background-color: #222;
+        color: white;
+    }
+}
+
+.front {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border-radius: 0.75em;
+    /* opacity: 0; */
+    z-index: 1;
+    transform: scaleX(-100%);
+
+    background-color: black;
+    background-image: url(../images/logus.png);
+    background-size: 100% 100%;
+}
+
+.flipped {
+    transform: rotate3d(0, 1, 0, 180deg);
+}
+
+.hide .front {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.flipping {
+    animation: flipping 1s ease-in-out both;
+}
+
+@keyframes flipping {
+    0% {
+        transform: rotate3d(0, 0, 0, 0deg) translateX(0);
+    }
+    30% {
+        transform: rotate3d(0, 0, 0, 150deg) translateX(15%);
+    }
+    100% {
+        
+    }
+}

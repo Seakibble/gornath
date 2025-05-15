@@ -1,11 +1,12 @@
 h1 {
     color:var(--green);
-    font-size: 2.25em;
+    font-size: 1.75em;
 }
 
 h2 {
     color:var(--crimson);
-    font-size: 1.75em;
+    font-size: 1.5em;
+    line-height: 1.15em;
 }
 h3 {
     color:var(--orange);

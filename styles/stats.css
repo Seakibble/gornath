@@ -3,19 +3,22 @@
 }
 
 .stats__subtitle {
-    font-size: 1.15em;
+    font-size: 1em;
     text-align: center;
     font-weight: bold;
     color: var(--brown);
-    border-top: 4px solid var(--darkbrown);
+    border-bottom: 4px solid var(--darkbrown);
+    position: relative;
+    top: -0.25em;
+    
 }
 .stats__title {
-    position:relative;
-    top: -0.25em;
-    text-align: center;
+    font-size: 2em;
     line-height: 1em;
+    text-align: center;
+    
     color: var(--crimson);
-    border-bottom: 4px solid var(--darkbrown);
+    border-top: 4px solid var(--darkbrown);    
 }
 
 .stats__icon {
@@ -24,7 +27,7 @@
 }
 
 .stats__stat {
-    font-size: 1.25em;
+    font-size: 1.15em;
     font-weight: bold;
     display: grid;
     justify-content: start;

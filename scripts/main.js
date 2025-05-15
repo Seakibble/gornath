@@ -7,7 +7,11 @@ const ICONS = {
     logus: "👿",
     gate: "🌀",
     time: "⌛",
-    fight: "⚔️"
+    fight: "⚔️",
+    
+    crisis: "💥",
+    dilemma: "❓",
+    opportunity: "🌠",
 }
 
 let game = {

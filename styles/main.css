@@ -39,6 +39,9 @@ body {
     /* max-width: 1200px; */
     margin: 0 auto;
     padding: 1em;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr;
 }
 
 main {
@@ -69,7 +72,7 @@ button:hover {
     cursor: pointer;
     background: var(--crimson);
     color: black;
-    transform: translateY(-5px);
+    /* transform: translateY(-5px); */
 }
 
 button:disabled {
@@ -87,6 +90,7 @@ button:disabled {
 }
 #panel {
     /* grid-area: panel; */
+    
 }
 /* .daysRow {
     display: grid;

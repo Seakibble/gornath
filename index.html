@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/text.css">
     <link rel="stylesheet" href="styles/countdown.css">
     <link rel="stylesheet" href="styles/stats.css">
+    <link rel="stylesheet" href="styles/card.css">
 </head>
 <body>
     <div class="header">
@@ -21,21 +22,24 @@
     <main>
         <div class="sidebar">
             <div id="stats" class="stats box">
-                <div class="stats__subtitle">—&nbsp;THE&nbsp;CITY&nbsp;OF&nbsp;—</div>
                 <h1 class="stats__title">GORNATH</h1>
+                <div class="stats__subtitle">—&nbsp;THE&nbsp;DEAD&nbsp;CITY&nbsp;—</div>
             </div>
             <button id="next" onclick="game.nextDay()">⌛ Next Day</button>
         </div>
-        <div id="panel" class="box">
-            <h2>Stats</h2>
+        <div id="panel">
+
+            <!-- <h1>Stats</h1>
             <p><b>Military:</b> The effectiveness of Gornath's defenses. If it drops to 0, we will be unable to defend ourselves from the demons' attack - Gornath will fall, and there will be nothing anyone can do about it.</p>
             <p><b>Loyalty:</b> The trust and respect Gornath has for Bokaz. If it drops to 0, Bokaz may be overthrown. Gornath will go on, but someone will replace him, and your roles as the Voice of the Chief may not be honoured.</p>
             <p><b>Stability:</b> The state of the economy, civic order, and general morale. If it drops to 0, the city will descend into chaos and anarchy. The population will flee and abandon the city.</p>
-            <p><b>Reverence:</b> The faith the city has for the Gods. If it drops to 0, the people of Gornath will abandon the old gods and turn to other sources of power out of desperation - the demons, Iron Sorcery, Cleovaross, etc.</p>
+            <p><b>Reverence:</b> The faith the city has for the Gods. If it drops to 0, the people of Gornath will abandon the old gods and turn to other sources of power out of desperation - the demons, Iron Sorcery, Cleovaross, etc.</p> -->
         </div>
     </main>    
 
+    <script src="scripts/events.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/cards.js"></script>
 </body>
 </html>
