@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(30, 1fr);
     grid-auto-flow: column;
-    box-shadow: 0 0 10px black;
+    box-shadow: 0 0 20px black;
     margin: 1em 0 1em;
     font-size: 1.5em;
 }
@@ -40,31 +40,55 @@
 
 .countdown__pip.active {
     transition: background-color 0.5s ease-out, transform 0.25s ease-in-out, border-radius 0.25s, border 0.25s;
-}
-.countdown__pip.active {
+
     z-index: 1;
+    overflow: hidden;
+
+    &::after {
+        width: 12px;
+        height: 12px;
+        background-color: var(--darkbrown);
+        content: '';
+        display: block;
+        position: absolute;
+        top: -7px;
+        transform: rotate(50grad);
+        opacity: 0;
+
+        transition: opacity 0.5s;
+    }
 }
 .countdown__pip.now {
-    background: black;
+    position: relative;
     transform: scale(1.3);
     border-width: 4px;
     border-radius: 5px;
     z-index: 2;
     /* box-shadow: 0 0 5px black; */
+
+    &::after {
+        opacity: 1;
+    }
 }
 .countdown__icon {
+    position: relative;
+    z-index: 5;
     display: grid;
     place-content: center;
     pointer-events: none;
+    animation: enter 2s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.countdown__icon.spin {
+@keyframes enter {
+    from { transform: scale(0);}
+}
+.countdown__icon .spin {
     animation: spin 7s linear infinite;
 }
 @keyframes spin {
     from { transform: rotate(0deg);}
     to { transform: rotate(-360deg);}
 }
-.countdown__icon.pulse {
+.countdown__icon .pulse {
     animation: pulse 7s infinite;
 }
 @keyframes pulse {
@@ -75,8 +99,10 @@
 }
 
 .countdown__date {
-    position: relative;
-    top: -0.05em;
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    bottom: 0;
 }
 
 /* .countdown__pip.active .countdown__date {

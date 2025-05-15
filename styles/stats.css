@@ -34,11 +34,22 @@
     grid-template-columns: 2em 5em 1.5em;
 }
 
-.stats__name {
-}
-
 .stats__value {
     color: var(--green);
     transform: scale(1.2);
     text-align: center;
+
+    & div {
+        display: block;
+        animation: stat__flash 0.5s;
+    }
+}
+
+@keyframes stat__flash {
+    0%,100% {
+        transform: scale(1.2);
+    }
+    50% {
+        transform: scale(1.5);
+    }
 }

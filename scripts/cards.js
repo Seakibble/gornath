@@ -29,7 +29,12 @@ function makeOptions(options) {
             }
             if (outcome.other) values.push(outcome.other)
             
-            option += '<button><span class="' + outcome.name.toLowerCase() +'">' + outcome.name + "</span> " + values.join(', ') + '</button>'
+            let data = `data-m='${outcome.m}' data-l='${outcome.l}' data-s='${outcome.s}' data-r='${outcome.r}'`
+            
+            option += `<button ${data}>
+                <span class="${outcome.name.toLowerCase()}">${outcome.name}</span>
+                ${values.join(', ')}
+                </button>`
         }
         html += "<div class='inner option'>"+option+"</div>"
     }
@@ -52,15 +57,13 @@ function makeCard(card) {
     `
 }
 
-let $panel = document.getElementById('panel')
+game.elements.$panel = document.getElementById('panel')
 
-
-
-
-$panel.innerHTML += makeCard(events[0]) + makeCard(events[1]) + makeCard(events[2])
-
-$panel.addEventListener('click', (e) => {
+game.elements.$panel.addEventListener('click', (e) => {
     let $card = e.target.closest('.card')
+    if (!$card) {
+        return
+    }
     if ($card.classList.contains('card') && e.target.tagName !== 'BUTTON' && !$card.classList.contains('locked')) {
         $card.classList.toggle('flipped')
         $card.classList.add('locked')
@@ -74,4 +77,21 @@ $panel.addEventListener('click', (e) => {
 
         }, 900)
     }
+
+    if (e.target.tagName == "BUTTON") {
+        resolve(e.target)
+    }
 })
+
+function resolve(button) {
+    let $card = button.closest('.card-wrapper')
+
+    game.changeStat('military', button.dataset.m)
+    game.changeStat('loyalty', button.dataset.l)
+    game.changeStat('stability', button.dataset.s)
+    game.changeStat('reverence', button.dataset.r)
+
+    $card.remove()
+    game.data.cards--
+    game.checkCards()
+} 
