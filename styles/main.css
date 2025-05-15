@@ -2,7 +2,7 @@
 
 :root {
     /* background: black; */
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Crimson Pro', sans-serif;
 
     --black: #000;
@@ -109,7 +109,7 @@ button:disabled {
 }
 
 
-@media screen and (width > 1200px) {
+@media screen and (width > 1600px) {
     :root {
         font-size: 20px;
     }

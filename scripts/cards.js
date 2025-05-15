@@ -59,20 +59,19 @@ let $panel = document.getElementById('panel')
 
 $panel.innerHTML += makeCard(events[0]) + makeCard(events[1]) + makeCard(events[2])
 
-
-$panel.addEventListener('animationend', (e) => {
-    if (e.target.classList.contains('card')) {
-        e.target.classList.remove('flipping')
-    }
-})
-
 $panel.addEventListener('click', (e) => {
     let $card = e.target.closest('.card')
-    if ($card.classList.contains('card') && e.target.tagName !== 'BUTTON') {
+    if ($card.classList.contains('card') && e.target.tagName !== 'BUTTON' && !$card.classList.contains('locked')) {
         $card.classList.toggle('flipped')
-        // $card.classList.add('flipping')
+        $card.classList.add('locked')
+        
         setTimeout(() => {
             $card.classList.toggle('hide')
-        }, 500);
+        }, 500)
+
+        setTimeout(()=> {
+            $card.classList.remove('locked')
+
+        }, 900)
     }
 })
