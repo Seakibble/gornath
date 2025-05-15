@@ -20,10 +20,10 @@ let game = {
             gateCooldown: 2,
         day: 3,
         stats: {
-            military: 10,
-            loyalty: 10,
+            military: 9,
+            loyalty: 6,
             stability: 10,
-            reverence: 10,
+            reverence: 12,
         },
     },
     elements: {},
@@ -68,10 +68,10 @@ let game = {
         for (let i = 0; i < this.days; i++) {
             let icon = ""
             if (i == this.data.day + this.data.gateCooldown) {
-                icon += `<div class='countdown__icon'>${ICONS['gate']}</div>`
+                icon += `<div class='countdown__icon spin'>${ICONS['gate']}</div>`
             }
             if (i == this.days-1) {
-                icon += `<div class='countdown__icon'>${ICONS['logus']}</div>`
+                icon += `<div class='countdown__icon pulse'>${ICONS['logus']}</div>`
             }
             if (icon == '') {
                 icon = `<div class='countdown__icon countdown__date'>${this.days-i-1}</div>`

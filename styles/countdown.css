@@ -55,6 +55,23 @@
 .countdown__icon {
     display: grid;
     place-content: center;
+    pointer-events: none;
+}
+.countdown__icon.spin {
+    animation: spin 7s linear infinite;
+}
+@keyframes spin {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(-360deg);}
+}
+.countdown__icon.pulse {
+    animation: pulse 7s infinite;
+}
+@keyframes pulse {
+    0%,15%,100% { transform: scale(1);}
+    7% { transform: scale(1.25);}
+    30%,50%,70%,90% { transform: scale(1.05);}
+    20%,40%,60%,80% { transform: scale(1);}
 }
 
 .countdown__date {

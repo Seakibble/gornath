@@ -8,7 +8,7 @@ let events = [
                 title: "Do this thing",
                 test: "DC 20 Military",
                 outcomes: [{
-                    name: 'Success',
+                    name: 'Pass',
                     m: -1,
                     l: 2,
                     s: 0,
@@ -16,7 +16,7 @@ let events = [
                     other: ""
                 },
                 {
-                    name: 'Failure',
+                    name: 'Fail',
                     m: -5,
                     l: 0,
                     s: 0,
@@ -49,7 +49,7 @@ let events = [
                 title: "Try and fix it",
                 test: "DC 20 Arcana",
                 outcomes: [{
-                    name: 'Success',
+                    name: 'Pass',
                     m: 0,
                     l: 0,
                     s: 0,
@@ -57,7 +57,7 @@ let events = [
                     other: "We keep the gate"
                 },
                 {
-                    name: 'Failure',
+                    name: 'Fail',
                     m: 0,
                     l: 0,
                     s: -5,
@@ -90,7 +90,7 @@ let events = [
                 title: "Try and fix it",
                 test: "DC 20 Arcana",
                 outcomes: [{
-                    name: 'Success',
+                    name: 'Pass',
                     m: 0,
                     l: 0,
                     s: 0,
@@ -98,7 +98,7 @@ let events = [
                     other: "We keep the gate"
                 },
                 {
-                    name: 'Failure',
+                    name: 'Fail',
                     m: 0,
                     l: 0,
                     s: -5,

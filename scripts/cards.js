@@ -31,7 +31,7 @@ function makeOptions(options) {
             
             option += '<button><span class="' + outcome.name.toLowerCase() +'">' + outcome.name + "</span> " + values.join(', ') + '</button>'
         }
-        html += option
+        html += "<div class='inner option'>"+option+"</div>"
     }
     return html
 }
@@ -39,12 +39,14 @@ function makeOptions(options) {
 function makeCard(card) {
     return `
         <div class='card-wrapper'><div class='card ${card.type} flipped'>
-            <div class='inner'>
+            <div class=''>
                 <h2>${ICONS[card.type]} ${card.title}</h2>
-                <p>${card.text}</p>
-
-                ${makeOptions(card.options)}
             </div>
+            <div class='inner'>
+                <p><i>${card.text}</i></p>
+            </div>
+            
+            ${makeOptions(card.options)}
             <div class="front"></div>
         </div></div>
     `

@@ -11,7 +11,7 @@
     --darkbrown: #3f3320;
     --crimson: #ef3434;
     --purple: #cc00ff;
-    --green: #7cff44;
+    --green: hsl(102, 100%, 63%);
     --orange: #ffb90e;
 
     color:var(--beige);
@@ -42,6 +42,7 @@ body {
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr;
+    overflow: hidden;
 }
 
 main {
