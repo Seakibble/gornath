@@ -86,7 +86,7 @@
 
 
 .card .inner {
-    background: hsla(var(--hue), 50%, 12%, 0.6);
+    background: linear-gradient(hsl(var(--hue), 50%, 15%, 0.8), hsl(var(--hue), 50%, 10%, 0.2));
     padding: 0.5em;
     border-radius: 0.5em;
 
