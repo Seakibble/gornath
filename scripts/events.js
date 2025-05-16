@@ -1,6 +1,6 @@
 let events = [
     {
-        title: "DEMONIC STRIKE",
+        title: "Demonic Strike",
         type: "dilemma",
         text: "A gang of demons are attacking Gornath from the lower levels. We need someone to look into this matter before it becomes a problem.",
         options: [
@@ -21,7 +21,7 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
-                    other: "Zorn will die"
+                    other: "Zorn dies"
                 }
                 ]
             },
@@ -41,7 +41,7 @@ let events = [
         ]
     },
     {
-        title: "GATE MALFUNCTION",
+        title: "Gate Malfunction",
         type: "crisis",
         text: "The gate his going critical! We need to stop it before it punches a hole in the fabric of reality.",
         options: [
@@ -54,7 +54,7 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
-                    other: "We keep the gate"
+                    other: "—"
                 },
                 {
                     name: 'Fail',
@@ -62,7 +62,7 @@ let events = [
                     l: 0,
                     s: -5,
                     r: 0,
-                    other: "We lose the gate"
+                    other: "Gate is lost"
                 }
                 ]
             },
@@ -75,55 +75,55 @@ let events = [
                         l: 0,
                         s: 0,
                         r: 0,
-                        other: "We lose the gate"
+                        other: "Gate is lost"
                     }
                 ]
             },
         ]
     },
     {
-        title: "QUIVICAR MERCH",
+        title: "Quivicar Merchandise",
         type: "opportunity",
-        text: "The gate his going critical! We need to stop it before it punches a hole in the fabric of reality.",
+        text: "The mangy merchant is doing a flash sale. Perhaps we can get him to drop his prices a little?",
         options: [
             {
-                title: "Try and fix it",
-                test: "DC 20 Arcana",
+                title: "Talk him around",
+                test: "DC 25 Persuasion",
                 outcomes: [{
                     name: 'Pass',
                     m: 0,
                     l: 0,
                     s: 0,
                     r: 0,
-                    other: "We keep the gate"
+                    other: "Lower prices"
                 },
                 {
                     name: 'Fail',
                     m: 0,
                     l: 0,
-                    s: -5,
+                    s: 0,
                     r: 0,
-                    other: "We lose the gate"
+                    other: ""
                 }
                 ]
             },
             {
-                title: "Destroy it",
+                title: "Use legal force",
                 outcomes: [
                     {
                         name: 'Effect',
                         m: 0,
-                        l: 0,
-                        s: 0,
+                        l: -1,
+                        s: -1,
                         r: 0,
-                        other: "We lose the gate"
+                        other: "Lower prices"
                     }
                 ]
             },
         ]
     },
     {
-        title: "LOGUS ATTACKS",
+        title: "Logus Attacks",
         type: "fight",
         text: "Logus as appeared suddenly and is attacking the town!.",
         options: [

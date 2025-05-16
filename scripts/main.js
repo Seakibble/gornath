@@ -9,6 +9,10 @@ const ICONS = {
     time: "⌛",
     fight: "⚔️",
     rest: '💤',
+    test: '🎲',
+
+    pass: '✔️',
+    fail: '❌',
     
     crisis: "💥",
     dilemma: "❓",
@@ -23,8 +27,8 @@ let game = {
         restCooldown: -1,
         day: 3,
         stats: {
-            military: 9,
             loyalty: 6,
+            military: 9,
             stability: 10,
             reverence: 12,
         },

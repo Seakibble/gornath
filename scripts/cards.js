@@ -3,36 +3,47 @@ function makeOptions(options) {
     let html = ''
     for (o of options) {
         let option = `<h3>${o.title}</h3>`
-        if (o.test) option += `<p><b>Test</b> ${o.test}</p>`
+        if (o.test) option += `<p><b>${ICONS['test']}</b> ${o.test}</p>`
 
         for (outcome of o.outcomes) {
             let values = []
             if (outcome.m < 0) {
-                values.push(outcome.m + " " + ICONS.military)
+                values.push("<span class='fail'>"+outcome.m + "</span>" + ICONS.military)
             } else if (outcome.m > 0) {
-                values.push("+" + outcome.m +" "+ ICONS.military)
+                values.push("<span class='pass'>+" + outcome.m +"</span>"+ ICONS.military)
             }
             if (outcome.l < 0) {
-                values.push(outcome.l + " " + ICONS.loyalty)
+                values.push("<span class='fail'>"+outcome.l + "</span>" + ICONS.loyalty)
             } else if (outcome.l > 0) {
-                values.push("+" + outcome.l +" "+ ICONS.loyalty)
+                values.push("<span class='pass'>+" + outcome.l +"</span>"+ ICONS.loyalty)
             }
             if (outcome.s < 0) {
-                values.push(outcome.s + " " + ICONS.stability)
+                values.push("<span class='fail'>" + outcome.s + "</span>" + ICONS.stability)
             } else if (outcome.s > 0) {
-                values.push("+" + outcome.s +" "+ ICONS.stability)
+                values.push("<span class='pass'>+" + outcome.s +"</span>"+ ICONS.stability)
             }
             if (outcome.r < 0) {
-                values.push(outcome.r + " " + ICONS.reverence)
+                values.push("<span class='fail'>" + outcome.r + "</span>" + ICONS.reverence)
             } else if (outcome.r > 0) {
-                values.push("+" + outcome.r +" "+ ICONS.reverence)
+                values.push("<span class='pass'>+" + outcome.r +"</span>"+ ICONS.reverence)
             }
             if (outcome.other) values.push(outcome.other)
             
             let data = `data-m='${outcome.m}' data-l='${outcome.l}' data-s='${outcome.s}' data-r='${outcome.r}'`
             
+            let text = ''
+            if (outcome.name == 'Pass') {
+                text = ICONS['pass'] + " |"
+            } else if (outcome.name == 'Fail') {
+                text = ICONS['fail'] + " |"
+            }
+            if (values.length == 1 && values[0] == "") {
+                values[0] = '—'
+            } else if (values.length == 0) {
+                values.push('—')
+            }
             option += `<button ${data}>
-                <span class="${outcome.name.toLowerCase()}">${outcome.name}</span>
+                <span class="${outcome.name.toLowerCase()}">${text}</span>
                 ${values.join(', ')}
                 </button>`
         }
@@ -47,11 +58,11 @@ function makeCard(card) {
     $card.innerHTML = `
         <div class='card-bumper'>
             <div class='card ${card.type} flipped'>
-                <div class=''>
+                <div class='inner'>
                     <h2>${ICONS[card.type]} <span>${card.title}</span></h2>
                 </div>
                 <div class='inner'>
-                    <p><i>${card.text}</i></p>
+                    <p>${card.text}</p>
                 </div>
                 
                 ${makeOptions(card.options)}
