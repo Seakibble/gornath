@@ -9,6 +9,7 @@
     transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1), box-shadow 0.5s;
     transition-delay: 0.1s;
     border-radius: 1em;
+    position: relative;
 
     animation: slideIn 1s ease backwards;
     animation-delay: 0ms;
@@ -45,9 +46,13 @@
 .card-bumper {
     perspective: 3000px;
     transition: transform 0.5s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 }
 
-.bump {
+.card-bumper.bump {
     transform: scale(1.1) rotate(5deg);
 }
 
@@ -245,19 +250,96 @@
     border-radius: 0.75em;
     /* opacity: 0; */
     z-index: 1;
-    transform: scaleX(-100%);
+    transform: scaleX(-1);
 
     background-color: black;
     background-size: 100% 100%;
     /* border: 5px solid var(--black); */
 
     background-image: url(../images/cardback.png);
-    box-shadow: inset 0 0 20px 10px hsl(var(--hue), 0%, 12%);
+
+    --easeInSpeed: 0.25s;
+    --easeOutSpeed: 0.5s;
+    --zoomMultiplier: 6;
+
+    transition: transform calc(var(--easeOutSpeed) * var(--zoomMultiplier));
+    &:hover {
+        transition: transform calc(var(--easeInSpeed) * var(--zoomMultiplier));
+        transform: scale(-1.1, 1.1);
+
+        & .inset {
+            transform: scale(0.91);
+            box-shadow: inset 0 0 80px 10px hsl(var(--hue), 50%, 30%, 0.75);
+            
+            transition: transform calc(var(--easeInSpeed) * var(--zoomMultiplier)) , box-shadow var(--easeInSpeed);
+        }
+    }
+
+    & .inset {
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: 0.75em;
+        box-shadow: inset 0 0 20px 10px hsl(var(--hue), 0%, 24%, 0.5);
+
+        transition: transform calc(var(--easeOutSpeed) * var(--zoomMultiplier)), box-shadow var(--easeOutSpeed);
+    }
+}
+
+.sheen {
+    /* background: linear-gradient(80deg, red, blue); */
+    
+    background: linear-gradient(80deg, 
+        hsla(var(--hue), 90%, 80%, 0) 50%, 
+        hsla(var(--hue), 90%, 80%, 0.3) 52.8%, 
+        hsla(var(--hue), 90%, 80%, 0.8) 53%, 
+        hsla(var(--hue), 90%, 80%, 0.3) 53.2%, 
+        hsla(var(--hue), 90%, 80%, 0) 56%
+        );
+    background-size: 3000% 100%; 
+    background-position: 0% 100%;
+    
+    mix-blend-mode: overlay;
+    filter: hue-rotate(40deg);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 1em;
+    /* opacity: 0; */
+    z-index: 2;
+    animation: scroll 12s linear infinite;
+    pointer-events: none;
+    --delay-offset: 0.425s;
+}
+
+@keyframes scroll {
+    to {
+        background-position: 100% 100%;
+    }
+
+    from {
+        background-position: 0% 100%;
+    }
+}
+
+.card-wrapper:nth-child(2) .sheen {
+    animation-delay: calc(var(--delay-offset)*1);
+}
+.card-wrapper:nth-child(3) .sheen {
+    animation-delay: calc(var(--delay-offset)*2);
 }
 
 .hide .front {
     opacity: 0;
     pointer-events: none;
+}
+
+.hide .sheen {
+    transform: scaleX(-1)
 }
 
 @media screen and (width < 1700px) {

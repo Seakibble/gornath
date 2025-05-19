@@ -58,6 +58,13 @@ body {
 
     pointer-events: none;
     box-shadow: inset 0 0 100px 15px black;
+    animation: fadeFromBlack 2s 0.5s backwards;
+}
+
+@keyframes fadeFromBlack {
+    from {
+        background-color:  black; 
+    }
 }
 
 main {
@@ -73,10 +80,18 @@ main {
     gap: 1em;
     align-self: start;
 
+    
+
     & button {
         text-align: left;
         display: grid;
         grid-template-columns: 1.5em 1fr;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translate(-300px);
     }
 }
 
@@ -131,11 +146,35 @@ button:disabled {
 
 #next {
     /* grid-area: next; */
+    animation: slideRight 1s 1.25s backwards;
+}
+#rest {
+    animation: slideRight 1s 1s backwards;
+
+    & .pulse {
+        animation: pulse 7s infinite;
+    }
+    &:disabled .pulse {
+        animation-play-state: paused;
+    }
+}
+#gate {
+    animation: slideRight 1s 0.75s backwards;
+
+    & .spin {
+        text-align: center;
+        animation: spin 7s linear infinite;
+    }
+
+    &:disabled .spin {
+        animation-play-state: paused;
+    }
 }
 #panel {
     /* grid-area: panel; */
-    
+    isolation: isolate;
 }
+
 /* .daysRow {
     display: grid;
     grid-template-columns: auto 1fr;

@@ -67,7 +67,10 @@ let game = {
         }, 400)
     },
     dealCards: function() {
-        let x = Math.floor(Math.random()*3)+1
+        let x = Math.floor(Math.random() * 3) + 1
+        let y = Math.floor(Math.random() * 3) + 1
+        if (y > x) x = y
+        
         for (let i = 0; i < x; i++) {
             let $card = makeCard(events[Math.floor(Math.random() * events.length)])
 

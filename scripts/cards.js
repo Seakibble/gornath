@@ -66,9 +66,13 @@ function makeCard(card) {
                 </div>
                 
                 ${makeOptions(card.options)}
-                <div class="front"></div>
+                <div class="front">
+                    <div class='inset'></div>
+                </div>
+                <div class="sheen"></div>
             </div>
         </div>
+        
     `
     return $card
 }
@@ -83,6 +87,7 @@ game.elements.$panel.addEventListener('click', (e) => {
     if ($card.classList.contains('card')
         && e.target.tagName !== 'BUTTON'
         && e.target.parentElement.tagName !== 'BUTTON'
+        && !e.target.closest('.option')
         && !$card.classList.contains('locked'))
     {
         $card.classList.toggle('flipped')
