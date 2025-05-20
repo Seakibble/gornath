@@ -27,9 +27,19 @@ function makeOptions(options) {
             } else if (outcome.r > 0) {
                 values.push("<span class='pass'>+" + outcome.r +"</span>"+ ICONS.reverence)
             }
+            if (outcome.sa < 0) {
+                values.push("<span class='fail'>" + outcome.sa + "</span>" + ICONS.salvage)
+            } else if (outcome.sa > 0) {
+                values.push("<span class='pass'>+" + outcome.sa + "</span>" + ICONS.salvage)
+            }
+            if (outcome.w < 0) {
+                values.push("<span class='fail'>" + outcome.w + "</span>" + ICONS.wealth)
+            } else if (outcome.w > 0) {
+                values.push("<span class='pass'>+" + outcome.w + "</span>" + ICONS.wealth)
+            }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-m='${outcome.m}' data-l='${outcome.l}' data-s='${outcome.s}' data-r='${outcome.r}'`
+            let data = `data-m='${outcome.m}' data-l='${outcome.l}' data-s='${outcome.s}' data-r='${outcome.r}' data-sa='${outcome.sa}' data-w='${outcome.w}'`
             
             let text = ''
             if (outcome.name == 'Pass') {
@@ -116,6 +126,9 @@ function resolve(button) {
     game.changeStat('loyalty', button.dataset.l)
     game.changeStat('stability', button.dataset.s)
     game.changeStat('reverence', button.dataset.r)
+    
+    game.changeStat('salvage', button.dataset.sa)
+    game.changeStat('wealth', button.dataset.w)
 
     $card.classList.add('remove')
     $card.addEventListener('animationend', cleanupCard)

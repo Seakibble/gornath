@@ -26,10 +26,18 @@
                 <h1 class="stats__title">GORNATH</h1>
                 <div class="stats__subtitle">—&nbsp;The&nbsp;Dead&nbsp;City&nbsp;—</div>
             </div>
+
             <div class="sidebar__buttons">
                 <button id="gate" onclick="game.useGate()"><div class="spin">🌀</div> <div>Activate Gate</div></button>
                 <button id="rest" onclick="game.rest()"><div class="pulse">💤</div> <div class="text">Begin Rest</div></button>
                 <button id="next" onclick="game.nextDay()"><div>⌛</div> <div>End the Day</div></button>
+            </div>
+
+            <div class="sidebar__tabs">
+                <button>🎧</button>
+                <button>📜</button>
+                <button>🛠️</button>
+                <button>🤝</button>
             </div>
         </div>
         <div id="panel">
@@ -40,7 +48,7 @@
             <p><b>Stability:</b> The state of the economy, civic order, and general morale. If it drops to 0, the city will descend into chaos and anarchy. The population will flee and abandon the city.</p>
             <p><b>Reverence:</b> The faith the city has for the Gods. If it drops to 0, the people of Gornath will abandon the old gods and turn to other sources of power out of desperation - the demons, Iron Sorcery, Cleovaross, etc.</p> -->
         </div>
-    </main>    
+    </main>
 
     <script src="scripts/events.js"></script>
     <script src="scripts/utils.js"></script>

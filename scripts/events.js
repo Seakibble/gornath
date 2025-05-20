@@ -13,6 +13,8 @@ let events = [
                     l: 2,
                     s: 0,
                     r: -5,
+                    sa: 0,
+                    w: 0,
                     other: ""
                 },
                 {
@@ -21,6 +23,8 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
+                    sa: 0,
+                    w: 0,
                     other: "Zorn dies"
                 }
                 ]
@@ -34,6 +38,8 @@ let events = [
                         l: 0,
                         s: 0,
                         r: 5,
+                        sa: 0,
+                        w: 0,
                         other: ""
                     }
                 ]
@@ -54,6 +60,8 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
+                    sa: 0,
+                    w: 0,
                     other: "—"
                 },
                 {
@@ -62,6 +70,8 @@ let events = [
                     l: 0,
                     s: -5,
                     r: 0,
+                    sa: 0,
+                    w: 0,
                     other: "Gate is lost"
                 }
                 ]
@@ -75,6 +85,8 @@ let events = [
                         l: 0,
                         s: 0,
                         r: 0,
+                        sa: 0,
+                        w: 0,
                         other: "Gate is lost"
                     }
                 ]
@@ -95,6 +107,8 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
+                    sa: 5,
+                    w: 5,
                     other: "Lower prices"
                 },
                 {
@@ -103,6 +117,8 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
+                    sa: 0,
+                    w: 0,
                     other: ""
                 }
                 ]
@@ -116,6 +132,8 @@ let events = [
                         l: -1,
                         s: -1,
                         r: 0,
+                        sa: 5,
+                        w: 5,
                         other: "Lower prices"
                     }
                 ]
@@ -136,6 +154,8 @@ let events = [
                     l: 0,
                     s: 0,
                     r: 0,
+                    sa: 0,
+                    w: 0,
                     other: ""
                 },
                 {
@@ -144,6 +164,8 @@ let events = [
                     l: -3,
                     s: -3,
                     r: 0,
+                    sa: 0,
+                    w: 0,
                     other: ""
                 }
                 ]
@@ -158,6 +180,8 @@ let events = [
                         l: 0,
                         s: 0,
                         r: 0,
+                        sa: 0,
+                        w: 0,
                         other: ""
                     },
                     {
@@ -166,6 +190,8 @@ let events = [
                         l: -1,
                         s: -3,
                         r: 0,
+                        sa: 0,
+                        w: 0,
                         other: ""
                     }
                 ]

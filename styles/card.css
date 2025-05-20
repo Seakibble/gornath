@@ -190,6 +190,7 @@
     padding: 0.25em;
     margin: 0 0 0.5em;
     text-indent: 0;
+    font-size: 1.1em;
     color: hsl(var(--hue), 80%, 70%);
     border-radius: 0.25em;
 }
@@ -221,7 +222,7 @@
     & span {
         color: hsl(var(--hue), 100%, 90%);
         font-weight: bold;
-        padding-right: 0.35em;
+        padding-right: 0.25em;
         pointer-events: none;
     }
 
@@ -291,14 +292,20 @@
 .sheen {
     /* background: linear-gradient(80deg, red, blue); */
     
-    background: linear-gradient(80deg, 
+    background: linear-gradient(82deg, 
         hsla(var(--hue), 90%, 80%, 0) 50%, 
-        hsla(var(--hue), 90%, 80%, 0.3) 52.8%, 
-        hsla(var(--hue), 90%, 80%, 0.8) 53%, 
-        hsla(var(--hue), 90%, 80%, 0.3) 53.2%, 
-        hsla(var(--hue), 90%, 80%, 0) 56%
+        hsla(var(--hue), 90%, 80%, 0.1) 53%,
+        hsla(var(--hue), 90%, 80%, 0.4) 56%, 
+        hsla(var(--hue), 90%, 80%, 1) 56.2%, 
+        hsla(var(--hue), 90%, 80%, 1) 56.4%,
+        hsla(var(--hue), 90%, 80%, 0.1) 56.6%,
+        hsla(var(--hue), 90%, 80%, 1) 56.8%, 
+        hsla(var(--hue), 90%, 80%, 1) 57%,
+        hsla(var(--hue), 90%, 80%, 0.4) 57.2%, 
+        hsla(var(--hue), 90%, 80%, 0.1) 62.2%,
+        hsla(var(--hue), 90%, 80%, 0) 67.2%
         );
-    background-size: 3000% 100%; 
+    background-size: 6000% 100%; 
     background-position: 0% 100%;
     
     mix-blend-mode: overlay;
@@ -311,9 +318,9 @@
     border-radius: 1em;
     /* opacity: 0; */
     z-index: 2;
-    animation: scroll 12s linear infinite;
+    animation: scroll 15s linear infinite;
     pointer-events: none;
-    --delay-offset: 0.425s;
+    --delay-offset: 0.3s;
 }
 
 @keyframes scroll {

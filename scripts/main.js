@@ -4,6 +4,10 @@ const ICONS = {
     loyalty: "❤️",
     stability: "⚖️",
     reverence: "📿",
+
+    salvage: '⚙️',
+    wealth: '💎',
+
     logus: "👿",
     gate: "🌀",
     time: "⌛",
@@ -21,16 +25,26 @@ const ICONS = {
 
 let game = {
     days: 30,
+    initialStats: {
+        loyalty: 6,
+        military: 9,
+        stability: 10,
+        reverence: 12,
+        salvage: 10,
+        wealth: 10,
+    },
     data: {
         cards: 0,
         gateCooldown: 2,
         restCooldown: -1,
         day: 3,
         stats: {
-            loyalty: 6,
-            military: 9,
-            stability: 10,
-            reverence: 12,
+            loyalty: 0,
+            military: 0,
+            stability: 0,
+            reverence: 0,
+            salvage: 0,
+            wealth: 0,
         },
     },
     elements: {},
@@ -99,10 +113,36 @@ let game = {
     changeStat: function(name, change){
         if (parseInt(change) !== 0) {
             this.data.stats[name] += parseInt(change)
-            let $stat = document.createElement('div')
-            $stat.innerText = this.data.stats[name]
-            this.elements['$'+name].innerHTML = ''
-            this.elements['$'+name].appendChild($stat)
+            let stat = this.data.stats[name]
+
+            let $stat = this.elements['$' + name]
+            let $newStat = document.createElement('div')
+            switch (name) {
+                case 'loyalty':
+                case 'military':
+                case 'stability':
+                case 'reverence':
+                    $newStat.innerHTML = addSign(stat)
+                    $stat.innerHTML = ''
+                    $stat.appendChild($newStat)
+
+                    if (stat <= -5) {
+                        $stat.parentElement.classList.remove('redline')
+                        $stat.parentElement.classList.add('purpleline')
+                    } else if (stat < 0) {
+                        $stat.parentElement.classList.add('redline')
+                        $stat.parentElement.classList.remove('purpleline')
+                    } else {
+                        $stat.parentElement.classList.remove('redline')
+                        $stat.parentElement.classList.remove('purpleline')
+                    }
+
+                    break
+                default:
+                    $newStat.innerHTML = stat
+                    $stat.innerHTML = ''
+                    $stat.appendChild($newStat)
+            }
         }
     },
     rest: function(){
@@ -221,12 +261,24 @@ let game = {
         this.elements.$loyalty = document.getElementById('stat__loyalty')
         this.elements.$stability = document.getElementById('stat__stability')
         this.elements.$reverence = document.getElementById('stat__reverence')
+        
+        this.elements.$salvage = document.getElementById('stat__salvage')
+        this.elements.$wealth = document.getElementById('stat__wealth')
+
+        this.changeStat('military', game.initialStats.military)
+        this.changeStat('loyalty', game.initialStats.loyalty)
+        this.changeStat('stability', game.initialStats.stability)
+        this.changeStat('reverence', game.initialStats.reverence)
+
+        this.changeStat('salvage', game.initialStats.salvage)
+        this.changeStat('wealth', game.initialStats.wealth)
     },
     init: function() {
         this.elements.$gate = document.getElementById('gate')
         this.elements.$rest = document.getElementById('rest')
         
         this.initStats()
+        
         this.initCountdown()
     }
 }
