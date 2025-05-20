@@ -1,0 +1,41 @@
+.menu {
+    /* position: relative; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+
+    background: #000a;
+
+    padding: 1em;
+
+    animation: menuFade 0.2s reverse both linear;
+
+    &.visible {
+        animation: menuFadeBullshitCopy 0.2s both linear;
+    }
+}
+
+/* Dumbest CSS hack I've ever needed to do. Animation won't retrigger when .visible is toggled because it's the same animation, even though the assigned values of animation change because the actual animation is the same. So short of hacking in animation: none with JS using setTimeout, the easiest way to fix this problem is to make a duplicate of the animation so that on paper, the animation is TOTALLY DIFFERENT wink wink. */
+@keyframes menuFadeBullshitCopy {
+    0% { 
+        opacity: 0;
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes menuFade {
+    0% { 
+        opacity: 0;
+        pointer-events: none;
+    }
+    100% {
+        opacity: 1;
+    }
+}

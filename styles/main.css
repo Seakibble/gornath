@@ -11,6 +11,7 @@
     --darkbrown: #3f3320;
     --crimson: #ef3434;
     --blue: #34a1ef;
+    --darkblue: #00243d;
     --purple: #cc00ff;
     --green: hsl(102, 100%, 63%);
     --orange: #ffb90e;
@@ -22,7 +23,7 @@
 html {
     --s: 80px;
     /* control the size*/
-    --c1: #1c130b;
+    --c1: #492d14;
     --c2: #0a0807;
 
     --_s: calc(2*var(--s)) calc(2*var(--s));
@@ -142,6 +143,11 @@ main {
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
     }
+
+    &.active {
+        background: var(--darkblue);
+        border-color: var(--blue);
+    }
 }
 
 button {
@@ -214,7 +220,14 @@ button:disabled {
 }
 #panel {
     /* grid-area: panel; */
+    position: relative;
     isolation: isolate;
+    min-width: 100%;
+    min-height: 100%;
+
+    &.blur div {
+        filter: blur(10px)
+    }
 }
 
 /* .daysRow {

@@ -44,7 +44,7 @@
 }
 
 .stats__stat:nth-of-type(6) {
-    border-top: 4px solid #111;
+    border-top: 2px solid var(--darkbrown);
 }
 
 .stats__value {

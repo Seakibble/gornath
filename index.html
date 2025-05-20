@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/countdown.css">
     <link rel="stylesheet" href="styles/stats.css">
     <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/menu.css">
 </head>
 <body>
     <div class="overlay"></div>
@@ -34,13 +35,25 @@
             </div>
 
             <div class="sidebar__tabs">
-                <button>🎧</button>
-                <button>📜</button>
-                <button>🛠️</button>
-                <button>🤝</button>
+                <button id="toggle__settings" onclick="game.toggleMenu('settings')">🎧</button>
+                <button id="toggle__quests" onclick="game.toggleMenu('quests')">📜</button>
+                <button id="toggle__projects" onclick="game.toggleMenu('projects')">🛠️</button>
+                <button id="toggle__allies" onclick="game.toggleMenu('allies')">🤝</button>
             </div>
         </div>
         <div id="panel">
+            <section id="menu__settings" class="menu box">
+                <h1>Settings</h1>
+            </section>
+            <section id="menu__quests" class="menu box">
+                <h1>Quests</h1>
+            </section>
+            <section id="menu__projects" class="menu box">
+                <h1>Projects</h1>
+            </section>
+            <section id="menu__allies" class="menu box">
+                <h1>Allies</h1>
+            </section>
             <!-- <div class="sheen"></div> -->
             <!-- <h1>Stats</h1>
             <p><b>Military:</b> The effectiveness of Gornath's defenses. If it drops to 0, we will be unable to defend ourselves from the demons' attack - Gornath will fall, and there will be nothing anyone can do about it.</p>

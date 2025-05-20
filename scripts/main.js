@@ -24,6 +24,7 @@ const ICONS = {
 }
 
 let game = {
+    activeMenu: null,
     days: 30,
     initialStats: {
         loyalty: 6,
@@ -192,6 +193,29 @@ let game = {
                 break
         }
     },
+    toggleMenu: function(menu) {
+        this.elements.$settings.classList.remove('visible')
+        this.elements.$quests.classList.remove('visible')
+        this.elements.$projects.classList.remove('visible')
+        this.elements.$allies.classList.remove('visible')
+
+        this.elements.$settingsBtn.classList.remove('active')
+        this.elements.$questsBtn.classList.remove('active')
+        this.elements.$projectsBtn.classList.remove('active')
+        this.elements.$alliesBtn.classList.remove('active')
+
+        if (this.activeMenu !== menu) {
+            this.elements['$'+menu+'Btn'].classList.add('active')
+            this.elements['$'+menu].classList.add('visible')
+
+            this.elements.$panel.classList.add('blur')
+            
+            this.activeMenu = menu
+        } else {
+            this.elements.$panel.classList.remove('blur')
+            this.activeMenu = null
+        }
+    },
     initCountdown: function() {
         this.elements.$countdown = document.getElementById('countdown')
         this.elements.$next = document.getElementById('next')
@@ -276,6 +300,15 @@ let game = {
     init: function() {
         this.elements.$gate = document.getElementById('gate')
         this.elements.$rest = document.getElementById('rest')
+
+        this.elements.$settings = document.getElementById('menu__settings')
+        this.elements.$settingsBtn = document.getElementById('toggle__settings')
+        this.elements.$quests = document.getElementById('menu__quests')
+        this.elements.$questsBtn = document.getElementById('toggle__quests')
+        this.elements.$projects = document.getElementById('menu__projects')
+        this.elements.$projectsBtn = document.getElementById('toggle__projects')
+        this.elements.$allies = document.getElementById('menu__allies')
+        this.elements.$alliesBtn = document.getElementById('toggle__allies')
         
         this.initStats()
         
