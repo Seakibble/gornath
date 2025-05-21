@@ -1,13 +1,14 @@
 const ICONS = {
-    readiness: "🛡️",
+    defense: "🛡️",
     economy: "💎",
-    loyalty: "❤️",
-    stability: "⚖️",
-    reverence: "📿",
+    loyalty: "👑",
+    order: "⚖️",
+    reverence: "🧿",
 
     salvage: '⚙️',
     wealth: '💎',
 
+    unworthy: "💡",
     logus: "👿",
     gate: "🌀",
     time: "⌛",
@@ -28,8 +29,8 @@ let game = {
     days: 30,
     initialStats: {
         loyalty: 6,
-        readiness: 9,
-        stability: 10,
+        defense: 9,
+        order: 10,
         reverence: 12,
         salvage: 10,
         wealth: 10,
@@ -41,8 +42,8 @@ let game = {
         day: 3,
         stats: {
             loyalty: 0,
-            readiness: 0,
-            stability: 0,
+            defense: 0,
+            order: 0,
             reverence: 0,
             salvage: 0,
             wealth: 0,
@@ -120,8 +121,8 @@ let game = {
             let $newStat = document.createElement('div')
             switch (name) {
                 case 'loyalty':
-                case 'readiness':
-                case 'stability':
+                case 'defense':
+                case 'order':
                 case 'reverence':
                     $newStat.innerHTML = addSign(stat)
                     $stat.innerHTML = ''
@@ -287,17 +288,17 @@ let game = {
                 <div id="stat__${key}" class="stats__value">${value}</div>
             </div>`
         }
-        this.elements.$readiness = document.getElementById('stat__readiness')
+        this.elements.$defense = document.getElementById('stat__defense')
         this.elements.$loyalty = document.getElementById('stat__loyalty')
-        this.elements.$stability = document.getElementById('stat__stability')
+        this.elements.$order = document.getElementById('stat__order')
         this.elements.$reverence = document.getElementById('stat__reverence')
         
         this.elements.$salvage = document.getElementById('stat__salvage')
         this.elements.$wealth = document.getElementById('stat__wealth')
 
-        this.changeStat('readiness', game.initialStats.readiness)
+        this.changeStat('defense', game.initialStats.defense)
         this.changeStat('loyalty', game.initialStats.loyalty)
-        this.changeStat('stability', game.initialStats.stability)
+        this.changeStat('order', game.initialStats.order)
         this.changeStat('reverence', game.initialStats.reverence)
 
         this.changeStat('salvage', game.initialStats.salvage)

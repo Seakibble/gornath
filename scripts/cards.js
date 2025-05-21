@@ -7,20 +7,20 @@ function makeOptions(options) {
 
         for (outcome of o.outcomes) {
             let values = []
-            if (outcome.readiness < 0) {
-                values.push("<span class='fail'>"+outcome.readiness + "</span>" + ICONS.readiness)
-            } else if (outcome.readiness > 0) {
-                values.push("<span class='pass'>+" + outcome.readiness +"</span>"+ ICONS.readiness)
+            if (outcome.defense < 0) {
+                values.push("<span class='fail'>"+outcome.defense + "</span>" + ICONS.defense)
+            } else if (outcome.defense > 0) {
+                values.push("<span class='pass'>+" + outcome.defense +"</span>"+ ICONS.defense)
             }
             if (outcome.loyalty < 0) {
                 values.push("<span class='fail'>"+outcome.loyalty + "</span>" + ICONS.loyalty)
             } else if (outcome.loyalty > 0) {
                 values.push("<span class='pass'>+" + outcome.loyalty +"</span>"+ ICONS.loyalty)
             }
-            if (outcome.stability < 0) {
-                values.push("<span class='fail'>" + outcome.stability + "</span>" + ICONS.stability)
-            } else if (outcome.stability > 0) {
-                values.push("<span class='pass'>+" + outcome.stability +"</span>"+ ICONS.stability)
+            if (outcome.order < 0) {
+                values.push("<span class='fail'>" + outcome.order + "</span>" + ICONS.order)
+            } else if (outcome.order > 0) {
+                values.push("<span class='pass'>+" + outcome.order +"</span>"+ ICONS.order)
             }
             if (outcome.reverence < 0) {
                 values.push("<span class='fail'>" + outcome.reverence + "</span>" + ICONS.reverence)
@@ -39,7 +39,7 @@ function makeOptions(options) {
             }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-readiness='${outcome.readiness}' data-loyalty='${outcome.loyalty}' data-stability='${outcome.stability}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}'`
+            let data = `data-defense='${outcome.defense}' data-loyalty='${outcome.loyalty}' data-order='${outcome.order}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}'`
             
             let text = ''
             if (outcome.name == 'Pass') {
@@ -106,8 +106,10 @@ game.elements.$panel.addEventListener('click', (e) => {
         
         setTimeout(() => {
             $card.classList.toggle('hide')
+        }, 350)
+        setTimeout(() => {
             $card.parentElement.classList.remove('bump')
-        }, 500)
+        }, 415);
 
         setTimeout(()=> {
             $card.classList.remove('locked')
@@ -122,9 +124,9 @@ game.elements.$panel.addEventListener('click', (e) => {
 function resolve(button) {
     let $card = button.closest('.card-wrapper')
 
-    game.changeStat('readiness', button.dataset.readiness)
+    game.changeStat('defense', button.dataset.defense)
     game.changeStat('loyalty', button.dataset.loyalty)
-    game.changeStat('stability', button.dataset.stability)
+    game.changeStat('order', button.dataset.order)
     game.changeStat('reverence', button.dataset.reverence)
     
     game.changeStat('salvage', button.dataset.salvage)

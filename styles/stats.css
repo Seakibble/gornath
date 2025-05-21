@@ -10,8 +10,12 @@
     font-size: 1em;
     text-align: center;
     font-weight: bold;
-    color: var(--brown);
-    border-bottom: 4px solid var(--darkbrown);
+
+    background: linear-gradient(var(--beige) 30%, var(--brown) 80%, var(--darkbrown));
+    background-clip: text;
+    color: transparent;
+
+    border-bottom: 2px solid var(--brown);
     position: relative;
     top: -0.25em;
 }
@@ -21,8 +25,11 @@
     line-height: 1.2em;
     text-align: center;
     
-    color: var(--crimson);
-    border-top: 4px solid var(--darkbrown);    
+    background: linear-gradient(rgb(255, 54, 54) 30%, var(--crimson) 70%, rgb(40, 0, 0));
+    background-clip: text;
+    color: transparent;
+    
+    border-top: 2px solid var(--brown);    
 }
 
 .stats__icon {
