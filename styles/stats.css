@@ -18,7 +18,7 @@
 .stats__title {
     margin: 0.25em 0.25em 0;
     font-size: 2em;
-    line-height: 1em;
+    line-height: 1.2em;
     text-align: center;
     
     color: var(--crimson);
@@ -59,8 +59,8 @@
     }
 }
 
-.stats__stat.redline { background: #200}
-.stats__stat.purpleline { background: #202}
+.stats__stat.redline { background: #300000}
+.stats__stat.purpleline { background: #300030}
 .redline .stats__name { color: var(--crimson)}
 .purpleline .stats__name { color: var(--purple)}
 

@@ -7,15 +7,25 @@
     bottom: 0;
     z-index: 10;
 
-    background: #000a;
-
+    background: #000b;
+    border: 4px solid var(--brown);
     padding: 1em;
-
-    animation: menuFade 0.2s reverse both linear;
+    animation: menuFade 0.4s reverse both ease-in-out;
 
     &.visible {
-        animation: menuFadeBullshitCopy 0.2s both linear;
+        animation: menuFadeBullshitCopy 0.4s both ease-in-out;
     }
+
+    & h1 {
+        color: var(--blue);
+        padding-bottom: 0.3em;
+        margin-bottom: 0.25em;
+        border-bottom: 2px solid var(--darkbrown);
+    }
+}
+
+.switch .menu {
+    animation-duration: 0.01s;
 }
 
 /* Dumbest CSS hack I've ever needed to do. Animation won't retrigger when .visible is toggled because it's the same animation, even though the assigned values of animation change because the actual animation is the same. So short of hacking in animation: none with JS using setTimeout, the easiest way to fix this problem is to make a duplicate of the animation so that on paper, the animation is TOTALLY DIFFERENT wink wink. */
@@ -23,6 +33,10 @@
     0% { 
         opacity: 0;
         pointer-events: none;
+        transform: scale(0.95);
+    }
+    70% {
+        transform: scale(1);
     }
     100% {
         opacity: 1;
@@ -34,6 +48,10 @@
     0% { 
         opacity: 0;
         pointer-events: none;
+        transform: scale(0.95);
+    }
+    70% {
+        transform: scale(1);
     }
     100% {
         opacity: 1;

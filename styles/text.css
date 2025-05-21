@@ -1,7 +1,8 @@
 h1 {
-    font-family: 'Crimson Pro', serif;
+    font-family: 'Marcellus SC', serif;
     color:var(--green);
-    font-size: 1.75em;
+    font-size: 2em;
+    line-height: 1em;
 }
 
 h2 {

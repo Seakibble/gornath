@@ -205,6 +205,11 @@ let game = {
         this.elements.$alliesBtn.classList.remove('active')
 
         if (this.activeMenu !== menu) {
+            if (this.activeMenu !== null) {
+                this.elements.$panel.classList.add('switch')
+            } else {
+                this.elements.$panel.classList.remove('switch')
+            }
             this.elements['$'+menu+'Btn'].classList.add('active')
             this.elements['$'+menu].classList.add('visible')
 
@@ -212,6 +217,7 @@ let game = {
             
             this.activeMenu = menu
         } else {
+            this.elements.$panel.classList.remove('switch')
             this.elements.$panel.classList.remove('blur')
             this.activeMenu = null
         }
