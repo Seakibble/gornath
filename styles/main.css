@@ -24,7 +24,7 @@ html {
     --s: 80px;
     /* control the size*/
     --c1: #492d14;
-    --c2: #0a0807;
+    --c2: #200d05;
 
     --_s: calc(2*var(--s)) calc(2*var(--s));
     --_g: 35.36% 35.36% at;

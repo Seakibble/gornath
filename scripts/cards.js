@@ -7,39 +7,39 @@ function makeOptions(options) {
 
         for (outcome of o.outcomes) {
             let values = []
-            if (outcome.m < 0) {
-                values.push("<span class='fail'>"+outcome.m + "</span>" + ICONS.military)
-            } else if (outcome.m > 0) {
-                values.push("<span class='pass'>+" + outcome.m +"</span>"+ ICONS.military)
+            if (outcome.readiness < 0) {
+                values.push("<span class='fail'>"+outcome.readiness + "</span>" + ICONS.readiness)
+            } else if (outcome.readiness > 0) {
+                values.push("<span class='pass'>+" + outcome.readiness +"</span>"+ ICONS.readiness)
             }
-            if (outcome.l < 0) {
-                values.push("<span class='fail'>"+outcome.l + "</span>" + ICONS.loyalty)
-            } else if (outcome.l > 0) {
-                values.push("<span class='pass'>+" + outcome.l +"</span>"+ ICONS.loyalty)
+            if (outcome.loyalty < 0) {
+                values.push("<span class='fail'>"+outcome.loyalty + "</span>" + ICONS.loyalty)
+            } else if (outcome.loyalty > 0) {
+                values.push("<span class='pass'>+" + outcome.loyalty +"</span>"+ ICONS.loyalty)
             }
-            if (outcome.s < 0) {
-                values.push("<span class='fail'>" + outcome.s + "</span>" + ICONS.stability)
-            } else if (outcome.s > 0) {
-                values.push("<span class='pass'>+" + outcome.s +"</span>"+ ICONS.stability)
+            if (outcome.stability < 0) {
+                values.push("<span class='fail'>" + outcome.stability + "</span>" + ICONS.stability)
+            } else if (outcome.stability > 0) {
+                values.push("<span class='pass'>+" + outcome.stability +"</span>"+ ICONS.stability)
             }
-            if (outcome.r < 0) {
-                values.push("<span class='fail'>" + outcome.r + "</span>" + ICONS.reverence)
-            } else if (outcome.r > 0) {
-                values.push("<span class='pass'>+" + outcome.r +"</span>"+ ICONS.reverence)
+            if (outcome.reverence < 0) {
+                values.push("<span class='fail'>" + outcome.reverence + "</span>" + ICONS.reverence)
+            } else if (outcome.reverence > 0) {
+                values.push("<span class='pass'>+" + outcome.reverence +"</span>"+ ICONS.reverence)
             }
-            if (outcome.sa < 0) {
-                values.push("<span class='fail'>" + outcome.sa + "</span>" + ICONS.salvage)
-            } else if (outcome.sa > 0) {
-                values.push("<span class='pass'>+" + outcome.sa + "</span>" + ICONS.salvage)
+            if (outcome.salvage < 0) {
+                values.push("<span class='fail'>" + outcome.salvage + "</span>" + ICONS.salvage)
+            } else if (outcome.salvage > 0) {
+                values.push("<span class='pass'>+" + outcome.salvage + "</span>" + ICONS.salvage)
             }
-            if (outcome.w < 0) {
-                values.push("<span class='fail'>" + outcome.w + "</span>" + ICONS.wealth)
-            } else if (outcome.w > 0) {
-                values.push("<span class='pass'>+" + outcome.w + "</span>" + ICONS.wealth)
+            if (outcome.wealth < 0) {
+                values.push("<span class='fail'>" + outcome.wealth + "</span>" + ICONS.wealth)
+            } else if (outcome.wealth > 0) {
+                values.push("<span class='pass'>+" + outcome.wealth + "</span>" + ICONS.wealth)
             }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-m='${outcome.m}' data-l='${outcome.l}' data-s='${outcome.s}' data-r='${outcome.r}' data-sa='${outcome.sa}' data-w='${outcome.w}'`
+            let data = `data-readiness='${outcome.readiness}' data-loyalty='${outcome.loyalty}' data-stability='${outcome.stability}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}'`
             
             let text = ''
             if (outcome.name == 'Pass') {
@@ -122,13 +122,13 @@ game.elements.$panel.addEventListener('click', (e) => {
 function resolve(button) {
     let $card = button.closest('.card-wrapper')
 
-    game.changeStat('military', button.dataset.m)
-    game.changeStat('loyalty', button.dataset.l)
-    game.changeStat('stability', button.dataset.s)
-    game.changeStat('reverence', button.dataset.r)
+    game.changeStat('readiness', button.dataset.readiness)
+    game.changeStat('loyalty', button.dataset.loyalty)
+    game.changeStat('stability', button.dataset.stability)
+    game.changeStat('reverence', button.dataset.reverence)
     
-    game.changeStat('salvage', button.dataset.sa)
-    game.changeStat('wealth', button.dataset.w)
+    game.changeStat('salvage', button.dataset.salvage)
+    game.changeStat('wealth', button.dataset.wealth)
 
     $card.classList.add('remove')
     $card.addEventListener('animationend', cleanupCard)
