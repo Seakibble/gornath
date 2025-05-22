@@ -1,5 +1,5 @@
 const ICONS = {
-    defense: "🛡️",
+    warriors: "🛡️",
     economy: "💎",
     loyalty: "👑",
     order: "⚖️",
@@ -29,7 +29,7 @@ let game = {
     days: 30,
     initialStats: {
         loyalty: 6,
-        defense: 9,
+        warriors: 9,
         order: 10,
         reverence: 12,
         salvage: 10,
@@ -42,7 +42,7 @@ let game = {
         day: 3,
         stats: {
             loyalty: 0,
-            defense: 0,
+            warriors: 0,
             order: 0,
             reverence: 0,
             salvage: 0,
@@ -121,7 +121,7 @@ let game = {
             let $newStat = document.createElement('div')
             switch (name) {
                 case 'loyalty':
-                case 'defense':
+                case 'warriors':
                 case 'order':
                 case 'reverence':
                     $newStat.innerHTML = addSign(stat)
@@ -288,7 +288,7 @@ let game = {
                 <div id="stat__${key}" class="stats__value">${value}</div>
             </div>`
         }
-        this.elements.$defense = document.getElementById('stat__defense')
+        this.elements.$warriors = document.getElementById('stat__warriors')
         this.elements.$loyalty = document.getElementById('stat__loyalty')
         this.elements.$order = document.getElementById('stat__order')
         this.elements.$reverence = document.getElementById('stat__reverence')
@@ -296,7 +296,7 @@ let game = {
         this.elements.$salvage = document.getElementById('stat__salvage')
         this.elements.$wealth = document.getElementById('stat__wealth')
 
-        this.changeStat('defense', game.initialStats.defense)
+        this.changeStat('warriors', game.initialStats.warriors)
         this.changeStat('loyalty', game.initialStats.loyalty)
         this.changeStat('order', game.initialStats.order)
         this.changeStat('reverence', game.initialStats.reverence)

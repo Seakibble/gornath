@@ -7,10 +7,10 @@ function makeOptions(options) {
 
         for (outcome of o.outcomes) {
             let values = []
-            if (outcome.defense < 0) {
-                values.push("<span class='fail'>"+outcome.defense + "</span>" + ICONS.defense)
-            } else if (outcome.defense > 0) {
-                values.push("<span class='pass'>+" + outcome.defense +"</span>"+ ICONS.defense)
+            if (outcome.warriors < 0) {
+                values.push("<span class='fail'>"+outcome.warriors + "</span>" + ICONS.warriors)
+            } else if (outcome.warriors > 0) {
+                values.push("<span class='pass'>+" + outcome.warriors +"</span>"+ ICONS.warriors)
             }
             if (outcome.loyalty < 0) {
                 values.push("<span class='fail'>"+outcome.loyalty + "</span>" + ICONS.loyalty)
@@ -39,7 +39,7 @@ function makeOptions(options) {
             }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-defense='${outcome.defense}' data-loyalty='${outcome.loyalty}' data-order='${outcome.order}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}'`
+            let data = `data-warriors='${outcome.warriors}' data-loyalty='${outcome.loyalty}' data-order='${outcome.order}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}'`
             
             let text = ''
             if (outcome.name == 'Pass') {
@@ -124,7 +124,7 @@ game.elements.$panel.addEventListener('click', (e) => {
 function resolve(button) {
     let $card = button.closest('.card-wrapper')
 
-    game.changeStat('defense', button.dataset.defense)
+    game.changeStat('warriors', button.dataset.warriors)
     game.changeStat('loyalty', button.dataset.loyalty)
     game.changeStat('order', button.dataset.order)
     game.changeStat('reverence', button.dataset.reverence)

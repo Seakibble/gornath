@@ -9,12 +9,12 @@ let events = [
                 test: "DC 20 Military",
                 outcomes: [{
                     name: 'Pass',
-                    defense: -1,  loyalty: 2,  order: 0,  reverence: -5,  salvage: 0,  wealth: 0,
+                    warriors: -1,  loyalty: 2,  order: 0,  reverence: -5,  salvage: 0,  wealth: 0,
                     other: ""
                 },
                 {
                     name: 'Fail',
-                    defense: -5,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
+                    warriors: -5,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
                     other: "Zorn dies"
                 }
                 ]
@@ -24,7 +24,7 @@ let events = [
                 outcomes: [
                     {
                         name: 'Effect',
-                        defense: 0,  loyalty: 0,  order: 0,  reverence: 5,  salvage: 0,  wealth: 0,
+                        warriors: 0,  loyalty: 0,  order: 0,  reverence: 5,  salvage: 0,  wealth: 0,
                         other: ""
                     }
                 ]
@@ -41,12 +41,12 @@ let events = [
                 test: "DC 20 Arcana",
                 outcomes: [{
                     name: 'Pass',
-                    defense: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
+                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
                     other: "—"
                 },
                 {
                     name: 'Fail',
-                    defense: 0,  loyalty: 0,  order: -5,  reverence: 0,  salvage: 0,  wealth: 0,
+                    warriors: 0,  loyalty: 0,  order: -5,  reverence: 0,  salvage: 0,  wealth: 0,
                     other: "Gate is lost"
                 }
                 ]
@@ -56,7 +56,7 @@ let events = [
                 outcomes: [
                     {
                         name: 'Effect',
-                        defense: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
+                        warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
                         other: "Gate is lost"
                     }
                 ]
@@ -73,12 +73,12 @@ let events = [
                 test: "DC 25 Persuasion",
                 outcomes: [{
                     name: 'Pass',
-                    defense: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 5,  wealth: 5,
+                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 5,  wealth: 5,
                     other: "Lower prices"
                 },
                 {
                     name: 'Fail',
-                    defense: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
+                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
                     other: ""
                 }
                 ]
@@ -88,7 +88,7 @@ let events = [
                 outcomes: [
                     {
                         name: 'Effect',
-                        defense: 0,  loyalty: -1,  order: -1,  reverence: 0,  salvage: 5,  wealth: 5,
+                        warriors: 0,  loyalty: -1,  order: -1,  reverence: 0,  salvage: 5,  wealth: 5,
                         other: "Lower prices"
                     }
                 ]
@@ -105,12 +105,12 @@ let events = [
                 test: "Combat",
                 outcomes: [{
                     name: 'Pass',
-                    defense: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
+                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
                     other: ""
                 },
                 {
                     name: 'Fail',
-                    defense: 0,  loyalty: -3,  order: -3,  reverence: 0,  salvage: 0,  wealth: 0,
+                    warriors: 0,  loyalty: -3,  order: -3,  reverence: 0,  salvage: 0,  wealth: 0,
                     other: ""
                 }
                 ]
@@ -121,12 +121,12 @@ let events = [
                 outcomes: [
                     {
                         name: 'Pass',
-                        defense: -2,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
+                        warriors: -2,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
                         other: ""
                     },
                     {
                         name: 'Fail',
-                        defense: -5,  loyalty: -1,  order: -3,  reverence: 0,  salvage: 0,  wealth: 0,
+                        warriors: -5,  loyalty: -1,  order: -3,  reverence: 0,  salvage: 0,  wealth: 0,
                         other: ""
                     }
                 ]
@@ -143,7 +143,7 @@ let events = [
                 outcomes: [
                     {
                         name: 'Effect',
-                        defense: 0, loyalty: 2, order: 0, reverence: 0, salvage: 0, wealth: 0,
+                        warriors: 0, loyalty: 2, order: 0, reverence: 0, salvage: 0, wealth: 0,
                         other: "Lose Unworthy"
                     }
                 ]
@@ -153,17 +153,17 @@ let events = [
                 test: "DC 25 Persuasion",
                 outcomes: [{
                     name: 'Pass',
-                    defense: 0, loyalty: -1, order: 0, reverence: -5, salvage: 0, wealth: 0,
+                    warriors: 0, loyalty: -1, order: 0, reverence: -5, salvage: 0, wealth: 0,
                     other: "Gain Unworthy"
                 },
                 {
                     name: 'Fail',
-                    defense: 0, loyalty: -1, order: 0, reverence: 0, salvage: 0, wealth: 0,
+                    warriors: 0, loyalty: -1, order: 0, reverence: 0, salvage: 0, wealth: 0,
                     other: "Lose Unworthy"
                 },
                 {
                     name: 'Fail',
-                    defense: 0, loyalty: -5, order: 0, reverence: -5, salvage: 0, wealth: 0,
+                    warriors: 0, loyalty: -5, order: 0, reverence: -5, salvage: 0, wealth: 0,
                     other: "Gain Unworthy"
                 },
                 ]

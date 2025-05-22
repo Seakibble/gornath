@@ -80,10 +80,10 @@ main {
     position: relative;
     z-index: 10;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto auto;
     height: 100%;
-    gap: 1em;
-    align-self: start;
+    /* gap: 1em; */
+    align-content: start;
 
     
 
@@ -101,6 +101,7 @@ main {
 }
 
 .sidebar__buttons {
+    margin-top: 1em;
     display: grid;
     gap: 0.75em;
     align-content: space-between;
@@ -108,21 +109,24 @@ main {
 }
 
 .sidebar__tabs {
-    background: var(--brown);
+    align-self: start;
+    background: black;
     display: flex;
     justify-content: space-between;
     box-shadow: 0 0 10px black;
 
     animation: slideRight 1s 1.5s backwards;
 
-    border-radius: 8px;
-    border: 2px solid var(--brown);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 4px solid var(--darkbrown);
+    border-top: 0;
 
     & button {
-        background: var(--darkbrown);
+        /* background: var(--darkbrown); */
         border-radius: 0;
-        border-left-width: 2px;
-        border-right-width: 2px;
+        /* border-left-width: 2px;
+        border-right-width: 2px; */
 
         box-shadow: none;
         flex-grow: 1;
@@ -136,25 +140,25 @@ main {
         grid-template-columns: 1fr;
         
         &:first-child {
-            border-top-left-radius: 4px;
+            /* border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
-            border-left-width: 4px;
+            border-left-width: 4px; */
         }
         &:last-child {
-            border-right-width: 4px;
+            /* border-right-width: 4px;
             border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
+            border-bottom-right-radius: 4px; */
         }
 
         &:hover {
-            background: var(--brown);
+            background: var(--darkbrown);
         }
 
         &.active {
-            background: var(--darkblue);
+            background: var(--darkbrown);
             
             &:hover {
-                background: var(--blue);
+                background: var(--beige);
             }
         }
     }

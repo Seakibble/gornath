@@ -83,6 +83,12 @@
         linear-gradient(45deg, var(--c1) var(--g));
         
     background-size: var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-quivicar.jpg');
+    }
+
+
     /* border: 5px solid #111; */
     display: grid;
     gap: 0.5em;
@@ -142,6 +148,10 @@
         calc(var(--s)/ 4) calc(var(--s)/ 4)/var(--_g),
         radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
         repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-demon.jpg');
+    }
 }
 
 .card.fight {
@@ -153,6 +163,10 @@
         linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
         linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
     background-size: var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-logus.jpg');
+    }
 }
 
 .card.crisis {
@@ -170,7 +184,7 @@
     background-size: var(--s) var(--s);
 
     & .front {
-        background-image: url('../images/cardback-demon.jpg');
+        background-image: url('../images/cardback-grey-one.jpg');
     }
 }
 
@@ -192,6 +206,9 @@
 
     & .front {
         background-image: url('../images/cardback-unworthy.jpg');
+    }
+    & h3 {
+        color: hsl(var(--hue), 100%, 95%);
     }
 }
 
