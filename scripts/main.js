@@ -1,28 +1,4 @@
-const ICONS = {
-    warriors: "🛡️",
-    economy: "💎",
-    loyalty: "👑",
-    order: "⚖️",
-    reverence: "🧿",
 
-    salvage: '⚙️',
-    wealth: '💎',
-
-    unworthy: "💡",
-    logus: "👿",
-    gate: "🌀",
-    time: "⌛",
-    fight: "⚔️",
-    rest: '💤',
-    test: '🎲',
-
-    pass: '✔️',
-    fail: '❌',
-    
-    crisis: "💥",
-    dilemma: "❓",
-    opportunity: "🌠",
-}
 
 let game = {
     activeMenu: null,
@@ -34,9 +10,15 @@ let game = {
         reverence: 12,
         salvage: 10,
         wealth: 10,
+        intel: 0,
     },
     data: {
-        cards: 0,
+        cards: {
+            locked: [],
+            unlocked: [],
+            discarded: [],
+            inPlay: []
+        },
         gateCooldown: 2,
         restCooldown: -1,
         day: 3,
@@ -47,11 +29,12 @@ let game = {
             reverence: 0,
             salvage: 0,
             wealth: 0,
+            intel: 0,
         },
     },
     elements: {},
     nextDay: function () {
-        if (this.data.cards > 0) {
+        if (this.data.cards.inPlay > 0) {
             alert("CARDS STILL IN PLAY")
             return
         }
@@ -86,17 +69,29 @@ let game = {
         let x = Math.floor(Math.random() * 3) + 1
         let y = Math.floor(Math.random() * 3) + 1
         if (y > x) x = y
+
+        if (game.data.cards.unlocked.length < x) {
+            x = game.data.cards.unlocked.length
+            
+            if (x = 0) {
+                alert("OUT OF CARDS!")
+                return
+            }
+        }
         
         for (let i = 0; i < x; i++) {
-            let $card = makeCard(events[Math.floor(Math.random() * events.length)])
+            let num = Math.floor(Math.random() * game.data.cards.unlocked.length)
+            let cardIndex = game.data.cards.unlocked.splice(num, 1)[0]
+
+            let $card = makeCard(events[cardIndex])
 
             this.elements.$panel.appendChild($card)
-            this.data.cards++
+            this.data.cards.inPlay.push(cardIndex)
             this.checkCards()
         }
     },
     checkCards: function() {
-        if (this.data.cards > 0) {
+        if (this.data.cards.inPlay.length > 0) {
             this.elements.$next.disabled = true
         } else {
             this.elements.$next.disabled = false
@@ -113,6 +108,7 @@ let game = {
         }
     },
     changeStat: function(name, change){
+        if (name === 'intel') console.log(change)
         if (parseInt(change) !== 0) {
             this.data.stats[name] += parseInt(change)
             let stat = this.data.stats[name]
@@ -295,6 +291,7 @@ let game = {
         
         this.elements.$salvage = document.getElementById('stat__salvage')
         this.elements.$wealth = document.getElementById('stat__wealth')
+        this.elements.$intel = document.getElementById('stat__intel')
 
         this.changeStat('warriors', game.initialStats.warriors)
         this.changeStat('loyalty', game.initialStats.loyalty)
@@ -303,6 +300,21 @@ let game = {
 
         this.changeStat('salvage', game.initialStats.salvage)
         this.changeStat('wealth', game.initialStats.wealth)
+        this.changeStat('intel', game.initialStats.intel)
+    },
+    initEvents: function() {
+        let i = 0
+        for (e of events) {
+            e.id = i
+            i++
+            if (e.locked) {
+                game.data.cards.locked.push(e.id)
+            } else {
+                game.data.cards.unlocked.push(e.id)
+            }
+        }
+
+        console.log(game.data.cards)
     },
     init: function() {
         this.elements.$gate = document.getElementById('gate')
@@ -320,6 +332,8 @@ let game = {
         this.initStats()
         
         this.initCountdown()
+
+        this.initEvents()
     }
 }
 

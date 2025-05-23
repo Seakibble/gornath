@@ -1,0 +1,96 @@
+.card.opportunity {
+    --hue: 190;
+    
+    --s: calc(var(--width) * 0.25);
+
+    --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
+    background:
+        calc(var(--s)/-4) calc(var(--s)/-4)/var(--_g),
+        calc(var(--s)/ 4) calc(var(--s)/ 4)/var(--_g),
+        radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
+        repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-quivicar.jpg');
+    }
+}
+
+.card.dilemma {
+    --hue: 35;
+    
+    --s: calc(var(--width) * 0.25);
+
+    --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
+    background:
+        calc(var(--s)/-4) calc(var(--s)/-4)/var(--_g),
+        calc(var(--s)/ 4) calc(var(--s)/ 4)/var(--_g),
+        radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
+        repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-demon.jpg');
+    }
+}
+
+.card.logus {
+    --hue: 280;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-logus.jpg');
+    }
+}
+
+.card.crisis {
+    --hue: 5;
+    --saturation: 0;
+
+    --s: calc(var(--width) * 0.25);
+
+    --_g: var(--c1) 6.1%, var(--c2) 6.4% 18.6%, var(--c1) 18.9% 31.1%,
+        var(--c2) 31.4% 43.6%, var(--c1) 43.9% 56.1%, var(--c2) 56.4% 68.6%, #0000 68.9%;
+    background:
+        radial-gradient(var(--s) at 100% 0, var(--_g)),
+        radial-gradient(var(--s) at 0 0, var(--_g)),
+        radial-gradient(var(--s) at 0 100%, var(--_g)),
+        radial-gradient(var(--s) at 100% 100%, var(--_g)) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front {
+        background-image: url('../images/cardback-grey-one.jpg');
+    }
+
+    & .sheen {
+        filter: grayscale(1) brightness(1.25);
+    }
+}
+
+.card.unworthy {
+    --hue: 250;
+
+    --s: calc(var(--width) * 0.125) ;
+
+    --c: #0000, var(--c1) .5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425%/6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425%/6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175%/12), var(--c));
+    background:
+        var(--g1), var(--g1) var(--s) calc(1.73*var(--s)),
+        var(--g2), var(--g2) var(--s) calc(1.73*var(--s)),
+        var(--g3) var(--s) 0, var(--g3) 0 calc(1.73*var(--s)) var(--c2);
+    background-size: calc(2*var(--s)) calc(3.46*var(--s));
+    /* background-position: center; */
+
+    & .front {
+        background-image: url('../images/cardback-unworthy.jpg');
+    }
+    & h3 {
+        color: hsl(var(--hue), 100%, 95%);
+    }
+}

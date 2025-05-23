@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Machine</title>
+    <link rel="stylesheet" href="styles/event.css">
+</head>
+<body>
+    <div id="container">
+        <nav id="sidebar">
+            <h2>Events</h2>
+            <div id="events-list"></div>
+            <button id="add-event-btn" style="width:8em; margin:0 auto; display:block; align-self: start;">Add Event</button>
+            <div>
+                <button id="stats-btn">Stats</button>
+                <button id="copy-btn">Copy Events</button>
+            </div>
+        </nav>
+        <main id="details-panel"></main>
+    </div>
+
+    <script src="scripts/constants.js"></script>
+    <script src="scripts/events.js"></script>
+    <script>
+        // --- Type color generation ---
+        function stringToColor(str, idx, total) {
+            // Use HSL for distinct colors
+            let hue = (idx * 360 / total) % 360;
+            return `hsl(${hue}, 100%, 20%)`;
+        }
+        function getTypeColors(types) {
+            let map = {};
+            types.forEach((t, i) => map[t] = stringToColor(t, i, types.length));
+            return map;
+        }
+        function getAllTypes() {
+            let set = new Set(events.map(e => e.type));
+            return Array.from(set);
+        }
+
+        // --- Numeric keys detection ---
+        function getNumericKeys() {
+            for (const event of events) {
+                for (const opt of event.options) {
+                    if (opt.outcomes && opt.outcomes.length) {
+                        return Object.keys(opt.outcomes[0]).filter(
+                            k => typeof opt.outcomes[0][k] === "number"
+                        );
+                    }
+                }
+            }
+            // fallback
+            return ['warriors','loyalty','order','reverence','salvage','wealth'];
+        }
+
+        // --- Contrast utility ---
+        function getContrastYIQ(hexcolor) {
+            // Accepts hsl() or hex, returns #23262e or #fff for contrast
+            let r, g, b;
+            if (hexcolor.startsWith('hsl')) {
+                let [h, s, l] = hexcolor.match(/\d+/g).map(Number);
+                s /= 100; l /= 100;
+                let c = (1 - Math.abs(2 * l - 1)) * s;
+                let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+                let m = l - c/2;
+                let rgb = [0,0,0];
+                if (h < 60) rgb = [c,x,0];
+                else if (h < 120) rgb = [x,c,0];
+                else if (h < 180) rgb = [0,c,x];
+                else if (h < 240) rgb = [0,x,c];
+                else if (h < 300) rgb = [x,0,c];
+                else rgb = [c,0,x];
+                [r,g,b] = rgb.map(v => Math.round((v + m) * 255));
+            } else {
+                hexcolor = hexcolor.replace('#','');
+                if (hexcolor.length === 3) hexcolor = hexcolor.split('').map(x=>x+x).join('');
+                r = parseInt(hexcolor.substr(0,2),16);
+                g = parseInt(hexcolor.substr(2,2),16);
+                b = parseInt(hexcolor.substr(4,2),16);
+            }
+            let yiq = ((r*299)+(g*587)+(b*114))/1000;
+            return (yiq >= 140) ? '#23262e' : '#fff';
+        }
+
+        // --- Main rendering logic ---
+        let originalEvents = JSON.parse(JSON.stringify(events));
+        let $eventsList = document.getElementById('events-list');
+        let $detailsPanel = document.getElementById('details-panel');
+        let selectedIdx = 0;
+        let typeColors = getTypeColors(getAllTypes());
+
+        function isEventEdited(idx) {
+            return JSON.stringify(events[idx]) !== JSON.stringify(originalEvents[idx]);
+        }
+
+        function renderList(selected) {
+            let types = getAllTypes();
+            typeColors = getTypeColors(types);
+            let html = '<ul>';
+            for (let i = 0; i < events.length; i++) {
+                let edited = isEventEdited(i);
+                let type = events[i].type;
+                let priority = events[i].priority
+                if (!priority) events[i].priority = 'standard'
+                console.log(priority)
+                let color = typeColors[type] || "#888";
+                let badgeText = type // .slice(0,5).toUpperCase();
+                let badgeFg = getContrastYIQ(color);
+                html += `<li data-idx="${i}" class=" ${i === selected ? 'selected ' : ''}${edited ? 'edited ' : ''} ${events[i].locked ? "locked": ''}">
+                    <span class="event-list-id">${i}</span>
+                    <span class="event-rarity rarity-${events[i].rarity.toLowerCase()}"></span>
+                    <span class="event-list-title">${events[i].title}${edited ? '<span class="event-list-edited">*</span>' : ''}</span>
+                    <div class='event-badges'>
+                        <span class='event-list-type'>${ICONS[priority]}</span><span class='event-list-type'>${ICONS[badgeText]}</span>
+                    </div>
+                </li>`;
+
+                //<span class='event-list-type'>${ICONS[badgeText]} <span class="event-list-type-badge" style="background:${color};color:${badgeFg};" title="${type}">${badgeText}</span></span>
+            }
+            html += '</ul>';
+            $eventsList.innerHTML = html;
+            $eventsList.querySelectorAll('li').forEach(li => {
+                li.onclick = function() {
+                    let idx = parseInt(this.getAttribute('data-idx'));
+                    selectedIdx = idx;
+                    statsMode = false;
+                    renderList(selectedIdx);
+                    renderDetails(idx);
+                }
+            });
+        }
+
+        function renderStatsPanel() {
+            // Gather stats
+            const totalEvents = events.length;
+            const typeCounts = {};
+            const rarityCounts = {};
+            const numericKeys = getNumericKeys();
+            let outcomeSum = {};
+            let outcomeCount = 0;
+
+            // Initialize sums
+            numericKeys.forEach(k => outcomeSum[k] = 0);
+
+            for (const event of events) {
+                // Type counts
+                typeCounts[event.type] = (typeCounts[event.type] || 0) + 1;
+                // Rarity counts
+                rarityCounts[event.rarity] = (rarityCounts[event.rarity] || 0) + 1;
+                // Outcomes
+                for (const opt of event.options) {
+                    if (opt.outcomes) {
+                        for (const outcome of opt.outcomes) {
+                            numericKeys.forEach(k => {
+                                outcomeSum[k] += Number(outcome[k]) || 0;
+                            });
+                            outcomeCount++;
+                        }
+                    }
+                }
+            }
+
+            // Type stats HTML
+            let typeStats = Object.entries(typeCounts).map(([type, count]) => {
+                let pct = ((count / totalEvents) * 100).toFixed(1);
+                return `<tr><td>${type}</td><td>${count}</td><td>${pct}%</td></tr>`;
+            }).join('');
+            // Rarity stats HTML
+            let rarityStats = Object.entries(rarityCounts).map(([rarity, count]) => {
+                let pct = ((count / totalEvents) * 100).toFixed(1);
+                return `<tr><td>${rarity}</td><td>${count}</td><td>${pct}%</td></tr>`;
+            }).join('');
+            // Numeric averages HTML
+            let numericStats = numericKeys.map(k => {
+                let avg = outcomeCount ? (outcomeSum[k] / outcomeCount).toFixed(2) : '0.00';
+                return `<tr><td>${k}</td><td>${avg}</td></tr>`;
+            }).join('');
+
+            $detailsPanel.innerHTML = `
+                <div style="padding:2em 2em 2em 2em; color:#bcd; max-width: 40em; margin: 0 auto;">
+                    <h2 style="text-align:center; color:#fff; margin-bottom:1.2em;">Event Data Statistics</h2>
+                    <div style="display:flex; gap:2em; flex-wrap:wrap;">
+                        <div style="flex:1 1 12em;">
+                            <h3 style="color:#8ecae6;">By Type</h3>
+                            <table style="width:100%; font-size:1em;">
+                                <thead><tr><th>Type</th><th>Count</th><th>%</th></tr></thead>
+                                <tbody>${typeStats}</tbody>
+                            </table>
+                        </div>
+                        <div style="flex:1 1 12em;">
+                            <h3 style="color:#fbbf24;">By Rarity</h3>
+                            <table style="width:100%; font-size:1em;">
+                                <thead><tr><th>Rarity</th><th>Count</th><th>%</th></tr></thead>
+                                <tbody>${rarityStats}</tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="margin-top:2em;">
+                        <h3 style="color:#a3be8c;">Average Outcome Adjustment</h3>
+                        <table style="width:100%; font-size:1em;">
+                            <thead><tr><th>Attribute</th><th>Average</th></tr></thead>
+                            <tbody>${numericStats}</tbody>
+                        </table>
+                        <div style="font-size:0.9em; color:#888; margin-top:0.5em;">(Averages are per outcome across all events)</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('stats-btn').onclick = function() {
+            statsMode = true;
+            $detailsPanel.innerHTML = '';
+            renderStatsPanel();
+        };
+
+        // Add this to get all unique rarities in use, fallback to some defaults
+        function getAllRarities() {
+            const defaults = ['common', 'uncommon', 'rare', 'special'];
+            const found = new Set(events.map(e => e.rarity).filter(Boolean));
+            defaults.forEach(r => found.add(r));
+            return Array.from(found).sort();
+        }
+
+        function renderDetails(idx) {
+            let event = events[idx];
+            let types = getAllTypes();
+            let rarities = getAllRarities();
+            let priorities = ['standard', 'high', 'immediate'];
+            typeColors = getTypeColors(types);
+            let color = typeColors[event.type] || "#888";
+            let numericKeys = getNumericKeys();
+
+            // Dropdown for types, with add option
+            let typeOptions = types.map(t =>
+                `<option value="${t}"${t === event.type ? ' selected' : ''} style="background:${typeColors[t]}; color:${getContrastYIQ(typeColors[t])};">${t}</option>`
+            ).join('');
+            typeOptions += `<option value="__add_new__">Add new type...</option>`;
+
+            // Dropdown for rarity
+            let rarityOptions = rarities.map(r => {
+                let rarityColour = ''
+                switch(r) {
+                    case 'common': rarityColour = 'hsl(207, 40%, 40%);'; break;
+                    case 'uncommon': rarityColour = 'hsl(0, 70%, 50%)'; break;
+                    case 'rare':  rarityColour = 'hsl(39, 100%, 50%);'; break;
+                    case 'special':  rarityColour = 'hsl(120, 100%, 70%)'; break;
+                }
+                return `<option style="background: ${rarityColour}" value="${r}"${r === event.rarity ? ' selected' : ''}>${r.charAt(0).toUpperCase() + r.slice(1)}</option>` }
+            ).join('');
+
+            // Priority selector options
+            let priorityOptions = priorities.map(p =>
+                `<option value="${p}"${event.priority === p ? ' selected' : ''}>${p.charAt(0).toUpperCase() + p.slice(1)}</option>`
+            ).join('');
+
+            let html = `
+                <div class="event-header">
+                    <label class="event-title">
+                        <input type="text" id="edit-title" class="edit-title" value="${event.title.replace(/"/g,'&quot;')}">
+                    </label>
+                </div>
+                <div style="margin: 0.5em 0 1em 0;">
+                    <label class="event-type">
+                        <select id="edit-type" class="edit-type" style="background:${color};color:${getContrastYIQ(color)};">
+                            ${typeOptions}
+                        </select>
+                    </label>
+                    <label class="rarity-type" style="margin-left:1em;">
+                        <select id="edit-rarity" class="rarity-${event.rarity} edit-type" style="width:auto;min-width:7em;">
+                            ${rarityOptions}
+                        </select>
+                    </label>
+                    <label class="priority-type" style="margin-left:1em;">
+                        <select id="edit-priority" class="edit-type" style="width:auto;min-width:7em;">
+                            ${priorityOptions}
+                        </select>
+                    </label>
+                    <label style="margin-left:1em;">
+                        <input type="checkbox" id="edit-locked" ${event.locked ? 'checked' : ''} style="vertical-align:middle;margin-right:0.3em;">
+                        Locked
+                    </label>
+                </div>
+                <input type="text" id="new-type-input" class="new-type-input edit-type" style="display:none;" placeholder="Enter new type">
+                <div>
+                    <textarea id="edit-text" class="edit-text">${event.text.replace(/</g,"&lt;")}</textarea>
+                </div>
+                <div class="event-options">
+                    <div class="options-label">Options</div>
+                    <ul class="options-list">
+            `;
+            for (let oi = 0; oi < event.options.length; oi++) {
+                let opt = event.options[oi];
+                html += `<li class="option-item">
+                    <div class="option-row">
+                        <span class="option-title">
+                            <input type="text" id="opt-title-${oi}" class="opt-title" value="${opt.title.replace(/"/g,'&quot;')}">
+                        </span>
+                        <input type="text" id="opt-test-${oi}" class="opt-test" value="${opt.test ? opt.test.replace(/"/g,'&quot;') : ''}" placeholder="Test">
+                        <button type="button" class="remove-option-btn" title="Remove option" data-oi="${oi}">&times;</button>
+                    </div>
+                    <div class="outcomes-table-wrap">
+                        <table class="outcomes-table">
+                            <thead>
+                                <tr>
+                                    <th class="outcome-th"></th>
+                                    ${numericKeys.map(k => `<th class="outcome-th" title="${k}">${ICONS[k]}</th>`).join('')}
+                                    <th class="outcome-th"></th>
+                                    <th class="outcome-th"></th>
+                                    <th class="outcome-th"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                if (opt.outcomes && opt.outcomes.length) {
+                    for (let oi2 = 0; oi2 < opt.outcomes.length; oi2++) {
+                        let outcome = opt.outcomes[oi2];
+                        html += `<tr class="outcome">
+                            <td>
+                                <input type="text" id="outcome-name-${oi}-${oi2}" class="outcome-name-input" value="${outcome.name.replace(/"/g,'&quot;')}">
+                            </td>
+                            ${numericKeys.map(k =>
+                                `<td>
+                                    <input type="number" id="outcome-${k}-${oi}-${oi2}" class="outcome-effect" value="${outcome[k]}" title="${k}">
+                                </td>`
+                            ).join('')}
+                            <td>
+                                <input type="text" id="outcome-other-${oi}-${oi2}" class="outcome-other" value="${outcome.other ? outcome.other.replace(/"/g,'&quot;') : ''}" placeholder="Other">
+                            </td>
+                            <td>
+                                <input type="text" id="outcome-unlocks-${oi}-${oi2}" class="outcome-unlocks" value="${outcome.unlocks ? outcome.unlocks.replace(/"/g,'&quot;') : ''}" placeholder="Unlocks">
+                            </td>
+                            <td>
+                                <button type="button" class="remove-outcome-btn" title="Remove outcome" data-oi="${oi}" data-oi2="${oi2}">&times;</button>
+                            </td>
+                        </tr>`;
+                    }
+                }
+                html += `
+                            <tr>
+                                <td colspan="${3 + numericKeys.length}">
+                                    <button type="button" class="add-outcome-btn" data-oi="${oi}">Add Outcome</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>`;
+            }
+            html += `
+                    <li class="add-option-item">
+                        <button type="button" class="add-option-btn">Add Option</button>
+                    </li>
+                </ul>
+                </div>
+                <span id="saved-indicator" class="saved-indicator" style="display:none;">Saved!</span>
+            `;
+            $detailsPanel.innerHTML = html;
+
+            let $typeSelect = document.getElementById('edit-type');
+            let $newTypeInput = document.getElementById('new-type-input');
+            let isAddingType = false;
+
+            // Use addEventListener instead of direct assignment
+            $typeSelect.addEventListener('change', function() {
+                if (this.value === "__add_new__") {
+                    isAddingType = true;
+                    $newTypeInput.style.display = "";
+                    $newTypeInput.value = "";
+                    $newTypeInput.focus();
+                } else {
+                    isAddingType = false;
+                    $newTypeInput.style.display = "none";
+                    $typeSelect.style.background = typeColors[this.value] || "#888";
+                    autoSave();
+                }
+            });
+
+            $newTypeInput.onblur = function() {
+                if (this.value.trim()) {
+                    let newType = this.value.trim();
+                    if (!types.includes(newType)) {
+                        types.push(newType);
+                        typeColors = getTypeColors(types);
+                        let opt = document.createElement('option');
+                        opt.value = newType;
+                        opt.textContent = newType;
+                        opt.selected = true;
+                        opt.style.background = typeColors[newType];
+                        $typeSelect.insertBefore(opt, $typeSelect.lastElementChild);
+                    }
+                    $typeSelect.value = newType;
+                    $typeSelect.style.background = typeColors[newType];
+                    isAddingType = false;
+                    $newTypeInput.style.display = "none";
+                    autoSave();
+                } else {
+                    isAddingType = false;
+                    $newTypeInput.style.display = "none";
+                    // Do not autosave if cancelled
+                }
+            };
+
+            // --- Add/Remove Option/Outcome handlers ---
+            $detailsPanel.querySelectorAll('.add-option-btn').forEach(btn => {
+                btn.onclick = function() {
+                    event.options.push({
+                        title: "Option",
+                        test: "",
+                        outcomes: [{
+                            name: "",
+                            ...Object.fromEntries(numericKeys.map(k => [k, 0])),
+                            other: "",
+                            unlocks: ""
+                        }]
+                    });
+                    renderDetails(idx);
+                    autoSave();
+                };
+            });
+            $detailsPanel.querySelectorAll('.remove-option-btn').forEach(btn => {
+                btn.onclick = function(e) {
+                    let oi = parseInt(this.getAttribute('data-oi'));
+                    event.options.splice(oi, 1);
+                    renderDetails(idx);
+                    autoSave();
+                };
+            });
+            $detailsPanel.querySelectorAll('.add-outcome-btn').forEach(btn => {
+                btn.onclick = function() {
+                    let oi = parseInt(this.getAttribute('data-oi'));
+                    event.options[oi].outcomes.push({
+                        name: "New",
+                        ...Object.fromEntries(numericKeys.map(k => [k, 0])),
+                        other: "",
+                        unlocks: ""
+                    });
+                    renderDetails(idx);
+                    autoSave();
+                };
+            });
+            $detailsPanel.querySelectorAll('.remove-outcome-btn').forEach(btn => {
+                btn.onclick = function(e) {
+                    let oi = parseInt(this.getAttribute('data-oi'));
+                    let oi2 = parseInt(this.getAttribute('data-oi2'));
+                    event.options[oi].outcomes.splice(oi2, 1);
+                    renderDetails(idx);
+                    autoSave();
+                };
+            });
+
+            // --- Auto-save on input change ---
+            function autoSave() {
+                if (isAddingType) return;
+                event.title = document.getElementById('edit-title').value;
+                let typeVal = $typeSelect.value === "__add_new__" && $newTypeInput.value.trim() ? $newTypeInput.value.trim() : $typeSelect.value;
+                event.type = typeVal;
+                event.text = document.getElementById('edit-text').value;
+                event.locked = document.getElementById('edit-locked').checked;
+                event.rarity = document.getElementById('edit-rarity').value;
+                event.priority = document.getElementById('edit-priority').value;
+                for (let oi = 0; oi < event.options.length; oi++) {
+                    let opt = event.options[oi];
+                    opt.title = document.getElementById(`opt-title-${oi}`).value;
+                    let testVal = document.getElementById(`opt-test-${oi}`).value;
+                    opt.test = testVal.trim() ? testVal : undefined;
+                    for (let oi2 = 0; oi2 < opt.outcomes.length; oi2++) {
+                        let outcome = opt.outcomes[oi2];
+                        outcome.name = document.getElementById(`outcome-name-${oi}-${oi2}`).value;
+                        for (let k of numericKeys) {
+                            outcome[k] = parseInt(document.getElementById(`outcome-${k}-${oi}-${oi2}`).value) || 0;
+                        }
+                        let otherVal = document.getElementById(`outcome-other-${oi}-${oi2}`).value;
+                        outcome.other = otherVal.trim() ? otherVal : "";
+                        let unlocksVal = document.getElementById(`outcome-unlocks-${oi}-${oi2}`).value;
+                        outcome.unlocks = unlocksVal.trim() ? unlocksVal : "";
+                    }
+                }
+                renderList(selectedIdx);
+                // Optionally show a quick saved indicator
+                let indicator = document.getElementById('saved-indicator');
+                if (indicator) {
+                    indicator.style.display = 'inline';
+                    setTimeout(() => { indicator.style.display = 'none'; }, 800);
+                }
+
+                document.getElementById('edit-rarity').classList.remove('rarity-common')
+                document.getElementById('edit-rarity').classList.remove('rarity-uncommon')
+                document.getElementById('edit-rarity').classList.remove('rarity-rare')
+                document.getElementById('edit-rarity').classList.add('rarity-'+event.rarity)
+            }
+
+            // Attach autoSave to all inputs except new-type-input
+            $detailsPanel.querySelectorAll('input,textarea,select').forEach(el => {
+                if (el.type === "button" || el.id === "new-type-input") return;
+                el.oninput = autoSave;
+                el.onchange = autoSave;
+            });
+        }
+
+        document.getElementById('copy-btn').onclick = function() {
+            let json = 'let events = ' + JSON.stringify(events, null, 4);
+            navigator.clipboard.writeText(json).then(() => {
+                this.textContent = "Copied!";
+                setTimeout(() => { this.textContent = "Copy Event Data"; }, 1200);
+            });
+        };
+
+        function getDefaultEvent() {
+            let numericKeys = getNumericKeys();
+            return {
+                title: "New Event",
+                type: getAllTypes()[0] || "newtype",
+                rarity: 'common',
+                priority: 'standard',
+                locked: false,
+                text: "",
+                options: [{
+                    title: "Option",
+                    test: "",
+                    outcomes: [{
+                        name: "",
+                        ...Object.fromEntries(numericKeys.map(k => [k, 0])),
+                        other: "", 
+                        unlocks: ""
+                    }]
+                }],
+                id: events.length > 0 ? Math.max(...events.map(e => e.id || 0)) + 1 : 0
+            };
+        }
+
+        // Add event button handler
+        document.getElementById('add-event-btn').onclick = function() {
+            let newEvent = getDefaultEvent();
+            events.push(newEvent);
+            originalEvents.push(JSON.parse(JSON.stringify(newEvent)));
+            selectedIdx = events.length - 1;
+            renderList(selectedIdx);
+            renderDetails(selectedIdx);
+            // Optionally, focus the title input for immediate editing
+            setTimeout(() => {
+                let titleInput = document.getElementById('edit-title');
+                if (titleInput) titleInput.focus();
+            }, 0);
+        };
+
+        // Initial render
+        renderList(selectedIdx);
+        renderDetails(selectedIdx);
+    </script>
+</body>
+</html>

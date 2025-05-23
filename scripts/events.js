@@ -1,179 +1,1157 @@
 let events = [
     {
-        title: "Demonic Strike",
-        type: "dilemma",
-        text: "A gang of demons are attacking Gornath from the lower levels. We need someone to look into this matter before it becomes a problem.",
-        options: [
+        "title": "The Galdarians Arrive",
+        "type": "galdarians",
+        "rarity": "special",
+        "priority": "standard",
+        "locked": false,
+        "text": "Erlag's people have arrived.",
+        "options": [
             {
-                title: "Do this thing",
-                test: "DC 20 Military",
-                outcomes: [{
-                    name: 'Pass',
-                    warriors: -1,  loyalty: 2,  order: 0,  reverence: -5,  salvage: 0,  wealth: 0,
-                    other: ""
-                },
-                {
-                    name: 'Fail',
-                    warriors: -5,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
-                    other: "Zorn dies"
-                }
-                ]
-            },
-            {
-                title: "Do this other thing",
-                outcomes: [
+                "title": "Send them home",
+                "outcomes": [
                     {
-                        name: 'Effect',
-                        warriors: 0,  loyalty: 0,  order: 0,  reverence: 5,  salvage: 0,  wealth: 0,
-                        other: ""
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
                     }
                 ]
             },
-        ]
-    },
-    {
-        title: "Gate Malfunction",
-        type: "crisis",
-        text: "The gate his going critical! We need to stop it before it punches a hole in the fabric of reality.",
-        options: [
             {
-                title: "Try and fix it",
-                test: "DC 20 Arcana",
-                outcomes: [{
-                    name: 'Pass',
-                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
-                    other: "—"
-                },
-                {
-                    name: 'Fail',
-                    warriors: 0,  loyalty: 0,  order: -5,  reverence: 0,  salvage: 0,  wealth: 0,
-                    other: "Gate is lost"
-                }
-                ]
-            },
-            {
-                title: "Destroy it",
-                outcomes: [
+                "title": "Get Gornath to accept them",
+                "outcomes": [
                     {
-                        name: 'Effect',
-                        warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
-                        other: "Gate is lost"
-                    }
-                ]
-            },
-        ]
-    },
-    {
-        title: "Quivicar Merchandise",
-        type: "opportunity",
-        text: "The mangy merchant is doing a flash sale. Perhaps we can get him to drop his prices a little?",
-        options: [
-            {
-                title: "Talk him around",
-                test: "DC 25 Persuasion",
-                outcomes: [{
-                    name: 'Pass',
-                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 5,  wealth: 5,
-                    other: "Lower prices"
-                },
-                {
-                    name: 'Fail',
-                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
-                    other: ""
-                }
-                ]
-            },
-            {
-                title: "Use legal force",
-                outcomes: [
-                    {
-                        name: 'Effect',
-                        warriors: 0,  loyalty: -1,  order: -1,  reverence: 0,  salvage: 5,  wealth: 5,
-                        other: "Lower prices"
-                    }
-                ]
-            },
-        ]
-    },
-    {
-        title: "Logus Attacks",
-        type: "fight",
-        text: "Logus as appeared suddenly and is attacking the town!.",
-        options: [
-            {
-                title: "Fight him off!",
-                test: "Combat",
-                outcomes: [{
-                    name: 'Pass',
-                    warriors: 0,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
-                    other: ""
-                },
-                {
-                    name: 'Fail',
-                    warriors: 0,  loyalty: -3,  order: -3,  reverence: 0,  salvage: 0,  wealth: 0,
-                    other: ""
-                }
-                ]
-            },
-            {
-                title: "Send in the Warriors",
-                test: "DC 20 Military",
-                outcomes: [
-                    {
-                        name: 'Pass',
-                        warriors: -2,  loyalty: 0,  order: 0,  reverence: 0,  salvage: 0,  wealth: 0,
-                        other: ""
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": -1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Erlag's people stay",
+                        "unlocks": ""
                     },
                     {
-                        name: 'Fail',
-                        warriors: -5,  loyalty: -1,  order: -3,  reverence: 0,  salvage: 0,  wealth: 0,
-                        other: ""
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
                     }
                 ]
-            },
-        ]
+            }
+        ],
+        "id": 0
     },
     {
-        title: "Unworthy to Stay",
-        type: "unworthy",
-        text: "We promised Unworthy that we'd get him Bokaz' sanction to conduct Adherent research within the City of Gornath. But the Chief seems unwilling to let him stay.",
-        options: [
+        "title": "Gate Malfunction",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "The gate his going critical! We need to stop it before it punches a hole in the fabric of reality.",
+        "options": [
             {
-                title: "Let Bokaz condemn Unworthy",
-                outcomes: [
+                "title": "Try and fix it",
+                "test": "DC 20 Arcana",
+                "outcomes": [
                     {
-                        name: 'Effect',
-                        warriors: 0, loyalty: 2, order: 0, reverence: 0, salvage: 0, wealth: 0,
-                        other: "Lose Unworthy"
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "—",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -5,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Gate is lost",
+                        "unlocks": ""
                     }
                 ]
             },
             {
-                title: "Try to convince Bokaz",
-                test: "DC 25 Persuasion",
-                outcomes: [{
-                    name: 'Pass',
-                    warriors: 0, loyalty: -1, order: 0, reverence: -5, salvage: 0, wealth: 0,
-                    other: "Gain Unworthy"
-                },
-                {
-                    name: 'Fail',
-                    warriors: 0, loyalty: -1, order: 0, reverence: 0, salvage: 0, wealth: 0,
-                    other: "Lose Unworthy"
-                },
-                {
-                    name: 'Fail',
-                    warriors: 0, loyalty: -5, order: 0, reverence: -5, salvage: 0, wealth: 0,
-                    other: "Gain Unworthy"
-                },
+                "title": "Destroy it",
+                "outcomes": [
+                    {
+                        "name": "Effect",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Gate is lost",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 1
+    },
+    {
+        "title": "Quivicar Merchandise",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "The mangy merchant is doing a flash sale. Perhaps we can get him to drop his prices a little?",
+        "options": [
+            {
+                "title": "Talk him around",
+                "test": "DC 25 Persuasion",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 5,
+                        "wealth": 5,
+                        "intel": 0,
+                        "other": "Lower prices",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
                 ]
             },
-        ]
+            {
+                "title": "Use legal force",
+                "outcomes": [
+                    {
+                        "name": "Effect",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 5,
+                        "wealth": 5,
+                        "intel": 0,
+                        "other": "Lower prices",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 2
     },
+    {
+        "title": "Logus Attacks",
+        "type": "fight",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Logus as appeared suddenly and is attacking the town!",
+        "options": [
+            {
+                "title": "Fight him off!",
+                "test": "Combat",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -3,
+                        "order": -3,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Send in the Warriors",
+                "test": "DC 20 Military",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": -2,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -5,
+                        "loyalty": -1,
+                        "order": -3,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 3
+    },
+    {
+        "title": "Unworthy to Stay",
+        "type": "unworthy",
+        "rarity": "special",
+        "priority": "standard",
+        "locked": false,
+        "text": "We promised Unworthy that we'd get him Bokaz' sanction to conduct Adherent research within the City of Gornath. But the Chief seems unwilling to let him stay.",
+        "options": [
+            {
+                "title": "Let Bokaz condemn Unworthy",
+                "outcomes": [
+                    {
+                        "name": "Effect",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Lose Unworthy",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Try to convince Bokaz",
+                "test": "DC 25 Persuasion",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": 0,
+                        "reverence": -5,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Gain Unworthy",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Lose Unworthy",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -5,
+                        "order": 0,
+                        "reverence": -5,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Gain Unworthy",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 4
+    },
+    {
+        "title": "Returning Emigrants",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "In the years following the fall of the Demon Kings, many people have come and gone from Gornath. News has spread of how Gornath is in danger, and a number of former warriors have returned to join us in the coming battle.",
+        "options": [
+            {
+                "title": "Accept them with open arms",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 2,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "They must swear fealty to Bokaz ",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 5
+    },
+    {
+        "title": "Taxation",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "It is time for the seasonal taxes to be levied.",
+        "options": [
+            {
+                "title": "Demand the usual rate",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 3,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Demand more than usual",
+                "test": "DC 20 Stability",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 5,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -2,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 5,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Waive the taxes!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Overhaul the tax code",
+                "test": "DC 20 History + DC 20 Investigation + DC 20 Stability",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 6,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -2,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 6
+    },
+    {
+        "title": "Skittering in the Night",
+        "type": "fight",
+        "rarity": "rare",
+        "priority": "standard",
+        "locked": false,
+        "text": "There are reports of strange activity in the lower level. People are disappearing. It all seems uncomfortably familiar after what happened with the adherents a few weeks ago. We need to look into this.",
+        "options": [
+            {
+                "title": "We don't have time for this",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "It probably doesn't matter...",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Investigate it personally",
+                "test": "Encounter",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Send in the warriors",
+                "test": "DC 20 Warriors",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": -2,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -4,
+                        "loyalty": 0,
+                        "order": -4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 7
+    },
+    {
+        "title": "To Delve Greedily...",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "The dwarven archaeologist wants to mount a proper, extensive expedition to Vir-kegeth, following your rather brilliant venture. He's proposing a number of warriors are spared so he can investigate safely.",
+        "options": [
+            {
+                "title": "Give him two bodyguards",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": -1,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Send a handful of warriors",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": -3,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Send a whole brigade!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": -6,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "This is a waste of valuable boots",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 8
+    },
+    {
+        "title": "Glory to the Gods!",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "A few of our priests are urging Bokaz to declare a festival in honour of the Kavak gods that have guided our way for three centuries. It could be expensive, but perhaps it might yield beneficial results.",
+        "options": [
+            {
+                "title": "Spare no expense",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": 0,
+                        "reverence": 3,
+                        "salvage": 0,
+                        "wealth": -4,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Throw a small party",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 2,
+                        "salvage": 0,
+                        "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "It's not a priority",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 9
+    },
+    {
+        "title": "In Cleovaross' Name",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Abeni and her followers are requesting that a temple be built in honour of Cleovaross, the Winter Goddess.",
+        "options": [
+            {
+                "title": "Request granted",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": -3,
+                        "salvage": 0,
+                        "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Fine, but you pay for it",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": -3,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Absolutely not!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": -3,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 10
+    },
+    {
+        "title": "The Summoning",
+        "type": "fight",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Reports are coming in of a commotion in the upper levels. Screams and acts of violence have been heard. We need to sort this out immediately.",
+        "options": [
+            {
+                "title": "Investigate it personally",
+                "test": "Encounter",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -3,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Have the warriors deal with it",
+                "test": "DC 16 Warriors",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": -1,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -3,
+                        "loyalty": 0,
+                        "order": -3,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 11
+    },
+    {
+        "title": "Sweet Dreams",
+        "type": "logus",
+        "rarity": "special",
+        "priority": "standard",
+        "locked": false,
+        "text": "[Redacted]",
+        "options": [
+            {
+                "title": "???",
+                "test": "DC 20 Insight",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "???",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "???",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 12
+    },
+    {
+        "title": "Magimecha Attack",
+        "type": "crisis",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Wild magimecha are assaulting the entrance to the city! ",
+        "options": [
+            {
+                "title": "Defend!",
+                "test": "DC 15 Military",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 3,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -2,
+                        "loyalty": 0,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 13
+    },
+    {
+        "title": "Earthquake!",
+        "type": "crisis",
+        "rarity": "uncommon",
+        "priority": "standard",
+        "locked": false,
+        "text": "A violent tremor shook the mountain today, causing a substantial amount of damage, most notably, the collapse of one of the bridges on the upper levels. A few people are dead, and many are wounded.",
+        "options": [
+            {
+                "title": "Triage",
+                "test": "DC 20 Medicine",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 14
+    },
+    {
+        "title": "Caught Red Handed",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "A thief has been found stealing food and weapons from the warriors' barracks. In her interrogation, she claimed that she wanted to help the town. But it's quite likely she was just an opportunist.",
+        "options": [
+            {
+                "title": "Execute her",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Conscript her",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 1,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Make her fear the gods",
+                "test": "DC 16 Religion",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 15
+    },
+    {
+        "title": "Arakos Coffee Deficit",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Our coffee reserves have dried up! We need to do something about this or our society may fall apart before Logus even sets foot in Gornath!",
+        "options": [
+            {
+                "title": "That's an overreaction, surely",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": "17"
+                    }
+                ]
+            },
+            {
+                "title": "No it isn't! Import more!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -3,
+                        "intel": 0,
+                        "other": "Coffee will be acquired",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Quivicar must have a stash!",
+                "test": "DC 20 Insight",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -1,
+                        "intel": 0,
+                        "other": "Coffee will be acquired",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": "17"
+                    }
+                ]
+            }
+        ],
+        "id": 16
+    },
+    {
+        "title": "Caffine Crisis!",
+        "type": "crisis",
+        "rarity": "special",
+        "priority": "high",
+        "locked": true,
+        "text": "Disaster strikes! What fools we were!",
+        "options": [
+            {
+                "title": "Option",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 17
+    },
+    {
+        "title": "Visions of the Witch",
+        "type": "galdarians",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Magra has caught glimpses of the future! Perhaps we can learn something about what he is going to bring to bear against us!",
+        "options": [
+            {
+                "title": "Option",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 2,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 18
+    }
 ]
-
-let i = 0
-for (e of events) {
-    e.id = i
-    i++
-}

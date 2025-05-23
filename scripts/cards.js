@@ -37,9 +37,14 @@ function makeOptions(options) {
             } else if (outcome.wealth > 0) {
                 values.push("<span class='pass'>+" + outcome.wealth + "</span>" + ICONS.wealth)
             }
+            if (outcome.intel < 0) {
+                values.push("<span class='fail'>" + outcome.intel + "</span>" + ICONS.intel)
+            } else if (outcome.intel > 0) {
+                values.push("<span class='pass'>+" + outcome.intel + "</span>" + ICONS.intel)
+            }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-warriors='${outcome.warriors}' data-loyalty='${outcome.loyalty}' data-order='${outcome.order}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}'`
+            let data = `data-warriors='${outcome.warriors}' data-loyalty='${outcome.loyalty}' data-order='${outcome.order}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}' data-intel='${outcome.intel}'`
             
             let text = ''
             if (outcome.name == 'Pass') {
@@ -65,17 +70,20 @@ function makeOptions(options) {
 function makeCard(card) {
     let $card = document.createElement('div')
     $card.classList.add('card-wrapper')
+    $card.dataset.id = card.id
     $card.innerHTML = `
         <div class='card-bumper'>
             <div class='card ${card.type} flipped'>
                 <div class='inner'>
                     <h2>${ICONS[card.type]} <span>${card.title}</span></h2>
                 </div>
-                <div class='inner'>
-                    <p>${card.text}</p>
+                <div class='card-scroller'>
+                    <div class='inner'>
+                        <p>${card.text}</p>
+                    </div>
+                    
+                    ${makeOptions(card.options)}
                 </div>
-                
-                ${makeOptions(card.options)}
                 <div class="front">
                     <div class='inset'></div>
                 </div>
@@ -131,6 +139,7 @@ function resolve(button) {
     
     game.changeStat('salvage', button.dataset.salvage)
     game.changeStat('wealth', button.dataset.wealth)
+    game.changeStat('intel', button.dataset.intel)
 
     $card.classList.add('remove')
     $card.addEventListener('animationend', cleanupCard)
@@ -139,8 +148,10 @@ function resolve(button) {
 function cleanupCard(e) {
     if (e.target.classList.contains('card-wrapper')) {
         e.target.remove()
-        game.data.cards--
+        let id = e.target.dataset.id
+        game.data.cards.inPlay.splice(game.data.cards.inPlay.findIndex((card)=>{return card.id == id}), 1)
         game.checkCards()
+        game.data.cards.discarded.push(id)
 
         e.target.removeEventListener('animationend', cleanupCard)
     }

@@ -48,6 +48,12 @@
     perspective: 3000px;
     transition: transform 0.37s cubic-bezier(0.68, -0.55, 0, 2);
 
+    --size: 0.75;
+    --width: calc(27.5em * var(--size) + 4em);
+    --height: calc(47.5em * var(--size) + 4em);
+    width: var(--width);
+    height: var(--height);
+
     &:hover {
         /* transform: scale(1.05); */
         /* transform: translateY(-2.5%); */
@@ -62,18 +68,15 @@
 
 .card {
     position: relative;
-
-    --size: 0.75;
-    --width: calc(27.5em * var(--size));
-    --height: calc(47.5em * var(--size));
-    width: var(--width);
-    height: var(--height);
+    width: var(--width - 4em);
+    height: 100%;
     
     --hue: 150;
+    --saturation: 1;
 
     --s: calc(var(--width) * 0.125);
-    --c1: hsl(var(--hue), 70%, 18%);
-    --c2: hsl(var(--hue), 70%, 24%);
+    --c1: hsl(var(--hue), calc(70% * var(--saturation)), 18%);
+    --c2: hsl(var(--hue), calc(70% * var(--saturation)), 24%);
 
     --l: var(--c1) 20%, #0000 0;
     --g: 35%, var(--c2) 0 45%, var(--c1) 0;
@@ -84,21 +87,18 @@
         
     background-size: var(--s) var(--s);
 
-    & .front {
-        background-image: url('../images/cardback-quivicar.jpg');
-    }
 
 
     /* border: 5px solid #111; */
     display: grid;
     gap: 0.5em;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
     
     padding: 1em;
     margin: 2em;
     border-radius: 1em;
 
-    box-shadow: inset 0 0 10px 2px hsl(var(--hue), 100%, 15%), 0 0 6px 1px black;
+    box-shadow: inset 0 0 10px 2px hsl(var(--hue), calc(100% * var(--saturation)), 15%), 0 0 6px 1px black;
 
     filter: blur(0);
 
@@ -114,6 +114,9 @@
         cursor: url('../images/cursor-active.png'), auto !important;
     }
 
+    & .front {
+        background-image: url('../images/cardback.png');
+    }
 
     &:hover {
         /* box-shadow: inset 0 0 10px 2px hsl(var(--hue), 100%, 15%), 0 0 1em 1em hsla(var(--hue), 100%, 0%, 0.5); */
@@ -137,97 +140,34 @@
     transform: rotate3d(0, 1, 0, 180deg);
 }
 
-.card.dilemma {
-    --hue: 35;
-    
-    --s: calc(var(--width) * 0.25);
 
-    --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
-    background:
-        calc(var(--s)/-4) calc(var(--s)/-4)/var(--_g),
-        calc(var(--s)/ 4) calc(var(--s)/ 4)/var(--_g),
-        radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
-        repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
-
-    & .front {
-        background-image: url('../images/cardback-demon.jpg');
-    }
-}
-
-.card.fight {
-    --hue: 280;
-    --s: calc(var(--width) * 0.125);
-
-    background:
-        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
-        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
-        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
-    background-size: var(--s) var(--s);
-
-    & .front {
-        background-image: url('../images/cardback-logus.jpg');
-    }
-}
-
-.card.crisis {
-    --hue: 5;
-
-    --s: calc(var(--width) * 0.25);
-
-    --_g: var(--c1) 6.1%, var(--c2) 6.4% 18.6%, var(--c1) 18.9% 31.1%,
-        var(--c2) 31.4% 43.6%, var(--c1) 43.9% 56.1%, var(--c2) 56.4% 68.6%, #0000 68.9%;
-    background:
-        radial-gradient(var(--s) at 100% 0, var(--_g)),
-        radial-gradient(var(--s) at 0 0, var(--_g)),
-        radial-gradient(var(--s) at 0 100%, var(--_g)),
-        radial-gradient(var(--s) at 100% 100%, var(--_g)) var(--c1);
-    background-size: var(--s) var(--s);
-
-    & .front {
-        background-image: url('../images/cardback-grey-one.jpg');
-    }
-}
-
-.card.unworthy {
-    --hue: 250;
-
-    --s: calc(var(--width) * 0.125) ;
-
-    --c: #0000, var(--c1) .5deg 119.5deg, #0000 120deg;
-    --g1: conic-gradient(from 60deg at 56.25% calc(425%/6), var(--c));
-    --g2: conic-gradient(from 180deg at 43.75% calc(425%/6), var(--c));
-    --g3: conic-gradient(from -60deg at 50% calc(175%/12), var(--c));
-    background:
-        var(--g1), var(--g1) var(--s) calc(1.73*var(--s)),
-        var(--g2), var(--g2) var(--s) calc(1.73*var(--s)),
-        var(--g3) var(--s) 0, var(--g3) 0 calc(1.73*var(--s)) var(--c2);
-    background-size: calc(2*var(--s)) calc(3.46*var(--s));
-    /* background-position: center; */
-
-    & .front {
-        background-image: url('../images/cardback-unworthy.jpg');
-    }
-    & h3 {
-        color: hsl(var(--hue), 100%, 95%);
-    }
-}
 
 
 .card .inner {
-    background: hsl(var(--hue), 30%, 5%, 0.9);
+    background: hsl(var(--hue), calc(30% * var(--saturation)), 5%, 0.9);
     padding: 0.5em;
     border-radius: 0.5em;
 
-    box-shadow: inset 0 2px 10px 2px hsl(var(--hue), 50%, 2%);
+    box-shadow: inset 0 2px 10px 2px hsl(var(--hue), calc(50% * var(--saturation)), 2%);
 }
 
 .card .inner:first-child {
-    background: hsl(var(--hue), 30%, 3%, 1);
+    background: hsl(var(--hue), calc(30% * var(--saturation)), 3%, 1);
 
     box-shadow: none;
 }
+
+.card-scroller {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 1em;
+    align-content: start;
+
+    overflow: scroll;
+}
+
 .inner.option {
-    border-top: 4px solid hsl(var(--hue), 100%, 50%);
+    border-top: 4px solid hsl(var(--hue), calc(100% * var(--saturation)), 50%);
     margin-top: 1em;
     padding-top: 1em;
     position: relative;
@@ -238,7 +178,7 @@
     font-weight: normal;
     font-size: 1.4em;
     /* text-align: center; */
-    color: hsl(var(--hue), 100%, 90%);
+    color: hsl(var(--hue), calc(100% * var(--saturation)), 90%);
 }
 
 .card h3 {
@@ -247,8 +187,8 @@
     text-align: center;
     padding: 0 0.5em;
     line-height: 1.4em;
-    background-color: hsl(var(--hue), 100%, 50%);
-    color: hsl(var(--hue), 100%, 1%);
+    background-color: hsl(var(--hue), calc(100% * var(--saturation)), 50%);
+    color: hsl(var(--hue), calc(100% * var(--saturation)), 1%);
     position: absolute;
     top: -0.9em;
     display: inline-block;
@@ -263,11 +203,11 @@
     margin: 0 0 0.5em;
     text-indent: 0;
     font-size: round(1.1em, 2px);
-    color: hsl(var(--hue), 80%, 70%);
+    color: hsl(var(--hue), calc(80% * var(--saturation)), 70%);
     border-radius: 0.25em;
 }
 .card b {
-    color: hsl(var(--hue), 100%, 80%);
+    color: hsl(var(--hue), calc(100% * var(--saturation)), 80%);
     padding-right: 0.35em;
 }
 
@@ -278,10 +218,10 @@
     font-weight: normal;
 
     font-size: 1em;
-    color: hsl(var(--hue), 40%, 70%);
-    background: hsl(var(--hue), 20%, 15%, 1);
+    color: hsl(var(--hue), calc(40% * var(--saturation)), 70%);
+    background: hsl(var(--hue), calc(20% * var(--saturation)), 15%, 1);
 
-    border-left: 0.25em solid hsl(var(--hue), 100%, 50%);
+    border-left: 0.25em solid hsl(var(--hue), calc(100% * var(--saturation)), 50%);
 
     box-shadow: none;
 
@@ -292,7 +232,7 @@
     padding: 0 0.5em;
     
     & span {
-        color: hsl(var(--hue), 100%, 90%);
+        color: hsl(var(--hue), calc(100% * var(--saturation)), 90%);
         font-weight: bold;
         padding-right: 0.25em;
         pointer-events: none;
@@ -309,8 +249,8 @@
         /* transform: translateX(5px); */
         border-width: 1em;
         border-color: white;
-        background: hsl(var(--hue), 20%, 22%, 1);
-        color: hsl(var(--hue), 100%, 100%);
+        background: hsl(var(--hue), calc(20% * var(--saturation)), 22%, 1);
+        color: hsl(var(--hue), calc(100% * var(--saturation)), 100%);
     }
 }
 
@@ -344,7 +284,7 @@
 
         & .inset {
             transform: scale(0.91);
-            box-shadow: inset 0 0 80px 25px hsl(var(--hue), 100%, 15%, 0.5);
+            box-shadow: inset 0 0 80px 25px hsl(var(--hue), calc(100% * var(--saturation)), 15%, 0.5);
             
             transition: transform calc(var(--easeInSpeed) * var(--zoomMultiplier)) , box-shadow var(--easeInSpeed), filter 0.5s;
         }
@@ -358,14 +298,14 @@
         bottom: -1px;
         border-radius: 1.25em;
 
-        border: 8px solid hsl(var(--hue), 100%, 20%, 0.75);
+        border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), 20%, 0.75);
 
         box-shadow: inset 0 0 30px 20px hsl(var(--hue), 0%, 0%, 0.5);
 
         transition: transform calc(var(--easeOutSpeed) * var(--zoomMultiplier)), box-shadow var(--easeOutSpeed), border 0.5s;
 
         &:hover {
-            border: 8px solid hsl(var(--hue), 100%, 70%, 1);
+            border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), 70%, 1);
         }
     }
 }
