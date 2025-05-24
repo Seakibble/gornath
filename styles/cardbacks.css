@@ -10,13 +10,13 @@
         radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
         repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
 
-    & .front {
+    & .front .image {
         background-image: url('../images/cardback-quivicar.jpg');
     }
 }
 
 .card.dilemma {
-    --hue: 35;
+    --hue: 40;
     
     --s: calc(var(--width) * 0.25);
 
@@ -27,8 +27,69 @@
         radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
         repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
 
-    & .front {
+    & .front .image{
         background-image: url('../images/cardback-demon.jpg');
+    }
+}
+
+.card.fight {
+    --hue: 90;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front .image {
+        background-image: url('../images/cardback-rilmok.jpg');
+    }
+}
+
+.card.chaos {
+    --hue: 0;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front .image {
+        background-image: url('../images/cardback-blood.jpg');
+    }
+}
+
+
+.card.zen {
+    --hue: 210;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front .image {
+        background-image: url('../images/cardback-zen.jpg');
+    }
+}
+
+.card.eideron {
+    --hue: 230;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front .image {
+        background-image: url('../images/cardback-eideron.jpg');
     }
 }
 
@@ -42,13 +103,29 @@
         linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
     background-size: var(--s) var(--s);
 
-    & .front {
+    & .front .image {
         background-image: url('../images/cardback-logus.jpg');
     }
 }
 
+.card.magnus {
+    --hue: 20;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front .image {
+        background-image: url('../images/cardback-magnus.jpg');
+    }
+}
+
+
 .card.crisis {
-    --hue: 5;
+    --hue: 0;
     --saturation: 0;
 
     --s: calc(var(--width) * 0.25);
@@ -62,7 +139,7 @@
         radial-gradient(var(--s) at 100% 100%, var(--_g)) var(--c1);
     background-size: var(--s) var(--s);
 
-    & .front {
+    & .front .image {
         background-image: url('../images/cardback-grey-one.jpg');
     }
 
@@ -87,10 +164,84 @@
     background-size: calc(2*var(--s)) calc(3.46*var(--s));
     /* background-position: center; */
 
-    & .front {
+    & .front .image {
         background-image: url('../images/cardback-unworthy.jpg');
     }
     & h3 {
         color: hsl(var(--hue), 100%, 95%);
     }
 }
+
+.card.galdarians {
+    --hue: 70;
+
+    --s: calc(var(--width) * 0.125) ;
+
+    --c: #0000, var(--c1) .5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425%/6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425%/6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175%/12), var(--c));
+    background:
+        var(--g1), var(--g1) var(--s) calc(1.73*var(--s)),
+        var(--g2), var(--g2) var(--s) calc(1.73*var(--s)),
+        var(--g3) var(--s) 0, var(--g3) 0 calc(1.73*var(--s)) var(--c2);
+    background-size: calc(2*var(--s)) calc(3.46*var(--s));
+    /* background-position: center; */
+
+    & .front .image {
+        background-image: url('../images/cardback-erlag.jpg');
+    }
+}
+
+.card.corpus {
+    --hue: 50;
+    --s: calc(var(--width) * 0.125);
+
+    background:
+        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
+        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
+        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+    background-size: var(--s) var(--s);
+
+    & .front .image {
+        background-image: url('../images/cardback-corpus.jpg');
+    }
+}
+
+
+.unworthy .image::before { content: 'I'; }
+.unworthy .image::after { content: 'The Magician'; }
+
+.fight .image::before { content: 'II'; }
+.fight .image::after { content: 'Conflict'; }
+
+.chaos .image::before { content: 'III'; }
+.chaos .image::after { content: 'Chaos'; }
+
+.card.dilemma .image::before { content: 'VII'; }
+.card.dilemma .image::after { content: 'Adversity'; }
+
+.galdarians .image::before { content: 'VIII'; }
+.galdarians .image::after { content: 'Strength'; }
+
+
+.magnus .image::before { content: 'IX'; }
+.magnus .image::after { content: 'The Hermit'; }
+
+.opportunity .image::before { content: 'X'; }
+.opportunity .image::after { content: 'Opportunity'; }
+
+.zen .image::before { content: 'XII'; }
+.zen .image::after { content: 'The Hanged Man'; }
+
+.crisis .image::before { content: 'XIII'; }
+.crisis .image::after { content: 'Death'; }
+
+.logus .image::before { content: 'XV'; }
+.logus .image::after { content: 'The Devil'; }
+
+.eideron .image::before { content: 'XVII'; }
+.eideron .image::after { content: 'The Star'; }
+
+.corpus .image::before { content: 'XX'; }
+.corpus .image::after { content: 'Judgement'; }

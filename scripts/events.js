@@ -37,7 +37,7 @@ let events = [
                         "wealth": 0,
                         "intel": 0,
                         "other": "Erlag's people stay",
-                        "unlocks": ""
+                        "unlocks": "19"
                     },
                     {
                         "name": "Fail",
@@ -1153,5 +1153,365 @@ let events = [
             }
         ],
         "id": 18
+    },
+    {
+        "title": "Cultural Troubles",
+        "type": "galdarians",
+        "rarity": "common",
+        "priority": "high",
+        "locked": true,
+        "text": "Seems the Galdarians are having trouble fitting in her in Gornath. They're being loud, interfering with the goings on of the locals. Some are saying we made a mistake in letting them live here.",
+        "options": [
+            {
+                "title": "Make them see reason",
+                "test": "DC 20 Persuasion (Intelligence)",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Get them to back down",
+                "test": "DC 20 Intimidation (Strength)",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Drive them out!",
+                "test": "DC 15 Military",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Erlag's People will leave",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -3,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 19
+    },
+    {
+        "title": "The Copycat",
+        "type": "chaos",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "There are reports of someone practising blood magic in the city. On investigation, it appears someone is imitating Atanasya. And poorly at that. We can't have this.",
+        "options": [
+            {
+                "title": "Arrest them",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Teach them REAL blood magic",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": -4,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Atanasya gains an apprentice",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 20
+    },
+    {
+        "title": "Last Rites",
+        "type": "zen",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "Our friend has fallen. We need to honour him.",
+        "options": [
+            {
+                "title": "He carried the blade well",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 21
+    },
+    {
+        "title": "Trouble Below",
+        "type": "magnus",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "text": "We've received word from Magnus. He needs supplies sent down to the Aperture to help look after the refugees there. ",
+        "options": [
+            {
+                "title": "We can spare nothing",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Put together what we can",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 22
+    },
+    {
+        "title": "Sharpening the Blade",
+        "type": "corpus",
+        "rarity": "special",
+        "priority": "standard",
+        "locked": false,
+        "text": "No one in Gornath knows as much about fighting demons as Corpus Bonebrooke. Our troops could learn a lot from his experience.",
+        "options": [
+            {
+                "title": "They must kill demons",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 2,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "They must revere the watchers",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 2,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "A balance must be struck",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 1,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 23
+    },
+    {
+        "title": "The Stars Guide Us",
+        "type": "eideron",
+        "rarity": "special",
+        "priority": "standard",
+        "locked": false,
+        "text": "Xaltor has reported an increased interest in the worship of Astaris. But what should they pray for?",
+        "options": [
+            {
+                "title": "Protection and Valour",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 2,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Wisdom and Knowledge",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 3,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Peace and Order",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 2,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Visions and Prophecy",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 2,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 24
     }
 ]

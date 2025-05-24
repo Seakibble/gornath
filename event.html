@@ -80,6 +80,7 @@
                 b = parseInt(hexcolor.substr(4,2),16);
             }
             let yiq = ((r*299)+(g*587)+(b*114))/1000;
+            return 'white';
             return (yiq >= 140) ? '#23262e' : '#fff';
         }
 

@@ -2,6 +2,7 @@
 
 let game = {
     activeMenu: null,
+    sfx: {},
     days: 30,
     initialStats: {
         loyalty: 6,
@@ -88,11 +89,14 @@ let game = {
             this.elements.$panel.appendChild($card)
             this.data.cards.inPlay.push(cardIndex)
             this.checkCards()
+            setTimeout(() => {
+                game.sfx['deal'+i].play()
+            }, i * 250+400);
         }
     },
     checkCards: function() {
         if (this.data.cards.inPlay.length > 0) {
-            this.elements.$next.disabled = true
+            this.elements.$next.disabled = true  
         } else {
             this.elements.$next.disabled = false
         }
@@ -316,6 +320,13 @@ let game = {
 
         console.log(game.data.cards)
     },
+    initAudio: function () {
+        this.sfx.flip = document.getElementById('audio_flip')
+        this.sfx.place = document.getElementById('audio_place')
+        this.sfx.deal0 = document.getElementById('audio_deal_0')
+        this.sfx.deal1 = document.getElementById('audio_deal_1')
+        this.sfx.deal2 = document.getElementById('audio_deal_2')
+    },
     init: function() {
         this.elements.$gate = document.getElementById('gate')
         this.elements.$rest = document.getElementById('rest')
@@ -334,6 +345,8 @@ let game = {
         this.initCountdown()
 
         this.initEvents()
+
+        this.initAudio()
     }
 }
 

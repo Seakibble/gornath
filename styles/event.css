@@ -18,7 +18,6 @@ body {
     background-color: #11131a;
     box-shadow: 0.1em 0 0.8em #0006;
     padding: 0 1em 0 0.5em;
-    overflow-y: auto;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     padding-bottom: 2em;
@@ -31,7 +30,7 @@ body {
     margin: 0.5em 0;
     padding: 1em 0 1em 0;
     max-height: 70vh;
-    overflow: scroll;
+    overflow-y: auto;
 }
 #events-list ul {
     list-style: none;
@@ -62,7 +61,7 @@ body {
     /* transform: translate(0.5em); */
     /* box-shadow: 0 0.3em 1.2em #0007; */
     border-left: 1em solid #88c0d0;
-    padding-left: 0.5em;
+    padding-left: 1em;
     z-index: 2;
 }
 #events-list li.selected {
@@ -70,7 +69,7 @@ body {
     /* transform: translate(0.5em); */
     /* box-shadow: 0 0.1em 0.2em #0007; */
     border-left: 1em solid #3ad4ff;
-    padding-left: 0.5em;
+    padding-left: 1em;
     z-index: 1;
 }
 

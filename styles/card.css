@@ -23,24 +23,35 @@
         animation-delay: 0.5s;
     }
 }
-.card-wrapper:nth-of-type(2) { animation-delay: 250ms;}
-.card-wrapper:nth-of-type(3) { animation-delay: 500ms;}
+.card-wrapper:nth-of-type(2) { 
+    animation-delay: 250ms;
+
+    & .image {
+        animation-delay: 2500ms;
+    }
+}
+.card-wrapper:nth-of-type(3) { 
+    animation-delay: 500ms;
+    & .image {
+        animation-delay: 5000ms;
+    }
+}
 
 @keyframes slideIn {
     from {
-        transform: translate(700px, -1500px) rotate(120deg) scale(1.1);
+        transform: translate(0px, -1500px) rotate(120deg) scale(1.1);
     }
 }
 
 @keyframes slideOut {
-    33% {
+    60% {
         width: inherit;
-        height: inherit;
+        /* height: inherit; */
     } 
     100% {
         transform: translate(0, -1500px) rotate(45deg);
         width: 0;
-        height: 0;
+        /* height: 0; */
     }
 }
 
@@ -49,8 +60,8 @@
     transition: transform 0.37s cubic-bezier(0.68, -0.55, 0, 2);
 
     --size: 0.75;
-    --width: calc(27.5em * var(--size) + 4em);
-    --height: calc(47.5em * var(--size) + 4em);
+    --width: calc(32.5em * var(--size));
+    --height: calc(46.5em * var(--size));
     width: var(--width);
     height: var(--height);
 
@@ -68,7 +79,7 @@
 
 .card {
     position: relative;
-    width: var(--width - 4em);
+    /* width: var(--width - 4em); */
     height: 100%;
     
     --hue: 150;
@@ -95,7 +106,7 @@
     grid-template-rows: auto 1fr;
     
     padding: 1em;
-    margin: 2em;
+    margin: 0 2em;
     border-radius: 1em;
 
     box-shadow: inset 0 0 10px 2px hsl(var(--hue), calc(100% * var(--saturation)), 15%), 0 0 6px 1px black;
@@ -163,12 +174,28 @@
     gap: 1em;
     align-content: start;
 
-    overflow: scroll;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #000a;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #fffa;
+} 
+::-webkit-scrollbar-thumb:hover {
+    background: #aaaa;
 }
 
 .inner.option {
     border-top: 4px solid hsl(var(--hue), calc(100% * var(--saturation)), 50%);
-    margin-top: 1em;
+    margin-top: 0.5em;
     padding-top: 1em;
     position: relative;
 }
@@ -183,7 +210,7 @@
 
 .card h3 {
     font-family: 'Crimson Pro', serif;
-    font-size: 1.1em;
+    font-size: 1em;
     text-align: center;
     padding: 0 0.5em;
     line-height: 1.4em;
@@ -222,6 +249,7 @@
     background: hsl(var(--hue), calc(20% * var(--saturation)), 15%, 1);
 
     border-left: 0.25em solid hsl(var(--hue), calc(100% * var(--saturation)), 50%);
+    border-right: 1em solid transparent;
 
     box-shadow: none;
 
@@ -247,8 +275,9 @@
 
     &:hover {
         /* transform: translateX(5px); */
-        border-width: 1em;
-        border-color: white;
+        border-left-width: 1em;
+        border-right-width: 0.25em;
+        border-left-color: white;
         background: hsl(var(--hue), calc(20% * var(--saturation)), 22%, 1);
         color: hsl(var(--hue), calc(100% * var(--saturation)), 100%);
     }
@@ -266,16 +295,13 @@
     transform: scaleX(-1);
 
     background-color: black;
-    background-size: 100% 100%;
-    /* border: 5px solid var(--black); */
-
-    background-image: url(../images/cardback.png);
 
     --easeInSpeed: 0.25s;
     --easeOutSpeed: 0.5s;
     --zoomMultiplier: 6;
 
     transition: transform calc(var(--easeOutSpeed) * var(--zoomMultiplier)), filter 0.5s;
+
     &:hover {
         transition: transform calc(var(--easeInSpeed) * var(--zoomMultiplier)), filter 0.5s;
         transform: scale(-1.1, 1.1);
@@ -290,6 +316,18 @@
         }
     }
 
+    & .image {
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        background-size: 100% 100%;
+        background-image: url(../images/cardback.png);
+        
+        animation: moveth 7.5s alternate infinite cubic-bezier(.2, 0, .8, 1);
+    } 
+
     & .inset {
         position: absolute;
         top: -1px;
@@ -297,6 +335,7 @@
         right: -1px;
         bottom: -1px;
         border-radius: 1.25em;
+        z-index: 1;
 
         border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), 20%, 0.75);
 
@@ -307,6 +346,16 @@
         &:hover {
             border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), 70%, 1);
         }
+    }
+}
+
+@keyframes moveth {
+    0% {
+        transform: scale(1)
+    }
+
+    100% {
+        transform: scale(1.05)
     }
 }
 
@@ -371,8 +420,32 @@
     transform: scaleX(-1)
 }
 
+.card .image::before, 
+.card .image::after {
+    display: grid;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-content: end;
+    text-align: center;
+    font-family: 'Modern Antiqua';
+    text-shadow: 0 0 1em black;
+}
+.card .image::before {
+    padding-bottom: 1.75em;
+    font-size: 3em;
+    background: linear-gradient(#0000 50%, #000f 100%);
+}
+.card .image::after {
+    padding-bottom: 1.5em;
+    font-size: 2em;
+}
+
 @media screen and (width < 1700px) {
     .card {
-        margin: 1em;
+        /* margin: 1em; */
     }
 }

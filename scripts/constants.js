@@ -19,13 +19,20 @@ const ICONS = {
     pass: '✔️',
     fail: '❌',
     
-    crisis: "💥",
+    crisis: "💀",
     dilemma: "❓",
     opportunity: "🌠",
     galdarians: "🗿",
+
+    chaos: '🩸',
+
+    zen: "🦴",
+    corpus: "❓",
+    magnus: "❓",
+    eideron: "✨",
 
 
     standard: ' ',
     high: '❗️',
     immediate: '‼️',
-}
+} 

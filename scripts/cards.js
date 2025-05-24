@@ -85,12 +85,12 @@ function makeCard(card) {
                     ${makeOptions(card.options)}
                 </div>
                 <div class="front">
+                    <div class='image'></div>    
                     <div class='inset'></div>
                 </div>
                 <div class="sheen"></div>
             </div>
         </div>
-        
     `
     return $card
 }
@@ -117,11 +117,14 @@ game.elements.$panel.addEventListener('click', (e) => {
         }, 350)
         setTimeout(() => {
             $card.parentElement.classList.remove('bump')
+            game.sfx.place.play()
         }, 415);
 
         setTimeout(()=> {
             $card.classList.remove('locked')
         }, 900)
+
+        game.sfx.flip.play()
     }
 
     if (e.target.tagName == "BUTTON") {
