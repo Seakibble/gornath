@@ -35,4 +35,6 @@ const ICONS = {
     standard: ' ',
     high: '❗️',
     immediate: '‼️',
+
+    scheduled: '⏰',
 } 

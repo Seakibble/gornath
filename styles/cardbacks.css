@@ -3,12 +3,12 @@
     
     --s: calc(var(--width) * 0.25);
 
-    --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
+    /* --_g: var(--s) var(--s) radial-gradient(var(--c1) 17%, var(--c2) 18% 35%, #0000 36.5%);
     background:
         calc(var(--s)/-4) calc(var(--s)/-4)/var(--_g),
         calc(var(--s)/ 4) calc(var(--s)/ 4)/var(--_g),
         radial-gradient(var(--c2) 34%, var(--c1) 36% 68%, #0000 70%) 0 0/calc(var(--s)/2) calc(var(--s)/2),
-        repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s);
+        repeating-linear-gradient(45deg, var(--c1) -12.5% 12.5%, var(--c2) 0 37.5%) 0 0/var(--s) var(--s); */
 
     & .front .image {
         background-image: url('../images/cardback-quivicar.jpg');
@@ -35,13 +35,13 @@
 .card.fight {
     --hue: 90;
     --s: calc(var(--width) * 0.125);
-
-    background:
-        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
-        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
-        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
-    background-size: var(--s) var(--s);
-
+  
+    background: 
+        conic-gradient(from  45deg at 70%,var(--c2) 25%,#0000 0) calc(5*var(--s)/8) var(--s),
+        conic-gradient(from  45deg at 40%,var(--c1) 25%,#0000 0) calc(3*var(--s)/4) var(--s),
+        conic-gradient(from -45deg at 30%,#0000 75%,var(--c2) 0) calc(var(--s)/8) 0,
+        conic-gradient(from -45deg at 60%,var(--c2) 75%,var(--c1) 0);
+    background-size: var(--s) calc(2*var(--s));
     & .front .image {
         background-image: url('../images/cardback-rilmok.jpg');
     }
@@ -65,12 +65,15 @@
 
 .card.zen {
     --hue: 210;
-    --s: calc(var(--width) * 0.125);
+    --s: calc(var(--width) * 0.25);
 
+    --_g: var(--c1)        6.1%,var(--c2)  6.4% 18.6%,var(--c1) 18.9% 31.1%,
+            var(--c2) 31.4% 43.6%,var(--c1) 43.9% 56.1%,var(--c2) 56.4% 68.6%,#0000 68.9%;
     background:
-        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
-        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
-        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+        radial-gradient(var(--s) at 100% 0   ,var(--_g)),
+        radial-gradient(var(--s) at 0    0   ,var(--_g)),
+        radial-gradient(var(--s) at 0    100%,var(--_g)),
+        radial-gradient(var(--s) at 100% 100%,var(--_g)) var(--c1);
     background-size: var(--s) var(--s);
 
     & .front .image {
@@ -80,12 +83,15 @@
 
 .card.eideron {
     --hue: 230;
-    --s: calc(var(--width) * 0.125);
-
+    --s: calc(var(--width) * 0.2);
+  
+    --_g: var(--c1)        6.1%,var(--c2)  6.4% 18.6%,var(--c1) 18.9% 31.1%,
+            var(--c2) 31.4% 43.6%,var(--c1) 43.9% 56.1%,var(--c2) 56.4% 68.6%,#0000 68.9%;
     background:
-        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
-        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
-        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
+        radial-gradient(var(--s) at 100% 0   ,var(--_g)),
+        radial-gradient(var(--s) at 0    0   ,var(--_g)),
+        radial-gradient(var(--s) at 0    100%,var(--_g)),
+        radial-gradient(var(--s) at 100% 100%,var(--_g)) var(--c1);
     background-size: var(--s) var(--s);
 
     & .front .image {
@@ -110,13 +116,36 @@
 
 .card.magnus {
     --hue: 20;
-    --s: calc(var(--width) * 0.125);
+    --s: calc(var(--width) * 0.06125);
 
-    background:
-        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
-        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
-        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
-    background-size: var(--s) var(--s);
+  --_c1: var(--c1) 99%,#0000 101%;
+  --_c2: var(--c2) 99%,#0000 101%;
+  
+  --r:calc(var(--s)*.866); 
+  --g0:radial-gradient(var(--s),var(--_c1));
+  --g1:radial-gradient(var(--s),var(--_c2));
+  --f:radial-gradient(var(--s) at calc(100% + var(--r)) 50%,var(--_c1));
+  --p:radial-gradient(var(--s) at 100% 50%,var(--_c2));
+  background:
+    var(--f) 0 calc(-5*var(--s)/2),
+    var(--f) calc(-2*var(--r)) calc(var(--s)/2),
+    var(--p) 0 calc(-2*var(--s)),
+    var(--g0) var(--r) calc(-5*var(--s)/2),
+    var(--g1) var(--r) calc( 5*var(--s)/2),
+    radial-gradient(var(--s) at 100% 100%,var(--_c1)) 0 calc(-1*var(--s)),   
+    radial-gradient(var(--s) at 0%   50% ,var(--_c1)) 0 calc(-4*var(--s)),
+    var(--g1) calc(-1*var(--r)) calc(-7*var(--s)/2),
+    var(--g0) calc(-1*var(--r)) calc(-5*var(--s)/2),
+    var(--p) calc(-2*var(--r)) var(--s),
+    var(--g0) calc(-1*var(--r)) calc(var(--s)/ 2),
+    var(--g1) calc(-1*var(--r)) calc(var(--s)/-2),
+    var(--g0) 0 calc(-1*var(--s)),
+    var(--g1) var(--r) calc(var(--s)/-2),
+    var(--g0) var(--r) calc(var(--s)/ 2) 
+    var(--c2);
+  background-size: calc(4*var(--r)) calc(6*var(--s));
+
+    /* background-size: var(--s) var(--s); */
 
     & .front .image {
         background-image: url('../images/cardback-magnus.jpg');
@@ -128,17 +157,15 @@
     --hue: 0;
     --saturation: 0;
 
-    --s: calc(var(--width) * 0.25);
+    --s: calc(var(--width) * 0.21);
 
-    --_g: var(--c1) 6.1%, var(--c2) 6.4% 18.6%, var(--c1) 18.9% 31.1%,
-        var(--c2) 31.4% 43.6%, var(--c1) 43.9% 56.1%, var(--c2) 56.4% 68.6%, #0000 68.9%;
+    --_l: #0000 46%,var(--c1) 47% 53%,#0000 54%;
     background:
-        radial-gradient(var(--s) at 100% 0, var(--_g)),
-        radial-gradient(var(--s) at 0 0, var(--_g)),
-        radial-gradient(var(--s) at 0 100%, var(--_g)),
-        radial-gradient(var(--s) at 100% 100%, var(--_g)) var(--c1);
-    background-size: var(--s) var(--s);
-
+        radial-gradient(100% 100% at 100% 100%,var(--_l)) var(--s) var(--s),
+        radial-gradient(100% 100% at 0    0   ,var(--_l)) var(--s) var(--s),
+        radial-gradient(100% 100%,#0000 22%,var(--c1) 23% 29%, #0000 30% 34%,var(--c1) 35% 41%,#0000 42%),
+        var(--c2);
+    background-size: calc(var(--s)*2) calc(var(--s)*2);
     & .front .image {
         background-image: url('../images/cardback-grey-one.jpg');
     }
@@ -195,13 +222,19 @@
 
 .card.corpus {
     --hue: 50;
+    --saturation: 0.75;
+    --lightness: 1.4;
+    
     --s: calc(var(--width) * 0.125);
 
+    --l1:#0000  48%,var(--c1) 0 52%,#0000 0;
+    --l2:#0000 1.3%,var(--c2) 0 32%,#0000 0;
     background:
-        radial-gradient(var(--c1) 14%, var(--c2) 15% 30%, var(--c1) 31% 44%, var(--c2) 45% 60%, #0000 61%),
-        linear-gradient(45deg, #0000 46%, var(--c2) 0 54%, #0000 0),
-        linear-gradient(-45deg, #0000 46%, var(--c2) 0 54%, #0000 0) var(--c1);
-    background-size: var(--s) var(--s);
+        linear-gradient(-45deg,var(--l2)),
+        linear-gradient( 45deg,var(--l1)),
+        linear-gradient( 45deg,var(--l2)) calc(var(--s)/2) calc(var(--s)/2),
+        linear-gradient(-45deg,var(--l1)) var(--c2);
+    background-size: calc(2*var(--s)) var(--s),var(--s) var(--s);
 
     & .front .image {
         background-image: url('../images/cardback-corpus.jpg');

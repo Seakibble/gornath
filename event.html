@@ -113,7 +113,7 @@
                     <span class="event-rarity rarity-${events[i].rarity.toLowerCase()}"></span>
                     <span class="event-list-title">${events[i].title}${edited ? '<span class="event-list-edited">*</span>' : ''}</span>
                     <div class='event-badges'>
-                        <span class='event-list-type'>${ICONS[priority]}</span><span class='event-list-type'>${ICONS[badgeText]}</span>
+                        <span class='event-list-type'>${events[i].scheduled ? ICONS['scheduled'] : ''}</span><span class='event-list-type'>${ICONS[priority]}</span><span class='event-list-type'>${ICONS[badgeText]}</span>
                     </div>
                 </li>`;
 
@@ -234,7 +234,7 @@
 
             // Dropdown for types, with add option
             let typeOptions = types.map(t =>
-                `<option value="${t}"${t === event.type ? ' selected' : ''} style="background:${typeColors[t]}; color:${getContrastYIQ(typeColors[t])};">${t}</option>`
+                `<option value="${t}"${t === event.type ? ' selected' : ''} style="background:${typeColors[t]}; color:${getContrastYIQ(typeColors[t])};">${ICONS[t]} ${t}</option>`
             ).join('');
             typeOptions += `<option value="__add_new__">Add new type...</option>`;
 
@@ -271,6 +271,7 @@
                         <select id="edit-rarity" class="rarity-${event.rarity} edit-type" style="width:auto;min-width:7em;">
                             ${rarityOptions}
                         </select>
+                        <input id='scheduled-date', class='scheduled-input edit-type' value='${event.scheduled}'>
                     </label>
                     <label class="priority-type" style="margin-left:1em;">
                         <select id="edit-priority" class="edit-type" style="width:auto;min-width:7em;">
@@ -459,6 +460,7 @@
                 event.text = document.getElementById('edit-text').value;
                 event.locked = document.getElementById('edit-locked').checked;
                 event.rarity = document.getElementById('edit-rarity').value;
+                event.scheduled = document.getElementById('scheduled-date').value;
                 event.priority = document.getElementById('edit-priority').value;
                 for (let oi = 0; oi < event.options.length; oi++) {
                     let opt = event.options[oi];
@@ -515,6 +517,7 @@
                 rarity: 'common',
                 priority: 'standard',
                 locked: false,
+                scheduled: '',
                 text: "",
                 options: [{
                     title: "Option",

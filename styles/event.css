@@ -213,6 +213,7 @@ select.edit-type {
     transition: transform 0.2s;
 }
 
+.scheduled-input,
 .new-type-input {
     margin-bottom: 1em;
     font-size: 1em;
@@ -224,6 +225,9 @@ select.edit-type {
     border: none;
     border-left: 0.25em solid #383f85;
     border-radius: 0.3em;
+}
+.scheduled-input {
+    width: 2em;
 }
 .edit-text {
     margin-bottom: 1em;

@@ -84,10 +84,11 @@
     
     --hue: 150;
     --saturation: 1;
+    --lightness: 1;
 
     --s: calc(var(--width) * 0.125);
-    --c1: hsl(var(--hue), calc(70% * var(--saturation)), 18%);
-    --c2: hsl(var(--hue), calc(70% * var(--saturation)), 24%);
+    --c1: hsl(var(--hue), calc(70% * var(--saturation)), calc(18% * var(--lightness)));
+    --c2: hsl(var(--hue), calc(70% * var(--saturation)), calc(24% * var(--lightness)));
 
     --l: var(--c1) 20%, #0000 0;
     --g: 35%, var(--c2) 0 45%, var(--c1) 0;
@@ -109,7 +110,7 @@
     margin: 0 2em;
     border-radius: 1em;
 
-    box-shadow: inset 0 0 10px 2px hsl(var(--hue), calc(100% * var(--saturation)), 15%), 0 0 6px 1px black;
+    box-shadow: inset 0 0 10px 2px hsl(var(--hue), calc(100% * var(--saturation)), calc(15% * var(--lightness))), 0 0 6px 1px black;
 
     filter: blur(0);
 
@@ -194,7 +195,7 @@
 }
 
 .inner.option {
-    border-top: 4px solid hsl(var(--hue), calc(100% * var(--saturation)), 50%);
+    border-top: 4px solid hsl(var(--hue), calc(100% * var(--saturation)), calc(50% * var(--lightness)));
     margin-top: 0.5em;
     padding-top: 1em;
     position: relative;
@@ -204,7 +205,7 @@
     font-family: 'Marcellus SC', 'Crimson Pro', serif;
     font-weight: normal;
     font-size: 1.4em;
-    /* text-align: center; */
+    text-align: center;
     color: hsl(var(--hue), calc(100% * var(--saturation)), 90%);
 }
 
@@ -214,7 +215,7 @@
     text-align: center;
     padding: 0 0.5em;
     line-height: 1.4em;
-    background-color: hsl(var(--hue), calc(100% * var(--saturation)), 50%);
+    background-color: hsl(var(--hue), calc(100% * var(--saturation)), calc(50% * var(--lightness)));
     color: hsl(var(--hue), calc(100% * var(--saturation)), 1%);
     position: absolute;
     top: -0.9em;
@@ -230,11 +231,11 @@
     margin: 0 0 0.5em;
     text-indent: 0;
     font-size: round(1.1em, 2px);
-    color: hsl(var(--hue), calc(80% * var(--saturation)), 70%);
+    color: hsl(var(--hue), calc(80% * var(--saturation)), calc(70% * var(--lightness)));
     border-radius: 0.25em;
 }
 .card b {
-    color: hsl(var(--hue), calc(100% * var(--saturation)), 80%);
+    color: hsl(var(--hue), calc(100% * var(--saturation)), calc(80% * var(--lightness)));
     padding-right: 0.35em;
 }
 
@@ -245,10 +246,10 @@
     font-weight: normal;
 
     font-size: 1em;
-    color: hsl(var(--hue), calc(40% * var(--saturation)), 70%);
-    background: hsl(var(--hue), calc(20% * var(--saturation)), 15%, 1);
+    color: hsl(var(--hue), calc(40% * var(--saturation)), calc(70% * var(--lightness)));
+    background: hsl(var(--hue), calc(20% * var(--saturation)), calc(15% * var(--lightness)), 1);
 
-    border-left: 0.25em solid hsl(var(--hue), calc(100% * var(--saturation)), 50%);
+    border-left: 0.25em solid hsl(var(--hue), calc(100% * var(--saturation)), calc(50% * var(--lightness)));
     border-right: 1em solid transparent;
 
     box-shadow: none;
@@ -278,7 +279,7 @@
         border-left-width: 1em;
         border-right-width: 0.25em;
         border-left-color: white;
-        background: hsl(var(--hue), calc(20% * var(--saturation)), 22%, 1);
+        background: hsl(var(--hue), calc(20% * var(--saturation)), calc(22% * var(--lightness)), 1);
         color: hsl(var(--hue), calc(100% * var(--saturation)), 100%);
     }
 }
@@ -310,7 +311,7 @@
 
         & .inset {
             transform: scale(0.91);
-            box-shadow: inset 0 0 80px 25px hsl(var(--hue), calc(100% * var(--saturation)), 15%, 0.5);
+            box-shadow: inset 0 0 80px 25px hsl(var(--hue), calc(100% * var(--saturation)), calc(15% * var(--lightness)), 0.5);
             
             transition: transform calc(var(--easeInSpeed) * var(--zoomMultiplier)) , box-shadow var(--easeInSpeed), filter 0.5s;
         }
@@ -337,14 +338,14 @@
         border-radius: 1.25em;
         z-index: 1;
 
-        border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), 20%, 0.75);
+        border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), calc(20% * var(--lightness)), 0.75);
 
         box-shadow: inset 0 0 30px 20px hsl(var(--hue), 0%, 0%, 0.5);
 
         transition: transform calc(var(--easeOutSpeed) * var(--zoomMultiplier)), box-shadow var(--easeOutSpeed), border 0.5s;
 
         &:hover {
-            border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), 70%, 1);
+            border: 8px solid hsl(var(--hue), calc(100% * var(--saturation)), calc(70% * var(--lightness)), 1);
         }
     }
 }

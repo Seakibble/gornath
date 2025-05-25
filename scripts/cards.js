@@ -44,13 +44,23 @@ function makeOptions(options) {
             }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-warriors='${outcome.warriors}' data-loyalty='${outcome.loyalty}' data-order='${outcome.order}' data-reverence='${outcome.reverence}' data-salvage='${outcome.salvage}' data-wealth='${outcome.wealth}' data-intel='${outcome.intel}'`
+            let data = `data-warriors='${outcome.warriors}' 
+                        data-loyalty='${outcome.loyalty}' 
+                        data-order='${outcome.order}' 
+                        data-reverence='${outcome.reverence}' 
+                        data-salvage='${outcome.salvage}' 
+                        data-wealth='${outcome.wealth}' 
+                        data-intel='${outcome.intel}' 
+                        data-unlocks='${outcome.unlocks}'
+                        data-flags='${outcome.flags}'`
             
-            let text = ''
+            let text = outcome.name
             if (outcome.name == 'Pass') {
                 text = ICONS['pass'] + " |"
             } else if (outcome.name == 'Fail') {
                 text = ICONS['fail'] + " |"
+            } else if (text != '') {
+                text = text + ": "
             }
             if (values.length == 1 && values[0] == "") {
                 values[0] = '—'
@@ -67,7 +77,7 @@ function makeOptions(options) {
     return html
 }
 
-function makeCard(card) {
+function makeCard(card, num = 0) {
     let $card = document.createElement('div')
     $card.classList.add('card-wrapper')
     $card.dataset.id = card.id
@@ -75,7 +85,7 @@ function makeCard(card) {
         <div class='card-bumper'>
             <div class='card ${card.type} flipped'>
                 <div class='inner'>
-                    <h2>${ICONS[card.type]} <span>${card.title}</span></h2>
+                    <h2>${/*ICONS[card.type]*/''} <span>${card.title}</span></h2>
                 </div>
                 <div class='card-scroller'>
                     <div class='inner'>
@@ -92,6 +102,10 @@ function makeCard(card) {
             </div>
         </div>
     `
+
+    setTimeout(() => {
+        game.sfx['deal'+num].play()
+    }, num* 250 + 400);
     return $card
 }
 
@@ -144,6 +158,20 @@ function resolve(button) {
     game.changeStat('wealth', button.dataset.wealth)
     game.changeStat('intel', button.dataset.intel)
 
+    if (button.dataset.unlocks) {
+        let unlocks = button.dataset.unlocks.split(', ')
+        unlocks.forEach(id => {
+            game.data.cards.unlocked.push(extractFromDeck(game.data.cards.locked, id))
+        })
+    }
+
+    if (button.dataset.flags) {
+        let flags = button.dataset.flags.split(', ')
+        flags.forEach(flag => {
+            game.data.flags.push(flag)
+        }) 
+    }
+
     $card.classList.add('remove')
     $card.addEventListener('animationend', cleanupCard)
 } 
@@ -152,10 +180,19 @@ function cleanupCard(e) {
     if (e.target.classList.contains('card-wrapper')) {
         e.target.remove()
         let id = e.target.dataset.id
-        game.data.cards.inPlay.splice(game.data.cards.inPlay.findIndex((card)=>{return card.id == id}), 1)
+        extractFromDeck(game.data.cards.inPlay, id)
         game.checkCards()
         game.data.cards.discarded.push(id)
 
         e.target.removeEventListener('animationend', cleanupCard)
     }
+}
+
+function extractFromDeck(deck, id) {
+    return deck.splice(findInDeck(deck, id), 1)
+
+}
+
+function findInDeck(deck, id) {
+    return deck.findIndex((card)=>{return card.id == id})
 }

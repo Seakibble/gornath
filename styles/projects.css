@@ -1,0 +1,128 @@
+.projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+    overflow: auto;
+}
+.project {
+    position: relative;
+    background: linear-gradient(#111, var(--darkbrown));
+    border: 2px solid var(--brown);
+    padding: 0.5em;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+
+    box-shadow: 0 0 8px 0px #0000;
+
+    transition: box-shadow 0.3s, transform 0.3s;
+    
+    & h2 {
+        color: var(--green)
+    }
+
+    & h2, 
+    & p,
+    & button {
+        transition: filter 0.5s, background 0.25s, color 0.25s;
+    }
+
+    & button {
+        justify-self: end;
+        color: var(--green);
+        border: 2px solid var(--green);
+
+        &:not(:disabled):hover {
+            color: black;
+            background:var(--green);
+        }
+    }
+
+    .project__details {
+        font-family: 'Marcellus', 'Crimson Pro', serif;
+        display: flex;
+        gap: 2em;
+        margin-top: 0.5em
+    }
+
+    &.unaffordable {
+        background: #200;
+        color: #c55;
+        border-color: #722;
+
+        & h2 {
+            color: var(--crimson)
+        }
+
+        & button:disabled {
+            color: var(--crimson);
+            border-color: var(--crimson);
+            background: #111;
+        }
+    }
+
+    &.purchased {
+        background: #333;
+        color: #ccc;
+        border-color: #555;
+
+    }
+
+    &.purchased h2, 
+    &.purchased p,
+    &.purchased button {
+        filter:grayscale(1)
+    }
+
+    & .banner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+    & .banner::after {
+        width: 15em;
+        text-align: center;
+        position: absolute;
+        bottom: 1em;
+        right: -4.5em;
+        z-index: 10;
+        display: block;
+        content: 'AUTHORIZED!';
+        background: var(--lightblue);
+        color: var(--darkblue);
+        border: 0.25em solid var(--blue);
+        font-size: 1.5em;
+        font-weight: bold;
+        box-shadow: 0 0 5px black;
+
+        transition: transform 0.3s, opacity 0.3s;
+
+        opacity: 0;
+        transform: scale(2) rotate(-30deg);
+    }
+    &.purchased .banner::after {
+        opacity: 1;
+        transform: scale(1) rotate(-30deg);
+
+    }
+}
+
+.project > p {
+    margin: 0.5em 0 0.5em;
+    padding: 0;
+    text-indent: 0;
+
+    &:first-of-type {
+        font-family: 'Marcellus', 'Crimson Pro', serif;
+    }
+    &:last-of-type {
+        font-size: 1.2em;
+    }
+}
+
+.project button {
+    margin-top: 1em;
+}

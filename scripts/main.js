@@ -9,20 +9,22 @@ let game = {
         warriors: 9,
         order: 10,
         reverence: 12,
-        salvage: 10,
-        wealth: 10,
+        salvage: 5,
+        wealth: 5,
         intel: 0,
     },
     data: {
+        flags: [],
         cards: {
             locked: [],
             unlocked: [],
+            scheduled: [],
+            inPlay: [],
             discarded: [],
-            inPlay: []
         },
-        gateCooldown: 2,
+        gateCooldown: 3,
         restCooldown: -1,
-        day: 3,
+        day: 2,
         stats: {
             loyalty: 0,
             warriors: 0,
@@ -32,6 +34,7 @@ let game = {
             wealth: 0,
             intel: 0,
         },
+        projects: [],
     },
     elements: {},
     nextDay: function () {
@@ -40,7 +43,7 @@ let game = {
             return
         }
         this.elements.$pips[this.data.day - 1].classList.remove('now')
-
+        
         setTimeout(() => {
             this.data.day++
             this.elements.$pips[this.data.day - 1].classList.add('active')
@@ -67,9 +70,32 @@ let game = {
         }, 400)
     },
     dealCards: function() {
+        let scheduledCards = []
+        for(let i = game.data.cards.scheduled.length-1; i >= 0; i--) {
+            let deck = game.data.cards.scheduled
+
+            let cardData = events[deck[i]]
+
+            
+            if (cardData.scheduled && parseInt(cardData.scheduled) >= this.days-this.data.day) {
+                let card = deck.splice(i, 1)[0]
+                if (!cardData.locked) {
+                    scheduledCards.push(card)
+                }
+            }
+        }
+
         let x = Math.floor(Math.random() * 3) + 1
         let y = Math.floor(Math.random() * 3) + 1
         if (y > x) x = y
+
+        if (game.data.day === 3) x = 2
+
+        y = 0
+        for(let i = scheduledCards.length -1; i >= 0; i--) {
+            this.drawCard(scheduledCards, i)
+            x--
+        }
 
         if (game.data.cards.unlocked.length < x) {
             x = game.data.cards.unlocked.length
@@ -81,25 +107,42 @@ let game = {
         }
         
         for (let i = 0; i < x; i++) {
-            let num = Math.floor(Math.random() * game.data.cards.unlocked.length)
-            let cardIndex = game.data.cards.unlocked.splice(num, 1)[0]
-
-            let $card = makeCard(events[cardIndex])
-
-            this.elements.$panel.appendChild($card)
-            this.data.cards.inPlay.push(cardIndex)
-            this.checkCards()
-            setTimeout(() => {
-                game.sfx['deal'+i].play()
-            }, i * 250+400);
+            this.drawCard(game.data.cards.unlocked, i+y)
         }
+    },
+    drawCard(deck, cardNum = 0) {
+        let num = Math.floor(Math.random() * deck.length)
+        let cardIndex = deck.splice(num, 1)[0]
+
+        let $card = makeCard(events[cardIndex], cardNum)
+
+        this.elements.$panel.appendChild($card)
+        this.data.cards.inPlay.push(cardIndex)
+        this.checkCards()
+
     },
     checkCards: function() {
         if (this.data.cards.inPlay.length > 0) {
-            this.elements.$next.disabled = true  
+            this.elements.$next.disabled = true
         } else {
-            this.elements.$next.disabled = false
+            let immediateCards = []
+            for (let i = this.data.cards.unlocked.length-1; i >= 0; i--) {
+                if (events[this.data.cards.unlocked[i]].priority == 'immediate') {
+                    immediateCards.push(this.data.cards.unlocked.splice(i, 1)[0])
+                }
+            }
+            if (immediateCards.length > 0) {
+                let i = 0
+                for (let i = 0; i < immediateCards.length; i++) {
+                    setTimeout(() => {
+                        this.drawCard(immediateCards)
+                    }, i * 250);
+                }
+            } else {
+                this.elements.$next.disabled = false
+            }  
         }
+        this.saveData()
     },
     getDays: function () {
         let remaining = this.days - this.data.day
@@ -111,9 +154,8 @@ let game = {
             this.elements.$days.innerText = "May the Gods watch over us all..."
         }
     },
-    changeStat: function(name, change){
-        if (name === 'intel') console.log(change)
-        if (parseInt(change) !== 0) {
+    changeStat: function(name, change, flash = false){
+        if (parseInt(change) !== 0 || flash) {
             this.data.stats[name] += parseInt(change)
             let stat = this.data.stats[name]
 
@@ -194,16 +236,128 @@ let game = {
                 break
         }
     },
+    populateMenu: function(menu) {
+        switch(menu) {
+            case 'projects':
+                let content = ''
+                for (pro of projects) {
+                    pro.purchased = game.data.projects.includes(pro.id)
+                }
+                projects.sort((x, y)=> {
+                    return (x.purchased === y.purchased) ? 0 : x.purchased ? 1 : -1;
+                })
+                projects.forEach((pro) => {
+                    if (pro.requires && !game.data.flags.includes(pro.requires)) {
+                        return
+                    }
+                    let purchased = ''
+
+                    let time = pro.time
+                    if (time == 0) {
+                        time = 'Instant'
+                    } else if (time == 1) {
+                        time = time + " Day"
+                    } else {
+                        time = time + " Days"
+                    }
+                    if (this.data.projects.includes(pro.id)) {
+                        purchased = 'purchased'
+                    }
+
+                    let unaffordable =  this.isAffordable(pro) ? '' : 'unaffordable'
+
+                    let cost = []
+                    if (pro.cost.loyalty > 0) { cost.push(pro.cost.loyalty +" "+ ICONS['loyalty']) }
+                    if (pro.cost.warriors > 0) { cost.push(pro.cost.warriors +" "+ ICONS['warriors']) }
+                    if (pro.cost.order > 0) { cost.push(pro.cost.order +" "+ ICONS['order']) }
+                    if (pro.cost.reverence > 0) { cost.push(pro.cost.reverence +" "+ ICONS['reverence']) }
+                    if (pro.cost.salvage > 0) { cost.push(pro.cost.salvage +" "+ ICONS['salvage']) }
+                    if (pro.cost.wealth > 0) { cost.push(pro.cost.wealth +" "+ ICONS['wealth']) }
+                    if (pro.cost.intel > 0) { cost.push(pro.cost.intel +" "+ ICONS['intel']) }
+                    if (cost.length == 0) {
+                        cost = ['—']
+                    }
+
+                    let confers = []
+                    if (pro.return.loyalty > 0) { confers.push(pro.return.loyalty +" "+ ICONS['loyalty']) }
+                    if (pro.return.warriors > 0) { confers.push(pro.return.warriors +" "+ ICONS['warriors']) }
+                    if (pro.return.order > 0) { confers.push(pro.return.order +" "+ ICONS['order']) }
+                    if (pro.return.reverence > 0) { confers.push(pro.return.reverence +" "+ ICONS['reverence']) }
+                    if (pro.return.salvage > 0) { confers.push(pro.return.salvage +" "+ ICONS['salvage']) }
+                    if (pro.return.wealth > 0) { confers.push(pro.return.wealth +" "+ ICONS['wealth']) }
+                    if (pro.return.intel > 0) { confers.push(pro.return.intel +" "+ ICONS['intel']) }
+                    if (confers.length == 0) {
+                        confers = ['—']
+                    }
+
+                    if (purchased) { unaffordable = ''}
+
+                    content += `<div id='project-${pro.id}' class='project ${purchased} ${unaffordable}' data-id='${pro.id}'>
+                        <h2>${pro.name}</h2>
+                        <!-- <p><b>TIME:</b> ${time}</p> -->
+                        <div class="project__details">
+                            <p><b>COST:</b> ${cost.join(' ')}</p>
+                            <p><b>CONFERS:</b> ${confers.join(' ')}</p>
+                        </div>
+                        <p>${pro.text}</p>
+                        
+                        <button onclick="game.purchase(${pro.id})" ${(purchased === "" && unaffordable === '') ? '' : 'disabled'}>Authorize</button>
+                        <div class='banner'></div>
+                    </div>`
+                })
+                this.elements.$projects.innerHTML = content
+        }
+    },
+    isAffordable: function(pro) {
+        return (this.data.stats.wealth >= pro.cost.wealth
+                && this.data.stats.salvage >= pro.cost.salvage
+                && this.data.stats.intel >= pro.cost.intel)
+    },
+    purchase: function(id) {
+        let pro = projects[id]
+        if (pro.cost.wealth <= game.data.stats.wealth && pro.cost.salvage <= game.data.stats.salvage && pro.cost.intel <= game.data.stats.intel) {
+            let $project = document.getElementById('project-'+id)
+            $project.classList.add('purchased')
+            $project.querySelector('button').disabled = true
+            game.data.projects.push(id)
+
+            
+            game.changeStat('loyalty', pro.return.loyalty - pro.cost.loyalty)
+            game.changeStat('warriors', pro.return.warriors - pro.cost.warriors)
+            game.changeStat('order', pro.return.order - pro.cost.order)
+            game.changeStat('reverence', pro.return.reverence - pro.cost.reverence)
+            game.changeStat('wealth', pro.return.wealth - pro.cost.wealth)
+            game.changeStat('salvage', pro.return.salvage - pro.cost.salvage)
+            game.changeStat('intel', pro.return.intel - pro.cost.intel)
+            if (pro.callback) {
+                eval(pro.callback)
+            }
+
+            let $projectsList = this.elements.$projects.children
+
+            for ($pro of $projectsList) {
+                if (!this.isAffordable(projects[$pro.dataset.id])) {
+                    $pro.classList.add('unaffordable')
+                    $pro.querySelector('button').disabled = true
+                } else if (!$pro.classList.contains('purchased')) {
+                    $pro.classList.remove('unaffordable')
+                    $pro.querySelector('button').disabled = false
+                }
+            }
+
+            this.saveData()
+        }
+    },
     toggleMenu: function(menu) {
-        this.elements.$settings.classList.remove('visible')
-        this.elements.$quests.classList.remove('visible')
-        this.elements.$projects.classList.remove('visible')
-        this.elements.$allies.classList.remove('visible')
+        this.elements.$settingsTab.classList.remove('visible')
+        // this.elements.$questsTab.classList.remove('visible')
+        this.elements.$projectsTab.classList.remove('visible')
+        // this.elements.$alliesTab.classList.remove('visible')
 
         this.elements.$settingsBtn.classList.remove('active')
-        this.elements.$questsBtn.classList.remove('active')
+        // this.elements.$questsBtn.classList.remove('active')
         this.elements.$projectsBtn.classList.remove('active')
-        this.elements.$alliesBtn.classList.remove('active')
+        // this.elements.$alliesBtn.classList.remove('active')
 
         if (this.activeMenu !== menu) {
             if (this.activeMenu !== null) {
@@ -212,15 +366,37 @@ let game = {
                 this.elements.$panel.classList.remove('switch')
             }
             this.elements['$'+menu+'Btn'].classList.add('active')
-            this.elements['$'+menu].classList.add('visible')
+            this.elements['$'+menu+"Tab"].classList.add('visible')
 
             this.elements.$panel.classList.add('blur')
             
             this.activeMenu = menu
+
+            this.populateMenu(menu)
         } else {
             this.elements.$panel.classList.remove('switch')
             this.elements.$panel.classList.remove('blur')
             this.activeMenu = null
+        }
+    },
+    loadData: function() {
+        let data = localStorage.getItem('data')
+
+        if (data) {
+            this.data = JSON.parse(data)
+            return true
+        } else {
+            return false
+        }
+    },
+    saveData: function() {
+        localStorage.setItem('data', JSON.stringify(this.data))
+        console.log('saved!!')
+    },
+    clearData: function() {
+        if (confirm("You sure about that buddy?")) {
+            localStorage.clear()
+            location.reload()
         }
     },
     initCountdown: function() {
@@ -279,7 +455,7 @@ let game = {
         // this.getDays()
     },
     initStats: function() {
-        this.elements.$stats = document.getElementById('stats')
+        this.elements.$stats = document.getElementById('stats__panel')
 
         for (const [key, value] of Object.entries(this.data.stats)) {
             this.elements.$stats.innerHTML += `<div class="stats__stat">
@@ -297,6 +473,15 @@ let game = {
         this.elements.$wealth = document.getElementById('stat__wealth')
         this.elements.$intel = document.getElementById('stat__intel')
 
+        this.changeStat('warriors', 0, true)
+        this.changeStat('loyalty', 0, true)
+        this.changeStat('order', 0, true)
+        this.changeStat('reverence', 0, true)
+        this.changeStat('salvage', 0, true)
+        this.changeStat('wealth', 0, true)
+        this.changeStat('intel', 0, true)
+    },
+    setDefaultStats: function () {
         this.changeStat('warriors', game.initialStats.warriors)
         this.changeStat('loyalty', game.initialStats.loyalty)
         this.changeStat('order', game.initialStats.order)
@@ -311,14 +496,14 @@ let game = {
         for (e of events) {
             e.id = i
             i++
-            if (e.locked) {
+            if (e.scheduled) {
+                game.data.cards.scheduled.push(e.id)
+            } else if (e.locked) {
                 game.data.cards.locked.push(e.id)
             } else {
                 game.data.cards.unlocked.push(e.id)
             }
         }
-
-        console.log(game.data.cards)
     },
     initAudio: function () {
         this.sfx.flip = document.getElementById('audio_flip')
@@ -327,26 +512,54 @@ let game = {
         this.sfx.deal1 = document.getElementById('audio_deal_1')
         this.sfx.deal2 = document.getElementById('audio_deal_2')
     },
+    initProjects: function() {
+        let i = 0
+        for (e of projects) {
+            e.id = i
+            i++
+        }
+    },
     init: function() {
         this.elements.$gate = document.getElementById('gate')
         this.elements.$rest = document.getElementById('rest')
 
-        this.elements.$settings = document.getElementById('menu__settings')
+        this.elements.$settingsTab = document.getElementById('menu__settings')
         this.elements.$settingsBtn = document.getElementById('toggle__settings')
-        this.elements.$quests = document.getElementById('menu__quests')
+        this.elements.$questsTab = document.getElementById('menu__quests')
         this.elements.$questsBtn = document.getElementById('toggle__quests')
-        this.elements.$projects = document.getElementById('menu__projects')
+        this.elements.$projectsTab = document.getElementById('menu__projects')
         this.elements.$projectsBtn = document.getElementById('toggle__projects')
-        this.elements.$allies = document.getElementById('menu__allies')
+        this.elements.$alliesTab = document.getElementById('menu__allies')
         this.elements.$alliesBtn = document.getElementById('toggle__allies')
-        
-        this.initStats()
-        
-        this.initCountdown()
 
-        this.initEvents()
+        this.elements.$projects = document.getElementById('projects')
+        
+        if (this.loadData()) {
+            this.initProjects()
+            this.initStats()
+            this.initCountdown()
+            this.initAudio()
 
-        this.initAudio()
+
+            setTimeout(()=>{
+                if (game.data.cards.inPlay.length > 0) {
+                    for(let i = 0; i < game.data.cards.inPlay.length; i++) {
+                        let card = game.data.cards.inPlay[i]
+                        let $card = makeCard(events[card], i)
+                        this.elements.$panel.appendChild($card)
+                        this.checkCards()
+                    }
+                }
+            }, 3000)
+        } else {
+            this.initProjects()
+            this.initStats()
+            this.setDefaultStats()
+            this.initCountdown()
+            this.initEvents()
+            this.initAudio()
+        }
+
     }
 }
 

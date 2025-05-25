@@ -15,9 +15,11 @@
     <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/cardbacks.css">
     <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/projects.css">
+
 </head>
 <body>
-    <audio autoplay loop><source src="audio/the-dead-city.mp3"></audio>
+    <!-- <audio autoplay loop><source src="audio/the-dead-city.mp3"></audio> -->
 
     <audio id='audio_flip'><source src="audio/sfx-flip.mp3"></audio>
     <audio id='audio_place'><source src="audio/sfx-place.mp3"></audio>
@@ -36,32 +38,36 @@
             <div id="stats" class="stats box">
                 <h1 class="stats__title">GORNATH</h1>
                 <div class="stats__subtitle">—&nbsp;The&nbsp;Dead&nbsp;City&nbsp;—</div>
+                <div id="stats__panel" class="stats__panel"></div>
+                <div class="stats__tabs">
+                    <button id="toggle__settings" onclick="game.toggleMenu('settings')">🔧</button>
+                    <!-- <button id="toggle__quests" onclick="game.toggleMenu('quests')">📜</button> -->
+                    <button id="toggle__projects" onclick="game.toggleMenu('projects')">📜</button>
+                    <!-- <button id="toggle__allies" onclick="game.toggleMenu('allies')">🔮</button> -->
+                </div>
             </div>
-            <div class="sidebar__tabs">
-                <button id="toggle__settings" onclick="game.toggleMenu('settings')">🎧</button>
-                <button id="toggle__quests" onclick="game.toggleMenu('quests')">📜</button>
-                <button id="toggle__projects" onclick="game.toggleMenu('projects')">🛠️</button>
-                <button id="toggle__allies" onclick="game.toggleMenu('allies')">🤝</button>
-            </div>
-
+            
             <div class="sidebar__buttons">
                 <button id="gate" onclick="game.useGate()"><div class="spin">🌀</div> <div>Activate Gate</div></button>
                 <button id="rest" onclick="game.rest()"><div class="pulse">💤</div> <div class="text">Begin Rest</div></button>
                 <button id="next" onclick="game.nextDay()"><div>⌛</div> <div>End the Day</div></button>
             </div>
         </div>
+
         <div id="panel">
             <section id="menu__settings" class="menu box">
-                <h1>🎧 Settings</h1>
+                <h1>🔧 Settings</h1>
+                <button onclick="game.clearData()">Clear Data!</button>
             </section>
             <section id="menu__quests" class="menu box">
                 <h1>📜 Quests</h1>
             </section>
             <section id="menu__projects" class="menu box">
-                <h1>🛠️ Projects</h1>
+                <h1>📜 Projects & Actions</h1>
+                <div id="projects" class="projects"></div>
             </section>
             <section id="menu__allies" class="menu box">
-                <h1>🤝 Allies</h1>
+                <h1>🔮 Allies & Clues</h1>
             </section>
             <!-- <div class="sheen"></div> -->
             <!-- <h1>Stats</h1>
@@ -74,6 +80,7 @@
 
     <script src="scripts/constants.js"></script>
     <script src="scripts/events.js"></script>
+    <script src="scripts/projects.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/cards.js"></script>

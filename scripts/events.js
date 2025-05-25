@@ -3,6 +3,7 @@ let events = [
         "title": "The Galdarians Arrive",
         "type": "galdarians",
         "rarity": "special",
+        "scheduled": "26",
         "priority": "standard",
         "locked": false,
         "text": "Erlag's people have arrived.",
@@ -60,6 +61,7 @@ let events = [
         "title": "Gate Malfunction",
         "type": "dilemma",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "The gate his going critical! We need to stop it before it punches a hole in the fabric of reality.",
@@ -98,7 +100,7 @@ let events = [
                 "title": "Destroy it",
                 "outcomes": [
                     {
-                        "name": "Effect",
+                        "name": "",
                         "warriors": 0,
                         "loyalty": 0,
                         "order": 0,
@@ -118,34 +120,34 @@ let events = [
         "title": "Quivicar Merchandise",
         "type": "opportunity",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
-        "text": "The mangy merchant is doing a flash sale. Perhaps we can get him to drop his prices a little?",
+        "text": "The mangy merchant is doing a flash sale.",
         "options": [
             {
-                "title": "Talk him around",
-                "test": "DC 25 Persuasion",
+                "title": "Buy salvage",
                 "outcomes": [
                     {
-                        "name": "Pass",
+                        "name": "",
                         "warriors": 0,
                         "loyalty": 0,
                         "order": 0,
                         "reverence": 0,
-                        "salvage": 5,
-                        "wealth": 5,
+                        "salvage": 2,
+                        "wealth": -2,
                         "intel": 0,
-                        "other": "Lower prices",
+                        "other": "",
                         "unlocks": ""
                     },
                     {
-                        "name": "Fail",
+                        "name": "",
                         "warriors": 0,
                         "loyalty": 0,
                         "order": 0,
                         "reverence": 0,
-                        "salvage": 0,
-                        "wealth": 0,
+                        "salvage": 4,
+                        "wealth": -4,
                         "intel": 0,
                         "other": "",
                         "unlocks": ""
@@ -153,18 +155,96 @@ let events = [
                 ]
             },
             {
-                "title": "Use legal force",
+                "title": "Sell salvage",
                 "outcomes": [
                     {
-                        "name": "Effect",
+                        "name": "",
                         "warriors": 0,
-                        "loyalty": -1,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": -2,
+                        "wealth": 2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": -4,
+                        "wealth": 4,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Haggle",
+                "test": "DC 22 Persuasion",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 2,
+                        "wealth": -1,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 4,
+                        "wealth": -3,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": -1,
+                        "wealth": 2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": -3,
+                        "wealth": 4,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
                         "order": -1,
                         "reverence": 0,
-                        "salvage": 5,
-                        "wealth": 5,
+                        "salvage": 0,
+                        "wealth": 0,
                         "intel": 0,
-                        "other": "Lower prices",
+                        "other": "",
                         "unlocks": ""
                     }
                 ]
@@ -176,8 +256,9 @@ let events = [
         "title": "Logus Attacks",
         "type": "fight",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
-        "locked": false,
+        "locked": true,
         "text": "Logus as appeared suddenly and is attacking the town!",
         "options": [
             {
@@ -247,6 +328,7 @@ let events = [
         "title": "Unworthy to Stay",
         "type": "unworthy",
         "rarity": "special",
+        "scheduled": "27",
         "priority": "standard",
         "locked": false,
         "text": "We promised Unworthy that we'd get him Bokaz' sanction to conduct Adherent research within the City of Gornath. But the Chief seems unwilling to let him stay.",
@@ -263,7 +345,7 @@ let events = [
                         "salvage": 0,
                         "wealth": 0,
                         "intel": 0,
-                        "other": "Lose Unworthy",
+                        "other": "",
                         "unlocks": ""
                     }
                 ]
@@ -281,8 +363,8 @@ let events = [
                         "salvage": 0,
                         "wealth": 0,
                         "intel": 0,
-                        "other": "Gain Unworthy",
-                        "unlocks": ""
+                        "other": "Unworthy Stays",
+                        "unlocks": "26"
                     },
                     {
                         "name": "Fail",
@@ -293,7 +375,7 @@ let events = [
                         "salvage": 0,
                         "wealth": 0,
                         "intel": 0,
-                        "other": "Lose Unworthy",
+                        "other": "",
                         "unlocks": ""
                     },
                     {
@@ -305,8 +387,8 @@ let events = [
                         "salvage": 0,
                         "wealth": 0,
                         "intel": 0,
-                        "other": "Gain Unworthy",
-                        "unlocks": ""
+                        "other": "Unworthy Stays",
+                        "unlocks": "26"
                     }
                 ]
             }
@@ -317,6 +399,7 @@ let events = [
         "title": "Returning Emigrants",
         "type": "opportunity",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "In the years following the fall of the Demon Kings, many people have come and gone from Gornath. News has spread of how Gornath is in danger, and a number of former warriors have returned to join us in the coming battle.",
@@ -362,6 +445,7 @@ let events = [
         "title": "Taxation",
         "type": "dilemma",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "It is time for the seasonal taxes to be levied.",
@@ -467,6 +551,7 @@ let events = [
         "title": "Skittering in the Night",
         "type": "fight",
         "rarity": "rare",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "There are reports of strange activity in the lower level. People are disappearing. It all seems uncomfortably familiar after what happened with the adherents a few weeks ago. We need to look into this.",
@@ -484,7 +569,7 @@ let events = [
                         "wealth": 0,
                         "intel": 0,
                         "other": "It probably doesn't matter...",
-                        "unlocks": ""
+                        "unlocks": "25"
                     }
                 ]
             },
@@ -555,15 +640,16 @@ let events = [
         "title": "To Delve Greedily...",
         "type": "opportunity",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "The dwarven archaeologist wants to mount a proper, extensive expedition to Vir-kegeth, following your rather brilliant venture. He's proposing a number of warriors are spared so he can investigate safely.",
         "options": [
             {
-                "title": "Give him two bodyguards",
+                "title": "Send some warriors",
                 "outcomes": [
                     {
-                        "name": "",
+                        "name": "A couple",
                         "warriors": -1,
                         "loyalty": 0,
                         "order": 0,
@@ -573,14 +659,9 @@ let events = [
                         "intel": 0,
                         "other": "",
                         "unlocks": ""
-                    }
-                ]
-            },
-            {
-                "title": "Send a handful of warriors",
-                "outcomes": [
+                    },
                     {
-                        "name": "",
+                        "name": "A handful",
                         "warriors": -3,
                         "loyalty": 0,
                         "order": 0,
@@ -590,15 +671,10 @@ let events = [
                         "intel": 0,
                         "other": "",
                         "unlocks": ""
-                    }
-                ]
-            },
-            {
-                "title": "Send a whole brigade!",
-                "outcomes": [
+                    },
                     {
-                        "name": "",
-                        "warriors": -6,
+                        "name": "A dozen",
+                        "warriors": -5,
                         "loyalty": 0,
                         "order": 0,
                         "reverence": 0,
@@ -634,6 +710,7 @@ let events = [
         "title": "Glory to the Gods!",
         "type": "opportunity",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "A few of our priests are urging Bokaz to declare a festival in honour of the Kavak gods that have guided our way for three centuries. It could be expensive, but perhaps it might yield beneficial results.",
@@ -696,6 +773,7 @@ let events = [
         "title": "In Cleovaross' Name",
         "type": "dilemma",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "Abeni and her followers are requesting that a temple be built in honour of Cleovaross, the Winter Goddess.",
@@ -758,6 +836,7 @@ let events = [
         "title": "The Summoning",
         "type": "fight",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "Reports are coming in of a commotion in the upper levels. Screams and acts of violence have been heard. We need to sort this out immediately.",
@@ -829,6 +908,7 @@ let events = [
         "title": "Sweet Dreams",
         "type": "logus",
         "rarity": "special",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "[Redacted]",
@@ -870,6 +950,7 @@ let events = [
         "title": "Magimecha Attack",
         "type": "crisis",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "Wild magimecha are assaulting the entrance to the city! ",
@@ -896,7 +977,7 @@ let events = [
                         "loyalty": 0,
                         "order": -2,
                         "reverence": 0,
-                        "salvage": 0,
+                        "salvage": 1,
                         "wealth": 0,
                         "intel": 0,
                         "other": "",
@@ -911,19 +992,20 @@ let events = [
         "title": "Earthquake!",
         "type": "crisis",
         "rarity": "uncommon",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "A violent tremor shook the mountain today, causing a substantial amount of damage, most notably, the collapse of one of the bridges on the upper levels. A few people are dead, and many are wounded.",
         "options": [
             {
-                "title": "Triage",
+                "title": "Establish a Triage Centre",
                 "test": "DC 20 Medicine",
                 "outcomes": [
                     {
                         "name": "Pass",
                         "warriors": 0,
                         "loyalty": 0,
-                        "order": -1,
+                        "order": -3,
                         "reverence": 0,
                         "salvage": 0,
                         "wealth": 0,
@@ -935,7 +1017,7 @@ let events = [
                         "name": "Fail",
                         "warriors": 0,
                         "loyalty": 0,
-                        "order": -4,
+                        "order": -7,
                         "reverence": 0,
                         "salvage": 0,
                         "wealth": 0,
@@ -952,6 +1034,7 @@ let events = [
         "title": "Caught Red Handed",
         "type": "dilemma",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "A thief has been found stealing food and weapons from the warriors' barracks. In her interrogation, she claimed that she wanted to help the town. But it's quite likely she was just an opportunist.",
@@ -1027,6 +1110,7 @@ let events = [
         "title": "Arakos Coffee Deficit",
         "type": "dilemma",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "Our coffee reserves have dried up! We need to do something about this or our society may fall apart before Logus even sets foot in Gornath!",
@@ -1102,6 +1186,7 @@ let events = [
         "title": "Caffine Crisis!",
         "type": "crisis",
         "rarity": "special",
+        "scheduled": "",
         "priority": "high",
         "locked": true,
         "text": "Disaster strikes! What fools we were!",
@@ -1128,14 +1213,15 @@ let events = [
     },
     {
         "title": "Visions of the Witch",
-        "type": "galdarians",
+        "type": "opportunity",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
-        "text": "Magra has caught glimpses of the future! Perhaps we can learn something about what he is going to bring to bear against us!",
+        "text": "Magra has caught glimpses of the future! Perhaps we can learn something about what he is going to bring to bear against us! But such visions are dangerous and who knows what the price may be...",
         "options": [
             {
-                "title": "Option",
+                "title": "Do not look",
                 "outcomes": [
                     {
                         "name": "",
@@ -1145,7 +1231,61 @@ let events = [
                         "reverence": 0,
                         "salvage": 0,
                         "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Gaze deeply",
+                "test": "Magra may die",
+                "outcomes": [
+                    {
+                        "name": "15% chance",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 1,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "30% chance",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
                         "intel": 2,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "45% chance",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 3,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "60% chance",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 4,
                         "other": "",
                         "unlocks": ""
                     }
@@ -1158,6 +1298,7 @@ let events = [
         "title": "Cultural Troubles",
         "type": "galdarians",
         "rarity": "common",
+        "scheduled": "",
         "priority": "high",
         "locked": true,
         "text": "Seems the Galdarians are having trouble fitting in her in Gornath. They're being loud, interfering with the goings on of the locals. Some are saying we made a mistake in letting them live here.",
@@ -1259,6 +1400,7 @@ let events = [
         "title": "The Copycat",
         "type": "chaos",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "There are reports of someone practising blood magic in the city. On investigation, it appears someone is imitating Atanasya. And poorly at that. We can't have this.",
@@ -1304,17 +1446,69 @@ let events = [
         "title": "Last Rites",
         "type": "zen",
         "rarity": "common",
+        "scheduled": "27",
         "priority": "standard",
         "locked": false,
-        "text": "Our friend has fallen. We need to honour him.",
+        "text": "Our friend has fallen. We need to honour him. What can we say about him?",
         "options": [
             {
                 "title": "He carried the blade well",
                 "outcomes": [
                     {
                         "name": "",
+                        "warriors": 1,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "He served Astaris to the end",
+                "outcomes": [
+                    {
+                        "name": "",
                         "warriors": 0,
                         "loyalty": 0,
+                        "order": 0,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "He put his duty before all else",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "He was a friend to Gornath",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 1,
                         "order": 0,
                         "reverence": 0,
                         "salvage": 0,
@@ -1332,6 +1526,7 @@ let events = [
         "title": "Trouble Below",
         "type": "magnus",
         "rarity": "common",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "We've received word from Magnus. He needs supplies sent down to the Aperture to help look after the refugees there. ",
@@ -1357,13 +1552,25 @@ let events = [
                 "title": "Put together what we can",
                 "outcomes": [
                     {
-                        "name": "",
+                        "name": "A little",
                         "warriors": 0,
                         "loyalty": 0,
                         "order": 0,
                         "reverence": 0,
                         "salvage": 0,
                         "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "A lot",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -5,
                         "intel": 0,
                         "other": "",
                         "unlocks": ""
@@ -1377,15 +1584,28 @@ let events = [
         "title": "Sharpening the Blade",
         "type": "corpus",
         "rarity": "special",
+        "scheduled": "25",
         "priority": "standard",
         "locked": false,
-        "text": "No one in Gornath knows as much about fighting demons as Corpus Bonebrooke. Our troops could learn a lot from his experience.",
+        "text": "No one in Gornath knows as much about fighting demons as Corpus Bonebrooke. Our warriors could learn a lot from his experience. What should their priority be?",
         "options": [
             {
                 "title": "They must kill demons",
                 "outcomes": [
                     {
-                        "name": "",
+                        "name": "Pass",
+                        "warriors": 4,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
                         "warriors": 2,
                         "loyalty": 0,
                         "order": 0,
@@ -1396,13 +1616,26 @@ let events = [
                         "other": "",
                         "unlocks": ""
                     }
-                ]
+                ],
+                "test": "DC 18 Attack"
             },
             {
-                "title": "They must revere the watchers",
+                "title": "The must revere the Watchers",
                 "outcomes": [
                     {
-                        "name": "",
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 4,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
                         "warriors": 0,
                         "loyalty": 0,
                         "order": 0,
@@ -1413,17 +1646,18 @@ let events = [
                         "other": "",
                         "unlocks": ""
                     }
-                ]
+                ],
+                "test": "DC 18 Religion"
             },
             {
                 "title": "A balance must be struck",
                 "outcomes": [
                     {
                         "name": "",
-                        "warriors": 1,
+                        "warriors": 2,
                         "loyalty": 0,
                         "order": 0,
-                        "reverence": 1,
+                        "reverence": 2,
                         "salvage": 0,
                         "wealth": 0,
                         "intel": 0,
@@ -1439,6 +1673,7 @@ let events = [
         "title": "The Stars Guide Us",
         "type": "eideron",
         "rarity": "special",
+        "scheduled": "",
         "priority": "standard",
         "locked": false,
         "text": "Xaltor has reported an increased interest in the worship of Astaris. But what should they pray for?",
@@ -1513,5 +1748,94 @@ let events = [
             }
         ],
         "id": 24
+    },
+    {
+        "title": "Chysalid Infestation!",
+        "type": "crisis",
+        "rarity": "common",
+        "scheduled": "",
+        "priority": "standard",
+        "locked": true,
+        "text": "We made a big mistake! The goings on down below were the workings of demons! Now there's an infestation of Chrysilid demons in the lower levels!",
+        "options": [
+            {
+                "title": "Lock the section down!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Purge the demons",
+                "test": "DC 20 Military",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": -1,
+                        "loyalty": 0,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -4,
+                        "loyalty": -2,
+                        "order": -4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 25
+    },
+    {
+        "title": "Unworthy Remains",
+        "type": "unworthy",
+        "rarity": "special",
+        "priority": "immediate",
+        "locked": true,
+        "scheduled": "",
+        "text": "We've set Unworthy up in the old adherent lab. <br><br><b>New options are available in the projects menu!</b>",
+        "options": [
+            {
+                "title": "Hopefully we don't regret this...",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": "",
+                        "flags": "unworthy"
+                    }
+                ]
+            }
+        ],
+        "id": 26
     }
 ]
