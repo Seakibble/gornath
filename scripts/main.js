@@ -410,7 +410,7 @@ let game = {
             this.saveData()
             location.reload()
         } else {
-            consoele.log("Nothing to undo!")
+            console.log("Nothing to undo!")
         }
     },
     checkUndo() {
@@ -418,9 +418,9 @@ let game = {
             this.undoStack = []
         }
         if (this.undoStack.length == 0) {
-            this.elements.$undo.disabled = true
+            this.elements.$undo.classList.add('disabled')
         } else {
-            this.elements.$undo.disabled = false
+            this.elements.$undo.classList.remove('disabled')
         }
     },
     setUndoState: function() {
