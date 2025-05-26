@@ -445,7 +445,7 @@
     font-size: 2em;
 }
 
-@media screen and (width < 1700px) {
+@media screen and (width < 1300px) {
     .card-wrapper {
         font-size: 0.8em;
         /* margin: 1em; */
