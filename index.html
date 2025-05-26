@@ -42,11 +42,13 @@
                 <div class="stats__subtitle">—&nbsp;The&nbsp;Dead&nbsp;City&nbsp;—</div>
                 <div id="stats__panel" class="stats__panel"></div>
                 <div class="stats__tabs">
-                    <button id="toggle__settings" onclick="game.toggleMenu('settings')">🔧</button>
+                    <button class="stats__btn" id="toggle__settings" onclick="game.toggleMenu('settings')">🔧</button>
                     <!-- <button id="toggle__quests" onclick="game.toggleMenu('quests')">📜</button> -->
-                    <button id="toggle__projects" onclick="game.toggleMenu('projects')">📜</button>
+                    <button class="stats__btn" id="toggle__projects" onclick="game.toggleMenu('projects')">📜</button>
                     <!-- <button id="toggle__allies" onclick="game.toggleMenu('allies')">🔮</button> -->
-                    <button id="undo" onclick="game.undo()">⏮️</button>
+                    <div class="stats__btn" id="undo">⏮️
+                        <button onclick="game.undo()">Undo?</button>
+                    </div>
                 </div>
             </div>
             

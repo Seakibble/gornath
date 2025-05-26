@@ -359,7 +359,6 @@ let game = {
             projects.sort((x, y)=> {
                 return x.id - y.id
             })
-            console.log(projects)
 
             for ($pro of $projectsList) {
                 if (!this.isAffordable(projects[$pro.dataset.id])) {
@@ -406,7 +405,7 @@ let game = {
         }
     },
     undo: function() {
-        if (this.undoStack.length > 0 && confirm("You're about to undo the last action.")) {
+        if (this.undoStack.length > 0) {
             this.data = this.undoStack.pop()
             this.saveData()
             location.reload()
