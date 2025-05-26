@@ -147,6 +147,7 @@ game.elements.$panel.addEventListener('click', (e) => {
 })
 
 function resolve(button) {
+    game.setUndoState()
     let $card = button.closest('.card-wrapper')
 
     game.changeStat('warriors', button.dataset.warriors)
@@ -194,5 +195,8 @@ function extractFromDeck(deck, id) {
 }
 
 function findInDeck(deck, id) {
-    return deck.findIndex((card)=>{return card.id == id})
+    console.log(deck, id)
+    return deck.findIndex((card)=>{
+        console.log(card, id)
+        return parseInt(card) === parseInt(id)})
 }

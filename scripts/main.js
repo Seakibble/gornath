@@ -7,10 +7,11 @@ let game = {
     initialStats: {
         loyalty: 6,
         warriors: 9,
+      
         order: 10,
         reverence: 12,
-        salvage: 5,
-        wealth: 5,
+        salvage: 3,
+        wealth: 3,
         intel: 0,
     },
     data: {
@@ -36,12 +37,14 @@ let game = {
         },
         projects: [],
     },
+    undoStack: [],
     elements: {},
     nextDay: function () {
         if (this.data.cards.inPlay > 0) {
             alert("CARDS STILL IN PLAY")
             return
         }
+        this.setUndoState()
         this.elements.$pips[this.data.day - 1].classList.remove('now')
         
         setTimeout(() => {
@@ -190,6 +193,7 @@ let game = {
         }
     },
     rest: function(){
+        this.setUndoState()
         if (this.data.restCooldown < 0) {
             this.data.restCooldown = 3
             this.elements.$rest.querySelector('.text').innerText = "Cancel Rest"
@@ -208,6 +212,7 @@ let game = {
         }
     },
     useGate: function(){
+        this.setUndoState()
         if (this.data.gateCooldown < 0) {
             this.data.gateCooldown = Math.floor(Math.random()*4)+2
             this.elements.$gate.disabled = true
@@ -316,6 +321,7 @@ let game = {
     purchase: function(id) {
         let pro = projects[id]
         if (pro.cost.wealth <= game.data.stats.wealth && pro.cost.salvage <= game.data.stats.salvage && pro.cost.intel <= game.data.stats.intel) {
+            this.setUndoState()
             let $project = document.getElementById('project-'+id)
             $project.classList.add('purchased')
             $project.querySelector('button').disabled = true
@@ -379,11 +385,44 @@ let game = {
             this.activeMenu = null
         }
     },
+    undo: function() {
+        if (this.undoStack.length > 0) {
+            this.data = this.undoStack.pop()
+            this.saveData()
+            location.reload()
+        } else {
+            consoele.log("Nothing to undo!")
+        }
+    },
+    checkUndo() {
+        if (!this.undoStack) {
+            this.undoStack = []
+        }
+        if (this.undoStack.length == 0) {
+            this.elements.$undo.disabled = true
+        } else {
+            this.elements.$undo.disabled = false
+        }
+    },
+    setUndoState: function() {
+        let lastState = JSON.parse(JSON.stringify(this.data))
+        lastState.undoStack = []
+        this.undoStack.push(lastState)
+        if (this.undoStack.length > 10) {
+            this.undoStack.pop()
+        }
+        console.log('Undo State Set!')
+    },
     loadData: function() {
         let data = localStorage.getItem('data')
+        let undoStack = localStorage.getItem('undo')
+
 
         if (data) {
             this.data = JSON.parse(data)
+            if(undoStack) {
+                this.undoStack = JSON.parse(undoStack)
+            }
             return true
         } else {
             return false
@@ -391,7 +430,10 @@ let game = {
     },
     saveData: function() {
         localStorage.setItem('data', JSON.stringify(this.data))
-        console.log('saved!!')
+        localStorage.setItem('undo', JSON.stringify(this.undoStack))
+
+        console.log('Saved!')
+        this.checkUndo()
     },
     clearData: function() {
         if (confirm("You sure about that buddy?")) {
@@ -533,6 +575,9 @@ let game = {
         this.elements.$alliesBtn = document.getElementById('toggle__allies')
 
         this.elements.$projects = document.getElementById('projects')
+
+        this.elements.$undo = document.getElementById('undo')
+
         
         if (this.loadData()) {
             this.initProjects()
@@ -559,7 +604,7 @@ let game = {
             this.initEvents()
             this.initAudio()
         }
-
+        this.checkUndo()
     }
 }
 
