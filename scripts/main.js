@@ -46,6 +46,7 @@ let game = {
         }
         this.setUndoState()
         this.elements.$pips[this.data.day - 1].classList.remove('now')
+        this.toggleMenu()
         
         setTimeout(() => {
             this.data.day++
@@ -241,6 +242,17 @@ let game = {
                 break
         }
     },
+    declaration: function(h1,h2) {
+        let $dec = document.createElement('div')
+        $dec.classList.add('declaration__outer')
+        $dec.innerHTML = `
+            <div class="declaration__inner">
+                <h1>${h1}</h1>
+                <h2>${h2}</h2>
+            </div>`
+
+        this.elements.$declaration.appendChild($dec)
+    },
     populateMenu: function(menu) {
         switch(menu) {
             case 'projects':
@@ -302,7 +314,7 @@ let game = {
                         <!-- <p><b>TIME:</b> ${time}</p> -->
                         <div class="project__details">
                             <p><b>COST:</b> ${cost.join(' ')}</p>
-                            <p><b>CONFERS:</b> ${confers.join(' ')}</p>
+                            <p><b>PROVIDES:</b> ${confers.join(' ')}</p>
                         </div>
                         <p>${pro.text}</p>
                         
@@ -319,7 +331,7 @@ let game = {
                 && this.data.stats.intel >= pro.cost.intel)
     },
     purchase: function(id) {
-        let pro = projects[id]
+        let pro = projects.find((project) => project.id === id)
         if (pro.cost.wealth <= game.data.stats.wealth && pro.cost.salvage <= game.data.stats.salvage && pro.cost.intel <= game.data.stats.intel) {
             this.setUndoState()
             let $project = document.getElementById('project-'+id)
@@ -338,8 +350,16 @@ let game = {
             if (pro.callback) {
                 eval(pro.callback)
             }
+            if (pro.declaration) {
+                this.declaration(pro.declaration[0], pro.declaration[1])
+            }
 
             let $projectsList = this.elements.$projects.children
+
+            projects.sort((x, y)=> {
+                return x.id - y.id
+            })
+            console.log(projects)
 
             for ($pro of $projectsList) {
                 if (!this.isAffordable(projects[$pro.dataset.id])) {
@@ -354,7 +374,7 @@ let game = {
             this.saveData()
         }
     },
-    toggleMenu: function(menu) {
+    toggleMenu: function(menu = '') {
         this.elements.$settingsTab.classList.remove('visible')
         // this.elements.$questsTab.classList.remove('visible')
         this.elements.$projectsTab.classList.remove('visible')
@@ -365,7 +385,7 @@ let game = {
         this.elements.$projectsBtn.classList.remove('active')
         // this.elements.$alliesBtn.classList.remove('active')
 
-        if (this.activeMenu !== menu) {
+        if (this.activeMenu !== menu && menu !== '') {
             if (this.activeMenu !== null) {
                 this.elements.$panel.classList.add('switch')
             } else {
@@ -386,7 +406,7 @@ let game = {
         }
     },
     undo: function() {
-        if (this.undoStack.length > 0) {
+        if (this.undoStack.length > 0 && confirm("You're about to undo the last action.")) {
             this.data = this.undoStack.pop()
             this.saveData()
             location.reload()
@@ -436,7 +456,7 @@ let game = {
         this.checkUndo()
     },
     clearData: function() {
-        if (confirm("You sure about that buddy?")) {
+        if (confirm("WARNING! You are about to delete all your local data!")) {
             localStorage.clear()
             location.reload()
         }
@@ -577,6 +597,14 @@ let game = {
         this.elements.$projects = document.getElementById('projects')
 
         this.elements.$undo = document.getElementById('undo')
+
+        this.elements.$declaration = document.getElementById('declaration')
+        this.elements.$declaration.addEventListener('animationend', (e) => {
+            console.log(e.target.classList)
+            if (e.target.classList.contains('declaration__outer')) {
+                e.target.remove()
+            }
+        })
 
         
         if (this.loadData()) {

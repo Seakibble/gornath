@@ -21,7 +21,8 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "callback": ""
+        "declaration": ['Martial Law Declared!', "You're in trouble now..."],
+        "callback": ``
     }, 
     {
         "name": "Take a Loan Out",
@@ -45,6 +46,7 @@ let projects = [
             "wealth": 5,
             "intel": 0,
         }, 
+        "declaration": ["Debt Acquired!", "(And some pocket change)"],
         "callback": ""
     }, 
     {
@@ -70,6 +72,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Throne Blinged Out!","Trakumir would be envious!"],
         "callback": ""
     },
     {
@@ -95,6 +98,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Armour Upgraded!", "(It's no longer painted red)"],
         "callback": ""
     },
     {
@@ -120,6 +124,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Weapons Upgraded!", "(Now with extra spikes)"],
         "callback": ""
     },
     {
@@ -145,6 +150,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Temple Fortified!","They'll be nice and safe now"],
         "callback": ""
     },
     {
@@ -160,7 +166,7 @@ let projects = [
             "wealth": 5,
             "intel": 0,
         },
-        "text": "Xaltor the Wise would like to invest in some arcane inks with which to place enchantments and wards upon the Temple of Astaris. It's not exactly high priority, but it could strengthen the faith of the people in Astaris.",
+        "text": "Xaltor the Wise would like to invest in some arcane inks with which to place enchantments and wards upon the Shrine of Astaris. It's not exactly high priority, but it could strengthen the faith of the people in Astaris.",
         "return": {
             "loyalty": 0,
             "warriors": 0,
@@ -170,6 +176,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Shrine Enchanted!","It's all very impressive looking now"],
         "callback": ""
     },
     {
@@ -195,6 +202,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Weapon Manufactured!","(Time to kill some fucking demons!)"],
         "callback": ""
     }, 
     {
@@ -220,6 +228,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Weapons Enhanced!", "(With vile Iron Sorcery)"],
         "callback": ""
     }, 
     {
@@ -245,6 +254,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
+        "declaration": ["Entrances Mined!","(Just don't forget they're there...)"],
         "callback": ""
     }
 ]
