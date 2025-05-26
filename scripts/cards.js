@@ -104,7 +104,7 @@ function makeCard(card, num = 0) {
     `
 
     setTimeout(() => {
-        game.sfx['deal'+num].play()
+        SFX['deal-'+num%3].play()
     }, num* 250 + 400);
     return $card
 }
@@ -131,14 +131,16 @@ game.elements.$panel.addEventListener('click', (e) => {
         }, 350)
         setTimeout(() => {
             $card.parentElement.classList.remove('bump')
-            game.sfx.place.play()
+            // game.sfx.place.play()
+            SFX.place.play()
         }, 415);
 
         setTimeout(()=> {
             $card.classList.remove('locked')
         }, 900)
 
-        game.sfx.flip.play()
+        // game.sfx.flip.play()
+        SFX.flip.play()
     }
 
     if (e.target.tagName == "BUTTON") {
@@ -149,6 +151,8 @@ game.elements.$panel.addEventListener('click', (e) => {
 function resolve(button) {
     game.setUndoState()
     let $card = button.closest('.card-wrapper')
+
+    SFX.resolve.play()
 
     game.changeStat('warriors', button.dataset.warriors)
     game.changeStat('loyalty', button.dataset.loyalty)
@@ -172,6 +176,10 @@ function resolve(button) {
             game.data.flags.push(flag)
         }) 
     }
+
+    setTimeout(()=>{
+        SFX['deal-0'].play()
+    }, 900)
 
     $card.classList.add('remove')
     $card.addEventListener('animationend', cleanupCard)

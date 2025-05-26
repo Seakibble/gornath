@@ -47,7 +47,8 @@ let game = {
         this.setUndoState()
         this.elements.$pips[this.data.day - 1].classList.remove('now')
         this.toggleMenu()
-        
+        SFX.end.play()
+
         setTimeout(() => {
             this.data.day++
             this.elements.$pips[this.data.day - 1].classList.add('active')
