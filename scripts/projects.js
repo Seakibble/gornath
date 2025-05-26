@@ -25,7 +25,7 @@ let projects = [
         "callback": ``
     }, 
     {
-        "name": "Take a Loan Out",
+        "name": "Take Out a Loan",
         "time": 0,
         "cost": {
             "loyalty": 0,
@@ -36,7 +36,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         },
-        "text": "The mangy kobold has offered to give us a generous loan of 5 💎. The only question is when he'll expect it to be paid back...",
+        "text": "The mangy kobold has offered to give us a generous loan. The only question is when he'll expect it to be paid back...",
         "return": {
             "loyalty": 0,
             "warriors": 0,
@@ -46,7 +46,7 @@ let projects = [
             "wealth": 5,
             "intel": 0,
         }, 
-        "declaration": ["Debt Acquired!", "(And some pocket change)"],
+        "declaration": ["Debt Acquired", "(And some pocket change)"],
         "callback": ""
     }, 
     {
@@ -72,7 +72,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Throne Blinged Out!","Trakumir would be envious!"],
+        "declaration": ["Throne Blinged Out","Trakumir would be envious!"],
         "callback": ""
     },
     {
@@ -98,7 +98,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Armour Upgraded!", "(It's no longer painted red)"],
+        "declaration": ["Armour Upgraded", "(It's no longer painted red)"],
         "callback": ""
     },
     {
@@ -124,7 +124,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Weapons Upgraded!", "(Now with extra spikes)"],
+        "declaration": ["Weapons Upgraded", "(Now with extra spikes)"],
         "callback": ""
     },
     {
@@ -150,7 +150,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Temple Fortified!","They'll be nice and safe now"],
+        "declaration": ["Temple Fortified","They'll be nice and safe now"],
         "callback": ""
     },
     {
@@ -176,7 +176,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Shrine Enchanted!","It's all very impressive looking now"],
+        "declaration": ["Shrine Enchanted","It's all very impressive looking now"],
         "callback": ""
     },
     {
@@ -202,7 +202,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Weapon Manufactured!","(Time to kill some fucking demons!)"],
+        "declaration": ["Weapon Manufactured","Time to kill some fucking demons!"],
         "callback": ""
     }, 
     {
@@ -228,7 +228,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Weapons Enhanced!", "(With vile Iron Sorcery)"],
+        "declaration": ["Weapons Enhanced", "(With vile Iron Sorcery)"],
         "callback": ""
     }, 
     {
@@ -254,7 +254,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Entrances Mined!","(Just don't forget they're there...)"],
+        "declaration": ["Entrances Mined","(Just don't forget they're there...)"],
         "callback": ""
     }
 ]

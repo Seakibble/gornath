@@ -120,10 +120,6 @@
 
         &.active {
             background: var(--darkbrown);
-            
-            &:hover {
-                background: var(--beige);
-            }
         }
     }
 }

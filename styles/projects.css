@@ -17,7 +17,8 @@
     transition: box-shadow 0.3s, transform 0.3s;
     
     & h2 {
-        color: var(--green)
+        color: var(--green);
+        font-size: 1.3em;
     }
 
     & h2, 
@@ -119,10 +120,16 @@
         font-family: 'Marcellus', 'Crimson Pro', serif;
     }
     &:last-of-type {
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 }
 
 .project button {
     margin-top: 1em;
+}
+
+@media screen and (width < 1400px) {
+    .projects {
+        grid-template-columns: 1fr 1fr;
+    }
 }

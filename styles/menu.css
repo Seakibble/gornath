@@ -21,6 +21,7 @@
 
     & h1 {
         color: var(--blue);
+        font-size: 1.5em;
         padding-bottom: 0.3em;
         margin-bottom: 1em;
         border-bottom: 2px solid var(--darkbrown);
