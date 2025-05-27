@@ -12,7 +12,7 @@ let game = {
         reverence: 12,
         salvage: 3,
         wealth: 3,
-        intel: 0,
+        intel: 3,
     },
     data: {
         flags: [],
@@ -36,6 +36,7 @@ let game = {
             intel: 0,
         },
         projects: [],
+        newProjects: [],
         intelligence: [],
     },
     undoStack: [],
@@ -193,6 +194,9 @@ let game = {
                     $stat.innerHTML = ''
                     $stat.appendChild($newStat)
             }
+            if(name == 'intel' && this.data.stats.intel > 0) {
+                this.alert('allies')
+            }
         }
     },
     rest: function(){
@@ -255,21 +259,41 @@ let game = {
 
         this.elements.$declaration.appendChild($dec)
     },
+    alert: function(menu) {
+        this.elements['$'+menu+'Btn'].classList.add('alert')
+    },
+    alertClear: function(menu) {
+        this.elements['$'+menu+'Btn'].classList.remove('alert')
+    },
     populateMenu: function(menu) {
         let content = ''
         switch(menu) {
             case 'projects':
+                this.alertClear('projects')
                 for (pro of projects) {
-                    pro.purchased = game.data.projects.includes(pro.id)
+                    pro.purchased = this.data.projects.includes(pro.id)
                 }
                 projects.sort((x, y)=> {
+                    let xNew = this.data.newProjects.includes(x.id)
+                    let yNew = this.data.newProjects.includes(y.id)
+
+                    if (xNew && !yNew) return -1
+                    if (!xNew && yNew) return 1
+
                     return (x.purchased === y.purchased) ? 0 : x.purchased ? 1 : -1;
                 })
                 projects.forEach((pro) => {
-                    if (pro.requires && !game.data.flags.includes(pro.requires)) {
+                    if (pro.requires && !this.data.flags.includes(pro.requires)) {
                         return
                     }
                     let purchased = ''
+                    if (this.data.projects.includes(pro.id)) {
+                        purchased = 'purchased'
+                    }
+                    let newProject = ''
+                    if (this.data.newProjects.includes(pro.id)) {
+                        newProject = 'new'
+                    }
 
                     let time = pro.time
                     if (time == 0) {
@@ -278,9 +302,6 @@ let game = {
                         time = time + " Day"
                     } else {
                         time = time + " Days"
-                    }
-                    if (this.data.projects.includes(pro.id)) {
-                        purchased = 'purchased'
                     }
 
                     let unaffordable =  this.isAffordable(pro) ? '' : 'unaffordable'
@@ -311,7 +332,7 @@ let game = {
 
                     if (purchased) { unaffordable = ''}
 
-                    content += `<div id='project-${pro.id}' class='project ${purchased} ${unaffordable}' data-id='${pro.id}'>
+                    content += `<div id='project-${pro.id}' class='project ${newProject} ${purchased} ${unaffordable}' data-id='${pro.id}'>
                         <h2>${pro.name}</h2>
                         <!-- <p><b>TIME:</b> ${time}</p> -->
                         <div class="project__details">
@@ -325,10 +346,19 @@ let game = {
                     </div>`
                 })
                 this.elements.$projects.innerHTML = content
+
+                projects.sort((x, y)=> {
+                    return x.id - y.id
+                })
                 break
 
             case 'allies':
+                this.alertClear('allies')
                 this.elements.$allies.innerHTML = ''
+                
+                if (game.data.stats.intel > 0) {
+                    this.elements.$allies.classList.add('has--intel')
+                }
                 
                 for (intelligence of intel) {
                     // content += `
@@ -374,10 +404,6 @@ let game = {
 
             let $projectsList = this.elements.$projects.children
 
-            projects.sort((x, y)=> {
-                return x.id - y.id
-            })
-
             for ($pro of $projectsList) {
                 if (!this.isAffordable(projects[$pro.dataset.id])) {
                     $pro.classList.add('unaffordable')
@@ -420,6 +446,8 @@ let game = {
             this.elements.$panel.classList.remove('switch')
             this.elements.$panel.classList.remove('blur')
             this.activeMenu = null
+            
+            this.data.newProjects = []
         }
     },
     undo: function() {
@@ -639,6 +667,9 @@ let game = {
             this.initCountdown()
             this.initAudio()
 
+            if (this.data.newProjects.length > 0 ) {
+                this.alert('projects')
+            }
 
             setTimeout(()=>{
                 if (game.data.cards.inPlay.length > 0) {

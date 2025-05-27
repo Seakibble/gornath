@@ -125,11 +125,12 @@ function makeIntelCard(card, num = 0) {
     if (locked) {
         $card.classList.add('intel--locked')
     }
+
     $card.innerHTML = `
         <div class=' card-bumper'>
-            <div class='card ${card.type} ${flipped}'>
+            <div class='card intel--${card.type} ${flipped}'>
                 <div class='inner'>
-                    <h2>${/*ICONS[card.type]*/''} <span>${card.title}</span></h2>
+                    <h2><span>${card.title}</span></h2>
                 </div>
                 <div class='card-scroller'>
                     <div class='inner'>
@@ -166,7 +167,15 @@ game.elements.$panel.addEventListener('click', (e) => {
                 let $wrapper = $card.closest('.card-wrapper')
                 game.data.intelligence.push(parseInt($wrapper.dataset.id))
                 $card.closest('.card-wrapper').classList.remove('intel--locked')
+                $card.closest('.card-wrapper').classList.add('intel--unlocked')
+
+                
+                if (game.data.stats.intel <= 0) {
+                    game.elements.$allies.classList.remove('has--intel')
+                }
+
                 game.saveData()
+                return
             } else {
                 console.log('locked')
                 return
@@ -224,7 +233,20 @@ function resolve(button) {
     if (button.dataset.flags) {
         let flags = button.dataset.flags.split(', ')
         flags.forEach(flag => {
-            game.data.flags.push(flag)
+            if (flag !== 'undefined') {
+                game.data.flags.push(flag)
+            }
+
+            let newProjects = false
+            for(project of projects) {
+                if (game.data.flags.includes(project.requires)) {
+                    game.data.newProjects.push(project.id)
+                    newProjects = true
+                }
+            }
+            if (newProjects) {
+                game.alert('projects')
+            }
         }) 
     }
 

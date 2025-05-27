@@ -16,6 +16,8 @@
     --purple: #cc00ff;
     --green: #7bff42;
     --orange: #ffb90e;
+    --lightorange: #ffdd87;
+    --darkorange: #483300;
     --orangered: #ff5e0e;
 
     color:var(--beige);

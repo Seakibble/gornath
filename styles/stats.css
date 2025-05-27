@@ -87,6 +87,7 @@
     border-top: 4px solid var(--darkbrown);
 
     & .stats__btn {
+        position: relative;
         /* background: var(--darkbrown); */
         border-radius: 0;
         /* border-left-width: 2px;
@@ -102,6 +103,29 @@
         text-align: center;
         font-size: 1.25em;
         grid-template-columns: 1fr;
+
+        &::after {
+            position: absolute;
+            font-size: 0.7em;
+            bottom: 0.1em;
+            right: 0.1em;
+            width: 1.4em;
+            height: 1.4em;
+            font-weight: bold;
+            z-index: 15;
+
+            color: white;
+            background: var(--crimson);
+            border-radius: 1em;
+            content: '!';
+            transform: scale(0);
+
+            transition: transform 0.4s 0.5s cubic-bezier(0.27, .95, 0.3, 1.4);
+        }
+
+        &.alert::after {
+            transform: scale(1);
+        }
         
         &:first-child {
             /* border-top-left-radius: 4px;

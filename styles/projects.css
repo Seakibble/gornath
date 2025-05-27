@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2em;
+    padding: 2em 1em 1em;
     overflow: auto;
 }
 .project {
@@ -44,6 +45,37 @@
         gap: 2em;
         margin-top: 0.5em
     }
+
+
+    &::before {
+        position: absolute;
+        z-index: 10;
+        display: block;
+
+        top: -0.5em;
+        right: -0.5em;
+        bottom: auto;
+
+        width: 4em;
+        text-align: center;
+        font-size: 1.25em;
+        font-weight: bold;
+        box-shadow: 0 0 5px black;
+        
+        transform: rotate(10deg);
+
+        opacity: 0;
+        content: 'NEW!';
+        border-radius: 0.5em;
+        background: var(--beige);
+        color: var(--darkbrown);
+        border: 0.25em solid var(--brown);
+    }
+
+    &.new::before {
+        opacity: 1;
+    }
+
 
     &.unaffordable {
         background: #200;
@@ -104,10 +136,10 @@
         opacity: 0;
         transform: scale(2) rotate(-30deg);
     }
+
     &.purchased .banner::after {
         opacity: 1;
         transform: scale(1) rotate(-30deg);
-
     }
 }
 
