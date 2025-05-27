@@ -45,9 +45,9 @@
                     <button class="stats__btn" id="toggle__settings" onclick="game.toggleMenu('settings')">🔧</button>
                     <!-- <button id="toggle__quests" onclick="game.toggleMenu('quests')">📜</button> -->
                     <button class="stats__btn" id="toggle__projects" onclick="game.toggleMenu('projects')">📜</button>
-                    <!-- <button id="toggle__allies" onclick="game.toggleMenu('allies')">🔮</button> -->
-                    <div class="stats__btn" id="undo">⏮️
-                        <button onclick="game.undo()">Undo?</button>
+                    <button class="stats__btn" id="toggle__allies" onclick="game.toggleMenu('allies')">🔮</button>
+                    <div class="stats__btn" id="undo">
+                        ⏮️<button onclick="game.undo()">Undo?</button>
                     </div>
                 </div>
             </div>
@@ -75,6 +75,8 @@
             </section>
             <section id="menu__allies" class="menu box">
                 <h1>🔮 Allies & Clues</h1>
+                <div id="allies" class="allies"></div>
+
             </section>
             <!-- <div class="sheen"></div> -->
             <!-- <h1>Stats</h1>
@@ -90,6 +92,7 @@
     <script src="scripts/constants.js"></script>
     <script src="scripts/events.js"></script>
     <script src="scripts/projects.js"></script>
+    <script src="scripts/intel.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/cards.js"></script>

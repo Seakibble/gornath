@@ -61,3 +61,10 @@
         opacity: 1;
     }
 }
+
+
+.allies {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5em
+}

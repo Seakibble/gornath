@@ -36,6 +36,7 @@ let game = {
             intel: 0,
         },
         projects: [],
+        intelligence: [],
     },
     undoStack: [],
     elements: {},
@@ -255,9 +256,9 @@ let game = {
         this.elements.$declaration.appendChild($dec)
     },
     populateMenu: function(menu) {
+        let content = ''
         switch(menu) {
             case 'projects':
-                let content = ''
                 for (pro of projects) {
                     pro.purchased = game.data.projects.includes(pro.id)
                 }
@@ -324,6 +325,22 @@ let game = {
                     </div>`
                 })
                 this.elements.$projects.innerHTML = content
+                break
+
+            case 'allies':
+                this.elements.$allies.innerHTML = ''
+                
+                for (intelligence of intel) {
+                    // content += `
+                    // <div class="intel">
+                    //     <h2>${intelligence.name}</h2>
+                    //     <h3>${intelligence.text}</h3>
+                    // </div>`
+                    this.elements.$allies.appendChild(makeIntelCard(intelligence))
+                }
+                // this.elements.$allies.innerHTML = content
+                break
+
         }
     },
     isAffordable: function(pro) {
@@ -378,12 +395,12 @@ let game = {
         this.elements.$settingsTab.classList.remove('visible')
         // this.elements.$questsTab.classList.remove('visible')
         this.elements.$projectsTab.classList.remove('visible')
-        // this.elements.$alliesTab.classList.remove('visible')
+        this.elements.$alliesTab.classList.remove('visible')
 
         this.elements.$settingsBtn.classList.remove('active')
         // this.elements.$questsBtn.classList.remove('active')
         this.elements.$projectsBtn.classList.remove('active')
-        // this.elements.$alliesBtn.classList.remove('active')
+        this.elements.$alliesBtn.classList.remove('active')
 
         if (this.activeMenu !== menu && menu !== '') {
             if (this.activeMenu !== null) {
@@ -429,7 +446,7 @@ let game = {
         lastState.undoStack = []
         this.undoStack.push(lastState)
         if (this.undoStack.length > 10) {
-            this.undoStack.pop()
+            this.undoStack.shift()
         }
         console.log('Undo State Set!')
     },
@@ -574,6 +591,13 @@ let game = {
         this.sfx.deal1 = document.getElementById('audio_deal_1')
         this.sfx.deal2 = document.getElementById('audio_deal_2')
     },
+    initIntel: function() {
+        let i = 0
+        for (e of intel) {
+            e.id = i
+            i++
+        }
+    },
     initProjects: function() {
         let i = 0
         for (e of projects) {
@@ -595,6 +619,7 @@ let game = {
         this.elements.$alliesBtn = document.getElementById('toggle__allies')
 
         this.elements.$projects = document.getElementById('projects')
+        this.elements.$allies = document.getElementById('allies')
 
         this.elements.$undo = document.getElementById('undo')
 
@@ -609,6 +634,7 @@ let game = {
         
         if (this.loadData()) {
             this.initProjects()
+            this.initIntel()
             this.initStats()
             this.initCountdown()
             this.initAudio()
@@ -626,6 +652,7 @@ let game = {
             }, 3000)
         } else {
             this.initProjects()
+            this.initIntel()
             this.initStats()
             this.setDefaultStats()
             this.initCountdown()

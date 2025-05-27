@@ -1,5 +1,9 @@
 
 function makeOptions(options) {
+    if (!options) {
+        return
+    }
+
     let html = ''
     for (o of options) {
         let option = `<h3>${o.title}</h3>`
@@ -109,8 +113,41 @@ function makeCard(card, num = 0) {
     return $card
 }
 
-game.elements.$panel = document.getElementById('panel')
+function makeIntelCard(card, num = 0) {
+    let $card = document.createElement('div')
+    $card.classList.add('card-wrapper')
+    $card.classList.add('card--intel')
+    
+    $card.dataset.id = card.id
 
+    let locked = !game.data.intelligence.includes(card.id)
+    let flipped = locked ? 'flipped' : 'hide'
+    if (locked) {
+        $card.classList.add('intel--locked')
+    }
+    $card.innerHTML = `
+        <div class=' card-bumper'>
+            <div class='card ${card.type} ${flipped}'>
+                <div class='inner'>
+                    <h2>${/*ICONS[card.type]*/''} <span>${card.title}</span></h2>
+                </div>
+                <div class='card-scroller'>
+                    <div class='inner'>
+                        <p>${card.text}</p>
+                    </div>
+                    
+                </div>
+                <div class="front">
+                    <div class='image'></div>    
+                    <div class='inset'></div>
+                </div>
+                <div class="sheen"></div>
+            </div>
+        </div>`
+    return $card
+}
+
+game.elements.$panel = document.getElementById('panel')
 game.elements.$panel.addEventListener('click', (e) => {
     let $card = e.target.closest('.card')
     if (!$card) {
@@ -122,6 +159,20 @@ game.elements.$panel.addEventListener('click', (e) => {
         && !e.target.closest('.option')
         && !$card.classList.contains('locked'))
     {
+        if ($card.closest('.card-wrapper').classList.contains('intel--locked')) {
+            if (game.data.stats.intel > 0) {
+                game.setUndoState()
+                game.changeStat('intel', -1)
+                let $wrapper = $card.closest('.card-wrapper')
+                game.data.intelligence.push(parseInt($wrapper.dataset.id))
+                $card.closest('.card-wrapper').classList.remove('intel--locked')
+                game.saveData()
+            } else {
+                console.log('locked')
+                return
+            }
+        }
+
         $card.classList.toggle('flipped')
         $card.classList.add('locked')
         $card.parentElement.classList.add('bump')

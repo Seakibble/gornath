@@ -75,6 +75,7 @@ main {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 1em;
+    overflow-x: hidden;
 }
 
 .sidebar {
@@ -195,7 +196,7 @@ button {
 
     transition: backdrop-filter 0.5s;
 
-    &.blur .card {
+    &.blur > .card-wrapper .card {
         filter: blur(10px)
     }
     &.blur {

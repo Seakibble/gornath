@@ -411,6 +411,12 @@
 .card-wrapper:nth-of-type(3) .sheen {
     animation-delay: calc(var(--delay-offset)*2);
 }
+.card-wrapper:nth-of-type(4) .sheen {
+    animation-delay: calc(var(--delay-offset)*3);
+}
+.card-wrapper:nth-of-type(5) .sheen {
+    animation-delay: calc(var(--delay-offset)*4);
+}
 
 .hide .front {
     opacity: 0;
@@ -449,5 +455,41 @@
     .card-wrapper {
         font-size: 0.8em;
         /* margin: 1em; */
+    }
+}
+
+
+.card--intel {
+    animation: none;
+
+    & .demon {
+        --hue: 40;
+        & .image {
+            background-image: url('../images/cardback-demon.jpg');
+            object-fit: cover;
+        }
+    }
+    &.intel--locked .card {
+        --hue: 0 !important;
+    }
+    
+    & .card-bumper {
+        --size: 0.5;
+
+        --width: calc(25em * var(--size));
+        --height: calc(35em * var(--size));
+    }
+
+    & .card {
+        margin: 0em;
+    }
+
+    /* animation: none; */
+
+    & h2 {
+        font-size: 1.15em;
+    }
+    & p {
+        font-size: 1.1em;
     }
 }
