@@ -40,7 +40,7 @@
     }
 
     .project__details {
-        font-family: 'Marcellus', 'Crimson Pro', serif;
+        font-family: 'Marcellus SC', 'Crimson Pro', serif;
         display: flex;
         gap: 2em;
         margin-top: 0.5em

@@ -270,6 +270,7 @@ let game = {
         switch(menu) {
             case 'projects':
                 this.alertClear('projects')
+
                 for (pro of projects) {
                     pro.purchased = this.data.projects.includes(pro.id)
                 }
@@ -336,8 +337,8 @@ let game = {
                         <h2>${pro.name}</h2>
                         <!-- <p><b>TIME:</b> ${time}</p> -->
                         <div class="project__details">
-                            <p><b>COST:</b> ${cost.join(' ')}</p>
-                            <p><b>PROVIDES:</b> ${confers.join(' ')}</p>
+                            <p><b>Cost:</b> ${cost.join(' ')}</p>
+                            <p><b>Provides:</b> ${confers.join(' ')}</p>
                         </div>
                         <p>${pro.text}</p>
                         
@@ -350,10 +351,10 @@ let game = {
                 projects.sort((x, y)=> {
                     return x.id - y.id
                 })
+                this.data.newProjects = []
                 break
 
             case 'allies':
-                this.alertClear('allies')
                 this.elements.$allies.innerHTML = ''
                 
                 if (game.data.stats.intel > 0) {
@@ -361,14 +362,8 @@ let game = {
                 }
                 
                 for (intelligence of intel) {
-                    // content += `
-                    // <div class="intel">
-                    //     <h2>${intelligence.name}</h2>
-                    //     <h3>${intelligence.text}</h3>
-                    // </div>`
                     this.elements.$allies.appendChild(makeIntelCard(intelligence))
                 }
-                // this.elements.$allies.innerHTML = content
                 break
 
         }
@@ -446,8 +441,6 @@ let game = {
             this.elements.$panel.classList.remove('switch')
             this.elements.$panel.classList.remove('blur')
             this.activeMenu = null
-            
-            this.data.newProjects = []
         }
     },
     undo: function() {

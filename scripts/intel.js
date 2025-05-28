@@ -26,12 +26,12 @@ let intel = [
     },
     {
         "title":"Witch Demons",
-        "type": 'demon',
+        "type": 'witch',
         "text": "Logus will bring 5 Witch Demons"
     },
     {
         "title":"Malice Demons",
-        "type": 'demon',
+        "type": 'malice',
         "text": "Logus will bring 20 Malice Demons"
     },
     {

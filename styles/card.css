@@ -406,28 +406,33 @@
     }
 }
 
-.card-wrapper:nth-of-type(2) .sheen { animation-delay: calc(var(--delay-offset)*1); }
-.card-wrapper:nth-of-type(3) .sheen { animation-delay: calc(var(--delay-offset)*2); }
-.card-wrapper:nth-of-type(4) .sheen { animation-delay: calc(var(--delay-offset)*3); }
-.card-wrapper:nth-of-type(5) .sheen { animation-delay: calc(var(--delay-offset)*4); }
+.card-wrapper:nth-of-type(1) .sheen { animation-delay: calc(var(--delay-offset)*1); }
+.card-wrapper:nth-of-type(2) .sheen { animation-delay: calc(var(--delay-offset)*2); }
+.card-wrapper:nth-of-type(3) .sheen { animation-delay: calc(var(--delay-offset)*3); }
+.card-wrapper:nth-of-type(4) .sheen { animation-delay: calc(var(--delay-offset)*4); }
+.card-wrapper:nth-of-type(5) .sheen { animation-delay: calc(var(--delay-offset)*5); }
+.card-wrapper:nth-of-type(6) .sheen { animation-delay: calc(var(--delay-offset)*6); }
 
-.card-wrapper:nth-of-type(6) .sheen { animation-delay: calc(var(--delay-offset)*0 + var(--delay-row-offset)); }
 .card-wrapper:nth-of-type(7) .sheen { animation-delay: calc(var(--delay-offset)*1 + var(--delay-row-offset)); }
 .card-wrapper:nth-of-type(8) .sheen { animation-delay: calc(var(--delay-offset)*2 + var(--delay-row-offset)); }
 .card-wrapper:nth-of-type(9) .sheen { animation-delay: calc(var(--delay-offset)*3 + var(--delay-row-offset)); }
 .card-wrapper:nth-of-type(10) .sheen { animation-delay: calc(var(--delay-offset)*4 + var(--delay-row-offset)); }
+.card-wrapper:nth-of-type(11) .sheen { animation-delay: calc(var(--delay-offset)*5 + var(--delay-row-offset)); }
+.card-wrapper:nth-of-type(12) .sheen { animation-delay: calc(var(--delay-offset)*6 + var(--delay-row-offset)); }
 
-.card-wrapper:nth-of-type(11) .sheen { animation-delay: calc(var(--delay-offset)*0 + var(--delay-row-offset) * 2); }
-.card-wrapper:nth-of-type(12) .sheen { animation-delay: calc(var(--delay-offset)*1 + var(--delay-row-offset) * 2); }
-.card-wrapper:nth-of-type(13) .sheen { animation-delay: calc(var(--delay-offset)*2 + var(--delay-row-offset) * 2); }
-.card-wrapper:nth-of-type(14) .sheen { animation-delay: calc(var(--delay-offset)*3 + var(--delay-row-offset) * 2); }
-.card-wrapper:nth-of-type(15) .sheen { animation-delay: calc(var(--delay-offset)*4 + var(--delay-row-offset) * 2); }
+.card-wrapper:nth-of-type(13) .sheen { animation-delay: calc(var(--delay-offset)*1 + var(--delay-row-offset) * 2); }
+.card-wrapper:nth-of-type(14) .sheen { animation-delay: calc(var(--delay-offset)*2 + var(--delay-row-offset) * 2); }
+.card-wrapper:nth-of-type(15) .sheen { animation-delay: calc(var(--delay-offset)*3 + var(--delay-row-offset) * 2); }
+.card-wrapper:nth-of-type(16) .sheen { animation-delay: calc(var(--delay-offset)*4 + var(--delay-row-offset) * 2); }
+.card-wrapper:nth-of-type(17) .sheen { animation-delay: calc(var(--delay-offset)*5 + var(--delay-row-offset) * 2); }
+.card-wrapper:nth-of-type(18) .sheen { animation-delay: calc(var(--delay-offset)*6 + var(--delay-row-offset) * 2); }
 
-.card-wrapper:nth-of-type(16) .sheen { animation-delay: calc(var(--delay-offset)*0 + var(--delay-row-offset) * 3); }
-.card-wrapper:nth-of-type(17) .sheen { animation-delay: calc(var(--delay-offset)*1 + var(--delay-row-offset) * 3); }
-.card-wrapper:nth-of-type(18) .sheen { animation-delay: calc(var(--delay-offset)*2 + var(--delay-row-offset) * 3); }
-.card-wrapper:nth-of-type(19) .sheen { animation-delay: calc(var(--delay-offset)*3 + var(--delay-row-offset) * 3); }
-.card-wrapper:nth-of-type(20) .sheen { animation-delay: calc(var(--delay-offset)*4 + var(--delay-row-offset) * 3); }
+.card-wrapper:nth-of-type(19) .sheen { animation-delay: calc(var(--delay-offset)*1 + var(--delay-row-offset) * 3); }
+.card-wrapper:nth-of-type(20) .sheen { animation-delay: calc(var(--delay-offset)*2 + var(--delay-row-offset) * 3); }
+.card-wrapper:nth-of-type(21) .sheen { animation-delay: calc(var(--delay-offset)*3 + var(--delay-row-offset) * 3); }
+.card-wrapper:nth-of-type(22) .sheen { animation-delay: calc(var(--delay-offset)*4 + var(--delay-row-offset) * 3); }
+.card-wrapper:nth-of-type(23) .sheen { animation-delay: calc(var(--delay-offset)*5 + var(--delay-row-offset) * 3); }
+.card-wrapper:nth-of-type(24) .sheen { animation-delay: calc(var(--delay-offset)*6 + var(--delay-row-offset) * 3); }
 
 .hide .front {
     opacity: 0;
@@ -449,7 +454,7 @@
     right: 0;
     align-content: end;
     text-align: center;
-    font-family: 'Modern Antiqua';
+    font-family: 'Modern Antiqua', 'Marcellus SC', serif;
     text-shadow: 0 0 1em black;
 }
 .card .image::before {
@@ -472,21 +477,33 @@
 
 .card--intel {
     animation: none;
+    /* display: grid; */
+    transform: scale(0.95);
 
     & .card-bumper {
-        --size: 0.45;
+        --size: 0.43;
 
         --width: calc(25em * var(--size));
         --height: calc(35em * var(--size));
     }
     
+    & .card-scroller {
+        grid-template-rows: 1fr;
+
+        & .inner {
+            text-align: center;
+            background-color: #000c !important;
+            display: grid;
+            place-content: center;
+        }
+    }
     & .image {
         background-size: cover;
 
         &::after {
             position: absolute;
-            left: 0;
-            right: 0;
+            left: -1em;
+            right: -1em;
             bottom: 0;
             place-content: center;
             font-size: 6em;
@@ -495,15 +512,20 @@
             opacity: 0;
             /* transition: opacity 0.25s; */
             content: "🔎";
-            transform: rotate(-22.5deg);
+            transform: translateY(0.25em) rotate(-22.5deg);
             filter: grayscale(1);
+
+            transition: opacity 1s, transform 1s, backdrop-filter 1s;
         }
     }
 
-    /* & .inner {
-        background: #000a;
-    } */
-
+    & .intel--witch {
+        --hue: 40;
+        
+        & .image {
+            background-image: url('../images/cardback-small-witch.jpg');
+        }
+    }
     & .intel--demon {
         --hue: 40;
         
@@ -515,35 +537,46 @@
         --hue: 10;
         
         & .image {
-            background-image: url('../images/cardback-demon.jpg');
+            background-image: url('../images/cardback-small-kereshk.jpg');
+        }
+    }
+    & .intel--malice {
+        --hue: 40;
+        
+        & .image {
+            background-image: url('../images/cardback-small-malice.jpg');
         }
     }
     & .intel--logus {
         --hue: 280;
         & .image {
-            background-image: url('../images/cardback-logus.jpg');
+            background-image: url('../images/cardback-small-logus.jpg');
         }
     }
     & .intel--rilmok {
         --hue: 90;
         & .image {
-            background-image: url('../images/cardback-rilmok.jpg');
+            background-image: url('../images/cardback-small-rilmok.jpg');
         }
     }
     & .intel--grey-ones {
         --saturation: 0;
         & .image {
-            background-image: url('../images/cardback-grey-one.jpg');
+            background-image: url('../images/cardback-small-grey-one.jpg');
         }
     }
 
     &.intel--unlocked {
-        animation: intelUnlock 0.4s;
+        animation: intelUnlock 0.4s forwards;
+
+        filter: grayscale(0) brightness(1.25);
+
+        /* outline: 4px solid #0ff7; */
     }
     &.intel--locked .card {
         /* --saturation: 0; */
 
-        filter: grayscale(0.25) brightness(0.75);
+        filter: grayscale(0.15) brightness(0.95);
 /* 
         &:hover {
             filter: grayscale(0.5) brightness(0.6);
@@ -567,16 +600,15 @@
 .has--intel .intel--locked {
 
     & .card {
-        /* --hue: 180 !important; */
-        /* --saturation: 1 !important; */
+        outline: 4px solid var(--blue);
 
     }
     & .card:hover .image::after {
         filter: grayscale(1) brightness(1.5);
-
-        transition: opacity 8s, backdrop-filter 5s;
-        opacity: 0.8;
-        backdrop-filter: brightness(0.5);
+        transform: translateY(0) rotate(-22.5deg);
+        transition: opacity 3s, transform 1s, backdrop-filter 2s;
+        opacity: 0.4;
+        backdrop-filter: brightness(0);
     }
 }
 
@@ -584,5 +616,14 @@
 @keyframes intelUnlock {
     60% {
         transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media screen and (width < 1800) {
+    .card--intel .card-bumper {
+        --size: 0.45;
     }
 }

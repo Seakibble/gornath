@@ -202,7 +202,7 @@ let projects = [
             "wealth": 0,
             "intel": 0,
         }, 
-        "declaration": ["Weapon Manufactured","Time to kill some fucking demons!"],
+        "declaration": ["Superweapon Manufactured","Time to kill some fucking demons!"],
         "callback": ""
     }, 
     {

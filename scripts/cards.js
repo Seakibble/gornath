@@ -124,6 +124,8 @@ function makeIntelCard(card, num = 0) {
     let flipped = locked ? 'flipped' : 'hide'
     if (locked) {
         $card.classList.add('intel--locked')
+    } else {
+        $card.classList.add('intel--unlocked')
     }
 
     $card.innerHTML = `
@@ -172,6 +174,7 @@ game.elements.$panel.addEventListener('click', (e) => {
                 
                 if (game.data.stats.intel <= 0) {
                     game.elements.$allies.classList.remove('has--intel')
+                    game.alertClear('allies')
                 }
 
                 game.saveData()
@@ -241,10 +244,9 @@ function resolve(button) {
             for(project of projects) {
                 if (game.data.flags.includes(project.requires)) {
                     game.data.newProjects.push(project.id)
-                    newProjects = true
                 }
             }
-            if (newProjects) {
+            if (game.data.newProjects.length > 0) {
                 game.alert('projects')
             }
         }) 

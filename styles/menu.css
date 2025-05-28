@@ -65,10 +65,10 @@
 
 .allies {
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     justify-content: center;
     align-content: start;
     padding: 2.5em 1.5em 1.5em;
-    gap: 1em;
+    gap: 2em;
     overflow: auto;
 }
