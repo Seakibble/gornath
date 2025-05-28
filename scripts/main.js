@@ -361,8 +361,18 @@ let game = {
                     this.elements.$allies.classList.add('has--intel')
                 }
                 
+                intel.sort((a, b) => {
+                    return a.type === b.type ? 0 : a.type > b.type ? 1 : -1
+                })
+                
+                let currentType = null
                 for (intelligence of intel) {
-                    this.elements.$allies.appendChild(makeIntelCard(intelligence))
+                    let $card = makeIntelCard(intelligence)
+                    if (currentType !== intelligence.type) {
+                        $card.classList.add('first')
+                        currentType = intelligence.type
+                    }
+                    this.elements.$allies.appendChild($card)
                 }
                 break
 
@@ -414,12 +424,12 @@ let game = {
     },
     toggleMenu: function(menu = '') {
         this.elements.$settingsTab.classList.remove('visible')
-        // this.elements.$questsTab.classList.remove('visible')
+        this.elements.$questsTab.classList.remove('visible')
         this.elements.$projectsTab.classList.remove('visible')
         this.elements.$alliesTab.classList.remove('visible')
 
         this.elements.$settingsBtn.classList.remove('active')
-        // this.elements.$questsBtn.classList.remove('active')
+        this.elements.$questsBtn.classList.remove('active')
         this.elements.$projectsBtn.classList.remove('active')
         this.elements.$alliesBtn.classList.remove('active')
 

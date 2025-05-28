@@ -101,7 +101,7 @@
         height: 2em;
         place-content: center;
         text-align: center;
-        font-size: 1.25em;
+        font-size: 1.15em;
         grid-template-columns: 1fr;
 
         &::after {
@@ -161,6 +161,8 @@
 #undo {
     position: relative;
     transition: background 0.5s;
+    display: grid;
+    place-content: center;
     &:hover {
         background-color: var(--crimson);
     }

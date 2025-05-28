@@ -511,9 +511,10 @@
 
             opacity: 0;
             /* transition: opacity 0.25s; */
-            content: "🔎";
-            transform: translateY(0.25em) rotate(-22.5deg);
-            filter: grayscale(1);
+            content: "🔒";
+            transform: translateY(0.25em) rotate(0);
+
+            filter: grayscale(1) brightness(1);
 
             transition: opacity 1s, transform 1s, backdrop-filter 1s;
         }
@@ -571,12 +572,16 @@
 
         filter: grayscale(0) brightness(1.25);
 
+        & .image::after {
+            content: ''
+        }
+
         /* outline: 4px solid #0ff7; */
     }
     &.intel--locked .card {
         /* --saturation: 0; */
 
-        filter: grayscale(0.15) brightness(0.95);
+        filter: grayscale(0.7) brightness(1);
 /* 
         &:hover {
             filter: grayscale(0.5) brightness(0.6);
@@ -589,6 +594,14 @@
         padding: 0.5em;
     }
 
+    &.intel--locked .card:hover .image::after {
+            /* opacity: 0.4; */
+            transform: translateY(0) rotate(0);
+            transition: opacity 1s, transform 0.5s, backdrop-filter 0.5s;
+            opacity: 0.6;
+            backdrop-filter: brightness(0);
+        }
+
     & h2 {
         font-size: 1.05em;
     }
@@ -597,33 +610,38 @@
     }
 }
 
-.has--intel .intel--locked {
+.has--intel .intel--locked.first,
+.has--intel :not(.intel--locked) + .intel--locked {
 
     & .card {
         outline: 4px solid var(--blue);
-
+        filter: grayscale(0) brightness(1);
+        & .image::after {
+            content: "🔎";
+            transform: translateY(0.25em) rotate(-22.5deg);
+        } 
     }
     & .card:hover .image::after {
-        filter: grayscale(1) brightness(1.5);
         transform: translateY(0) rotate(-22.5deg);
-        transition: opacity 3s, transform 1s, backdrop-filter 2s;
-        opacity: 0.4;
-        backdrop-filter: brightness(0);
     }
 }
+
+/* .has--intel .intel--unlocked .card .image::after {
+    content: ''
+} */
 
 
 @keyframes intelUnlock {
     60% {
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
     100% {
         transform: scale(1);
     }
 }
 
-@media screen and (width < 1800) {
+@media screen and (width < 1800px) {
     .card--intel .card-bumper {
-        --size: 0.45;
+        font-size: 0.9em;
     }
 }

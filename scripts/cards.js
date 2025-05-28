@@ -162,11 +162,12 @@ game.elements.$panel.addEventListener('click', (e) => {
         && !e.target.closest('.option')
         && !$card.classList.contains('locked'))
     {
-        if ($card.closest('.card-wrapper').classList.contains('intel--locked')) {
-            if (game.data.stats.intel > 0) {
+
+        let $wrapper = $card.closest('.card-wrapper')
+        if ($wrapper.classList.contains('intel--locked')) {
+            if (game.data.stats.intel > 0 && ($wrapper.classList.contains('first') || $wrapper.previousSibling.classList.contains('intel--unlocked'))) {
                 game.setUndoState()
                 game.changeStat('intel', -1)
-                let $wrapper = $card.closest('.card-wrapper')
                 game.data.intelligence.push(parseInt($wrapper.dataset.id))
                 $card.closest('.card-wrapper').classList.remove('intel--locked')
                 $card.closest('.card-wrapper').classList.add('intel--unlocked')

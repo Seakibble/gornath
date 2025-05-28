@@ -20,6 +20,11 @@ let intel = [
         "text": "Kereshk gets harder to hurt the more you damage him. His wounds passively give him damage resistance, but reduce his speed."
     },
     {
+        "title":"Kereshk",
+        "type": 'kereshk',
+        "text": "Kereshk's goal will be to kill as many Gornathi warriors as possible."
+    },
+    {
         "title":"Bloodreavers",
         "type": 'demon',
         "text": "Logus will bring 10 bloodreavers"
