@@ -12,7 +12,7 @@ let game = {
         reverence: 12,
         salvage: 3,
         wealth: 3,
-        intel: 3,
+        intel: 7,
     },
     data: {
         flags: [],
@@ -268,13 +268,46 @@ let game = {
     populateMenu: function(menu) {
         let content = ''
         switch(menu) {
+            case 'quests':
+                this.elements.$questList.innerHTML = ''
+                this.elements.$questDetails.innerHTML = ''
+                
+                QUESTS.sort((a, b) => {
+                    return a.type === b.type ? 0 : a.type > b.type ? 1 : -1
+                })
+                
+                let questList = ''
+                let type = null
+                for (quest of QUESTS) {
+                    if (type != quest.type) {
+                        let text = quest.type
+                        switch(quest.type) {
+                            case 'main': text = 'Main Story'; break
+                            case 'personal': text = 'Personal Missions'; break
+                            case 'necropolis': text = 'Within the Necropolis'; break
+                        }
+                        if (type != null) {
+                            questList += "</div>"
+                        }
+                        questList += `<div><h2>${text}</h2>`
+                        type = quest.type
+                    }
+                    questList += `
+                    <div id="quest-${quest.id}" class='quest__item quest--${quest.type}' data-id=${quest.id}>
+                        ${quest.name}
+                    </div>`
+                }
+                this.elements.$questList.innerHTML = questList + '</div>'
+                
+                this.selectQuest(0)
+                break
             case 'projects':
                 this.alertClear('projects')
 
-                for (pro of projects) {
+                for (pro of PROJECTS) {
                     pro.purchased = this.data.projects.includes(pro.id)
                 }
-                projects.sort((x, y)=> {
+                PROJECTS.sort((x, y)=> {
                     let xNew = this.data.newProjects.includes(x.id)
                     let yNew = this.data.newProjects.includes(y.id)
 
@@ -283,7 +316,7 @@ let game = {
 
                     return (x.purchased === y.purchased) ? 0 : x.purchased ? 1 : -1;
                 })
-                projects.forEach((pro) => {
+                PROJECTS.forEach((pro) => {
                     if (pro.requires && !this.data.flags.includes(pro.requires)) {
                         return
                     }
@@ -348,7 +381,7 @@ let game = {
                 })
                 this.elements.$projects.innerHTML = content
 
-                projects.sort((x, y)=> {
+                PROJECTS.sort((x, y)=> {
                     return x.id - y.id
                 })
                 this.data.newProjects = []
@@ -361,12 +394,12 @@ let game = {
                     this.elements.$allies.classList.add('has--intel')
                 }
                 
-                intel.sort((a, b) => {
+                INTEL.sort((a, b) => {
                     return a.type === b.type ? 0 : a.type > b.type ? 1 : -1
                 })
                 
                 let currentType = null
-                for (intelligence of intel) {
+                for (intelligence of INTEL) {
                     let $card = makeIntelCard(intelligence)
                     if (currentType !== intelligence.type) {
                         $card.classList.add('first')
@@ -384,7 +417,7 @@ let game = {
                 && this.data.stats.intel >= pro.cost.intel)
     },
     purchase: function(id) {
-        let pro = projects.find((project) => project.id === id)
+        let pro = PROJECTS.find((project) => project.id === id)
         if (pro.cost.wealth <= game.data.stats.wealth && pro.cost.salvage <= game.data.stats.salvage && pro.cost.intel <= game.data.stats.intel) {
             this.setUndoState()
             let $project = document.getElementById('project-'+id)
@@ -410,7 +443,7 @@ let game = {
             let $projectsList = this.elements.$projects.children
 
             for ($pro of $projectsList) {
-                if (!this.isAffordable(projects[$pro.dataset.id])) {
+                if (!this.isAffordable(PROJECTS[$pro.dataset.id])) {
                     $pro.classList.add('unaffordable')
                     $pro.querySelector('button').disabled = true
                 } else if (!$pro.classList.contains('purchased')) {
@@ -421,6 +454,28 @@ let game = {
 
             this.saveData()
         }
+    },
+    selectQuest: function(id) {
+        let $selected = this.elements.$questList.querySelector('.selected')
+        if ($selected) {
+            $selected.classList.remove('selected')
+        }
+        $selected = document.getElementById('quest-'+id)
+
+        if (!$selected) {
+            console.log('ERROR! Could not find quset ' + id + '!')
+            return
+        }
+        $selected.classList.add('selected')
+        
+        let quest = QUESTS.find((quest) => quest.id == id)
+        console.log(id, quest)
+
+        this.elements.$questDetails.innerHTML = `
+            <h2>${quest.name}</h2>
+            <p>${quest.text}</p>
+            <h3>Possible Outcomes</h3>
+            <ul><li>${quest.outcomes.join("</li><li>")}</li></ul>`
     },
     toggleMenu: function(menu = '') {
         this.elements.$settingsTab.classList.remove('visible')
@@ -624,14 +679,21 @@ let game = {
     },
     initIntel: function() {
         let i = 0
-        for (e of intel) {
+        for (e of INTEL) {
             e.id = i
             i++
         }
     },
     initProjects: function() {
         let i = 0
-        for (e of projects) {
+        for (e of PROJECTS) {
+            e.id = i
+            i++
+        }
+    },
+    initQuests: function() {
+        let i = 0
+        for (e of QUESTS) {
             e.id = i
             i++
         }
@@ -652,6 +714,14 @@ let game = {
         this.elements.$projects = document.getElementById('projects')
         this.elements.$allies = document.getElementById('allies')
 
+        this.elements.$questList = document.getElementById('quest__list')
+        this.elements.$questDetails = document.getElementById('quest__details')
+        this.elements.$questList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('quest__item')) {
+                this.selectQuest(e.target.dataset.id)
+            }
+        }) 
+
         this.elements.$undo = document.getElementById('undo')
 
         this.elements.$declaration = document.getElementById('declaration')
@@ -666,6 +736,8 @@ let game = {
         if (this.loadData()) {
             this.initProjects()
             this.initIntel()
+            this.initQuests()
+
             this.initStats()
             this.initCountdown()
             this.initAudio()
@@ -687,6 +759,8 @@ let game = {
         } else {
             this.initProjects()
             this.initIntel()
+            this.initQuests()
+
             this.initStats()
             this.setDefaultStats()
             this.initCountdown()

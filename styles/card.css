@@ -502,9 +502,10 @@
 
         &::after {
             position: absolute;
-            left: -1em;
-            right: -1em;
-            bottom: 0;
+            left: -2em;
+            right: -2em;
+            bottom: -2em;
+            top: -2em;
             place-content: center;
             font-size: 6em;
             padding: 0;
@@ -512,11 +513,11 @@
             opacity: 0;
             /* transition: opacity 0.25s; */
             content: "🔒";
-            transform: translateY(0.25em) rotate(0);
+            transform: translateY(0.4em) scale(0.75) rotate(0);
 
             filter: grayscale(1) brightness(1);
 
-            transition: opacity 1s, transform 1s, backdrop-filter 1s;
+            transition: opacity 0.75s, transform 0.75s, backdrop-filter 0.75s;
         }
     }
 
@@ -596,7 +597,7 @@
 
     &.intel--locked .card:hover .image::after {
             /* opacity: 0.4; */
-            transform: translateY(0) rotate(0);
+            transform: translateY(0) scale(1) rotate(0);
             transition: opacity 1s, transform 0.5s, backdrop-filter 0.5s;
             opacity: 0.6;
             backdrop-filter: brightness(0);
@@ -618,11 +619,11 @@
         filter: grayscale(0) brightness(1);
         & .image::after {
             content: "🔎";
-            transform: translateY(0.25em) rotate(-22.5deg);
+            transform: translateY(0.4em) scale(0.75) rotate(-22.5deg);
         } 
     }
     & .card:hover .image::after {
-        transform: translateY(0) rotate(-22.5deg);
+        transform: translateY(0) scale(1) rotate(-22.5deg);
     }
 }
 
@@ -636,7 +637,7 @@
         transform: scale(1.2);
     }
     100% {
-        transform: scale(1);
+        transform: scale(1.1);
     }
 }
 

@@ -1,4 +1,4 @@
-let projects = [
+let PROJECTS = [
     {
         "name": "Declare Martial Law",
         "time": 0,

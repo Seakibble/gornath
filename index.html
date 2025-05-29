@@ -54,12 +54,16 @@
         <div id="panel">
             <section id="menu__settings" class="menu box">
                 <h1>🎛️ Settings</h1>
-                <div>
+                <div class="menu__settings">
                     <button onclick="game.clearData()">Clear Data!</button>
                 </div>
             </section>
             <section id="menu__quests" class="menu box">
                 <h1>📜 Quests</h1>
+                <div id="quests">
+                    <div id="quest__list" class="quest__list"></div>
+                    <div id="quest__details" class="quest__details"></div>
+                </div>
             </section>
             <section id="menu__projects" class="menu box">
                 <h1>🛠️ Projects</h1>
@@ -82,9 +86,10 @@
     <script src="scripts/howler.min.js"></script>
     <script src="scripts/audio.js"></script>
     <script src="scripts/constants.js"></script>
-    <script src="scripts/events.js"></script>
-    <script src="scripts/projects.js"></script>
-    <script src="scripts/intel.js"></script>
+    <script src="scripts/data/events.js"></script>
+    <script src="scripts/data/projects.js"></script>
+    <script src="scripts/data/intel.js"></script>
+    <script src="scripts/data/quests.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/cards.js"></script>

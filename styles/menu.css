@@ -72,3 +72,74 @@
     gap: 2em;
     overflow: auto;
 }
+
+.menu__settings {
+    padding: 1.5em 0 1.5em;   
+    display: grid;
+    grid-gap: 1em;
+    place-content: start;
+}
+
+#quests {
+    display: grid;
+    grid-template-columns: 20em 1fr;
+    overflow-y: auto;
+
+    & .quest__list {
+        overflow-y: auto;
+        padding-bottom: 20em;
+
+        & h2 {
+            /* background-color: black; */
+            font-size: 1.5em;
+            padding: 1em 15px 0.2em;  
+            /* position: sticky; */
+            /* top: -1px; */
+        }
+
+        & .quest__item {
+            font-size: 1.1em;
+            padding: 0.2em 15px;
+            border-left: 0 solid transparent;
+            background: black;
+            color: var(--green);
+            transition: background 0.15s, color 0.15s, border 0.15s;
+            font-family: "Marcellus SC", "Crimson Pro", serif;
+
+
+            &:hover {
+                border-left: 0.5em solid var(--green);
+                background: var(--darkbrown);
+            }
+            &.selected {
+                border-left: 0.5em solid var(--green);
+                background: var(--green);
+                color: black;
+            }
+        }
+    }
+
+
+    & .quest__details {
+        font-size: 1.2em;
+        padding: 1em;
+        /* background: var(--darkbrown); */
+
+        & h2 {
+            font-size: 1.2em;
+            background: var(--crimson);
+            color: black;
+            padding: 0.25em 15px;
+            margin-bottom: 0.5em;
+        }
+        h3 {
+            font-size: 1.1em;
+            padding-left: 15px;
+        }
+
+        & p {
+            text-indent: 0;
+            padding-left: 15px;
+        }
+    }
+}
