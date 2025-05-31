@@ -46,7 +46,7 @@ let game = {
             alert("CARDS STILL IN PLAY")
             return
         }
-        this.setUndoState()
+        this.setUndoState("Next Day")
         this.elements.$pips[this.data.day - 1].classList.remove('now')
         this.toggleMenu()
         SFX.end.play()
@@ -81,7 +81,7 @@ let game = {
         for(let i = game.data.cards.scheduled.length-1; i >= 0; i--) {
             let deck = game.data.cards.scheduled
 
-            let cardData = events[deck[i]]
+            let cardData = EVENTS[deck[i]]
 
             
             if (cardData.scheduled && parseInt(cardData.scheduled) >= this.days-this.data.day) {
@@ -121,7 +121,7 @@ let game = {
         let num = Math.floor(Math.random() * deck.length)
         let cardIndex = deck.splice(num, 1)[0]
 
-        let $card = makeCard(events[cardIndex], cardNum)
+        let $card = makeCard(EVENTS[cardIndex], cardNum)
 
         this.elements.$panel.appendChild($card)
         this.data.cards.inPlay.push(cardIndex)
@@ -134,7 +134,7 @@ let game = {
         } else {
             let immediateCards = []
             for (let i = this.data.cards.unlocked.length-1; i >= 0; i--) {
-                if (events[this.data.cards.unlocked[i]].priority == 'immediate') {
+                if (EVENTS[this.data.cards.unlocked[i]].priority == 'immediate') {
                     immediateCards.push(this.data.cards.unlocked.splice(i, 1)[0])
                 }
             }
@@ -200,12 +200,13 @@ let game = {
         }
     },
     rest: function(){
-        this.setUndoState()
         if (this.data.restCooldown < 0) {
+            this.setUndoState("Start Rest")
             this.data.restCooldown = 3
             this.elements.$rest.querySelector('.text').innerText = "Cancel Rest"
             this.addIcon('rest', this.data.day + this.data.restCooldown)
         } else if (this.data.restCooldown >= 0) {
+            this.setUndoState("Cancel Rest")
             this.elements.$rest.querySelector('.text').innerText = "Begin Rest"
             this.elements.$pips[this.data.day+this.data.restCooldown].querySelector('.countdown__icon--rest').remove()
             this.data.restCooldown = -1
@@ -219,7 +220,7 @@ let game = {
         }
     },
     useGate: function(){
-        this.setUndoState()
+        this.setUndoState("Activate Gate")
         if (this.data.gateCooldown < 0) {
             this.data.gateCooldown = Math.floor(Math.random()*4)+2
             this.elements.$gate.disabled = true
@@ -419,7 +420,7 @@ let game = {
     purchase: function(id) {
         let pro = PROJECTS.find((project) => project.id === id)
         if (pro.cost.wealth <= game.data.stats.wealth && pro.cost.salvage <= game.data.stats.salvage && pro.cost.intel <= game.data.stats.intel) {
-            this.setUndoState()
+            this.setUndoState("Purchase " + pro.name)
             let $project = document.getElementById('project-'+id)
             $project.classList.add('purchased')
             $project.querySelector('button').disabled = true
@@ -463,7 +464,7 @@ let game = {
         $selected = document.getElementById('quest-'+id)
 
         if (!$selected) {
-            console.log('ERROR! Could not find quset ' + id + '!')
+            console.log('ERROR! Could not find quest ' + id + '!')
             return
         }
         $selected.classList.add('selected')
@@ -508,9 +509,13 @@ let game = {
             this.activeMenu = null
         }
     },
-    undo: function() {
-        if (this.undoStack.length > 0) {
-            this.data = this.undoStack.pop()
+    undo: function(actions = 1) {
+        if (this.undoStack.length > 0) { 
+            while (actions > 0 && this.undoStack.length > 0) {
+                this.data = this.undoStack.pop()
+                console.log(actions, this.data.action)
+                actions--
+            }
             this.saveData()
             location.reload()
         } else {
@@ -525,10 +530,17 @@ let game = {
             this.elements.$undo.classList.add('disabled')
         } else {
             this.elements.$undo.classList.remove('disabled')
+
+            let undoHTML = ``
+            for (let i = this.undoStack.length-1; i >= 0; i--) {
+                undoHTML += `<button onclick="game.undo(${this.undoStack.length-i})">${this.undoStack.length-i}. ${this.undoStack[i].action}</button>`
+            }
+            this.elements.$undo.innerHTML = `⏮️ <div class="undoList"><h3>Undo How Many Actions?</h3>${undoHTML}</div>`
         }
     },
-    setUndoState: function() {
+    setUndoState: function(action = "") {
         let lastState = JSON.parse(JSON.stringify(this.data))
+        lastState.action = action
         lastState.undoStack = []
         this.undoStack.push(lastState)
         if (this.undoStack.length > 10) {
@@ -539,7 +551,6 @@ let game = {
     loadData: function() {
         let data = localStorage.getItem('data')
         let undoStack = localStorage.getItem('undo')
-
 
         if (data) {
             this.data = JSON.parse(data)
@@ -658,7 +669,7 @@ let game = {
     },
     initEvents: function() {
         let i = 0
-        for (e of events) {
+        for (e of EVENTS) {
             e.id = i
             i++
             if (e.scheduled) {
@@ -750,7 +761,7 @@ let game = {
                 if (game.data.cards.inPlay.length > 0) {
                     for(let i = 0; i < game.data.cards.inPlay.length; i++) {
                         let card = game.data.cards.inPlay[i]
-                        let $card = makeCard(events[card], i)
+                        let $card = makeCard(EVENTS[card], i)
                         this.elements.$panel.appendChild($card)
                         this.checkCards()
                     }

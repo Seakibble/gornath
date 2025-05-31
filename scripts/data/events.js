@@ -1,4 +1,4 @@
-let events = [
+let EVENTS = [
     {
         "title": "The Galdarians Arrive",
         "type": "galdarians",

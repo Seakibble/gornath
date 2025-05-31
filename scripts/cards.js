@@ -48,7 +48,8 @@ function makeOptions(options) {
             }
             if (outcome.other) values.push(outcome.other)
             
-            let data = `data-warriors='${outcome.warriors}' 
+            let data = `data-name='${o.title}'
+                        data-warriors='${outcome.warriors}' 
                         data-loyalty='${outcome.loyalty}' 
                         data-order='${outcome.order}' 
                         data-reverence='${outcome.reverence}' 
@@ -166,9 +167,10 @@ game.elements.$panel.addEventListener('click', (e) => {
         let $wrapper = $card.closest('.card-wrapper')
         if ($wrapper.classList.contains('intel--locked')) {
             if (game.data.stats.intel > 0 && ($wrapper.classList.contains('first') || $wrapper.previousSibling.classList.contains('intel--unlocked'))) {
-                game.setUndoState()
+                let id = parseInt($wrapper.dataset.id)
+                game.setUndoState('Unlock Intel "' + INTEL.find((a)=>{return a.id == id}).title + '"')
                 game.changeStat('intel', -1)
-                game.data.intelligence.push(parseInt($wrapper.dataset.id))
+                game.data.intelligence.push(id)
                 $card.closest('.card-wrapper').classList.remove('intel--locked')
                 $card.closest('.card-wrapper').classList.add('intel--unlocked')
 
@@ -213,7 +215,7 @@ game.elements.$panel.addEventListener('click', (e) => {
 })
 
 function resolve(button) {
-    game.setUndoState()
+    game.setUndoState('Resolve Event "' + button.dataset.name + '"')
     let $card = button.closest('.card-wrapper')
 
     SFX.resolve.play()
@@ -241,12 +243,13 @@ function resolve(button) {
                 game.data.flags.push(flag)
             }
 
-            let newProjects = false
-            for(project of projects) {
-                if (game.data.flags.includes(project.requires)) {
+            console.log(game.data.newProjects)
+            for(project of PROJECTS) {
+                if (flag === project.requires) {
                     game.data.newProjects.push(project.id)
                 }
             }
+            console.log(game.data.newProjects)
             if (game.data.newProjects.length > 0) {
                 game.alert('projects')
             }

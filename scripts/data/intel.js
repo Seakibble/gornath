@@ -12,7 +12,7 @@ let INTEL = [
     {
         "title":"Vengeance",
         "type": 'logus',
-        "text": "Logus outwardly blames Bokaz for his own evil acts, but is inwardly consumed by guilt. To heal, he needs two things - one is to hear Bokaz accept responsibilty."
+        "text": "Logus outwardly blames Bokaz for his own evil acts, but is inwardly consumed by guilt. To heal, he needs two things - one is to hear Bokaz accept responsibilty for his actions."
     },
     {
         "title":"Reactions",
@@ -29,7 +29,7 @@ let INTEL = [
     {
         "title":"Seals",
         "type": 'grey-ones',
-        "text": "Logus has stopped maintaining the seals. The Grey ones are coming..."
+        "text": "Logus has stopped maintaining the seals. The Grey Ones are coming..."
     },
 
 
@@ -39,9 +39,9 @@ let INTEL = [
         "text": "'The Bonebrooke Butcherer,' Kereshk is a fierce warrior who earns wounds when he takes at least 10 damage, which he can spend on abilities."
     },
     {
-        "title":"Challenger",
+        "title":"Bodyguard",
         "type": 'kereshk',
-        "text": "Kereshk's goal will be to threaten the Voice of the Chief directly."
+        "text": "Kereshk's goal will be to guard Logus."
     },
     {
         "title":"Unstoppable",
@@ -58,7 +58,42 @@ let INTEL = [
     {
         "title":"Slaughter",
         "type": 'demon',
-        "text": "The bloodreavers' role will be to kill as many Gornathi warriors as possible."
+        "text": "The bloodreavers' role will be to kill as many weaker enemies as possible - Gornathi warriors or civilians - to produce onyx demons."
+    },
+    {
+        "title":"Onyx Demons",
+        "type": 'onyx',
+        "text": "Logus will bring 50 Onyx Demons."
+    },
+    {
+        "title":"Infiltration",
+        "type": 'onyx',
+        "text": "The onyx demons' role will be to disguise themselves as Gornathi warriors or civilians, sow discord, and betray your forces."
+    },
+    {
+        "title":"Onyx Brutes",
+        "type": 'demon',
+        "text": "Logus will bring 10 onyx brutes."
+    },
+    {
+        "title":"Fire Support",
+        "type": 'demon',
+        "text": "The brutes' role will be to stay back and pick off enemies at range."
+    },
+    {
+        "title":"Havoc",
+        "type": 'swarmlings',
+        "text": "The swarmlings' role will be to get past the front lines and cause havok."
+    },
+    {
+        "title":"Juggernaut",
+        "type": 'juggernaut',
+        "text": "Logus will bring 3 Demon Juggernauts. They will be supported by swarmlings, who are empowered by their presence."
+    },
+    {
+        "title":"Sledgehammer",
+        "type": 'juggernaut',
+        "text": "The juggernauts' role will be to lead powerful strikes against the Gornathi defences in attempts to obliterate the front lines."
     },
     {
         "title":"Lies",
@@ -75,10 +110,10 @@ let INTEL = [
     {
         "title":"Witch Demons",
         "type": 'witch',
-        "text": "Logus will bring 5 witch demons."
+        "text": "Logus will bring 7 witch demons."
     },
     {
-        "title":"Bodyguards",
+        "title":"Restoration",
         "type": 'witch',
         "text": "The witch demons role in the battle will be to protect and heal Logus and his lieutenants."
     },
