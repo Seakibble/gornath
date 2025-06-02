@@ -174,6 +174,7 @@ game.elements.$panel.addEventListener('click', (e) => {
                 $card.closest('.card-wrapper').classList.remove('intel--locked')
                 $card.closest('.card-wrapper').classList.add('intel--unlocked')
 
+                SFX.smallSting.play()
                 
                 if (game.data.stats.intel <= 0) {
                     game.elements.$allies.classList.remove('has--intel')

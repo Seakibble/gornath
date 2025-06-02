@@ -2,6 +2,7 @@ let PROJECTS = [
     {
         "name": "Declare Martial Law",
         "time": 0,
+        "major": true,
         "cost": {
             "loyalty": 4,
             "warriors": 0,
@@ -183,6 +184,7 @@ let PROJECTS = [
         "name": "A Weapon for Corpus",
         "requires": "unworthy",
         "time": 6,
+        "major": true,
         "cost": {
             "loyalty": 0,
             "warriors": 0,

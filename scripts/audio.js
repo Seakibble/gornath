@@ -5,7 +5,10 @@ let SFX_LIST = [
     'deal-1',
     'deal-2',
     'resolve',
-    'end'
+    'end',
+    'smallSting',
+    'mediumSting',
+    'bigSting',
 ]
 let SFX = {}
 
@@ -24,4 +27,4 @@ let MUSIC = new Howl({
     loop: true
 })
 
-MUSIC.play()
+// MUSIC.play()

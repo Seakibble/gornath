@@ -531,88 +531,61 @@
 
     & .intel--witch {
         --hue: 0;
-        
-        & .image {
-            background-image: url('../images/cardback-small-witch.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-witch.jpg'); }
     }
     & .intel--demon {
         --hue: 40;
-        
-        & .image {
-            background-image: url('../images/cardback-demon.jpg');
-        }
+        & .image { background-image: url('../images/cardback-demon.jpg'); }
     }
     & .intel--kereshk {
         --hue: 10;
-        
-        & .image {
-            background-image: url('../images/cardback-small-kereshk.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-kereshk.jpg'); }
     }
     & .intel--malice {
         --hue: 75;
-        
-        & .image {
-            background-image: url('../images/cardback-small-malice.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-malice.jpg'); }
     }
     & .intel--logus {
         --hue: 280;
-        & .image {
-            background-image: url('../images/cardback-small-logus.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-logus.jpg'); }
     }
     & .intel--rilmok {
         --hue: 90;
-        & .image {
-            background-image: url('../images/cardback-small-rilmok.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-rilmok.jpg'); }
     }
     & .intel--grey-ones {
         --saturation: 0;
-        & .image {
-            background-image: url('../images/cardback-small-grey-one.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-grey-one.jpg'); }
     }
     & .intel--juggernaut {
         --hue: 60;
-        & .image {
-            background-image: url('../images/cardback-small-juggernaut.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-juggernaut.jpg'); }
     }
     & .intel--swarmlings {
         --hue: 40;
-        & .image {
-            background-image: url('../images/cardback-small-swarmling.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-swarmling.jpg'); }
     }
     & .intel--onyx {
         --hue: 200;
-        & .image {
-            background-image: url('../images/cardback-small-onyx.jpg');
-        }
+        & .image { background-image: url('../images/cardback-small-onyx.jpg'); }
+    }
+    & .intel--judge {
+        --hue: 310;
+        --saturation: 0.75;
+        /* --lightness: 1.25; */
+        & .image { background-image: url('../images/cardback-small-judge.jpg'); }
     }
 
     &.intel--unlocked {
         animation: intelUnlock 0.4s forwards;
-
         filter: grayscale(0) brightness(1.25);
 
         & .image::after {
             content: ''
         }
-
-        /* outline: 4px solid #0ff7; */
     }
     &.intel--locked .card {
-        /* --saturation: 0; */
-
         filter: grayscale(0.7) brightness(1);
-/* 
-        &:hover {
-            filter: grayscale(0.5) brightness(0.6);
-        } */
     }
     
 
@@ -623,7 +596,6 @@
     }
 
     &.intel--locked .card:hover .image::after {
-            /* opacity: 0.4; */
             transform: translateY(0) scale(1) rotate(0);
             transition: opacity 1s, transform 0.5s, backdrop-filter 0.5s;
             opacity: 0.6;
@@ -642,7 +614,8 @@
 .has--intel :not(.intel--locked) + .intel--locked {
 
     & .card {
-        outline: 4px solid var(--blue);
+        outline: 0.1em solid var(--blue);
+        outline-offset: 0.5em;
         filter: grayscale(0) brightness(1);
 
         animation: unlockPulse 6s linear infinite;
@@ -664,18 +637,18 @@
 @keyframes unlockPulse {
     0% {
         outline-color: var(--blue);
-        outline-offset: 0em;
+        outline-offset: 0.5em;
     }
     10% {
         outline-color: transparent;
-        outline-offset: 0.5em;
+        outline-offset: 0.75em;
     }
     11% {
         outline-color: transparent;
-        outline-offset: 0em;
+        outline-offset: 0.5em;
     }
     30% {
-        outline-offset: 0em;
+        outline-offset: 0.5em;
         outline-color: var(--blue);
     }
 }

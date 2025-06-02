@@ -2,7 +2,6 @@
 
 let game = {
     activeMenu: null,
-    sfx: {},
     days: 30,
     initialStats: {
         loyalty: 6,
@@ -434,6 +433,7 @@ let game = {
             game.changeStat('wealth', pro.return.wealth - pro.cost.wealth)
             game.changeStat('salvage', pro.return.salvage - pro.cost.salvage)
             game.changeStat('intel', pro.return.intel - pro.cost.intel)
+
             if (pro.callback) {
                 eval(pro.callback)
             }
@@ -451,6 +451,13 @@ let game = {
                     $pro.classList.remove('unaffordable')
                     $pro.querySelector('button').disabled = false
                 }
+            }
+
+            console.log(pro)
+            if (pro.major == true) {
+                SFX.bigSting.play()
+            } else {
+                SFX.mediumSting.play()
             }
 
             this.saveData()
@@ -533,7 +540,7 @@ let game = {
 
             let undoHTML = ``
             for (let i = this.undoStack.length-1; i >= 0; i--) {
-                undoHTML += `<button onclick="game.undo(${this.undoStack.length-i})">${this.undoStack.length-i}. ${this.undoStack[i].action}</button>`
+                undoHTML += `<button onclick="game.undo(${this.undoStack.length-i})"><span>${this.undoStack.length-i}.</span> ${this.undoStack[i].action}</button>`
             }
             this.elements.$undo.innerHTML = `⏮️ <div class="undoList"><h3>Undo How Many Actions?</h3>${undoHTML}</div>`
         }
@@ -543,7 +550,7 @@ let game = {
         lastState.action = action
         lastState.undoStack = []
         this.undoStack.push(lastState)
-        if (this.undoStack.length > 10) {
+        if (this.undoStack.length > 15) {
             this.undoStack.shift()
         }
         console.log('Undo State Set!')
@@ -681,13 +688,6 @@ let game = {
             }
         }
     },
-    initAudio: function () {
-        this.sfx.flip = document.getElementById('audio_flip')
-        this.sfx.place = document.getElementById('audio_place')
-        this.sfx.deal0 = document.getElementById('audio_deal_0')
-        this.sfx.deal1 = document.getElementById('audio_deal_1')
-        this.sfx.deal2 = document.getElementById('audio_deal_2')
-    },
     initIntel: function() {
         let i = 0
         for (e of INTEL) {
@@ -751,7 +751,6 @@ let game = {
 
             this.initStats()
             this.initCountdown()
-            this.initAudio()
 
             if (this.data.newProjects.length > 0 ) {
                 this.alert('projects')
@@ -776,7 +775,6 @@ let game = {
             this.setDefaultStats()
             this.initCountdown()
             this.initEvents()
-            this.initAudio()
         }
         this.checkUndo()
     }

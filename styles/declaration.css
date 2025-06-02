@@ -15,7 +15,7 @@
     position: relative;
     margin-bottom: 4em;
 
-    animation: declarationHide 2.5s ease-in-out 6s forwards;
+    animation: declarationHide 1s ease-in-out 5s forwards;
 }
 @keyframes declarationHide {
     80% {
@@ -39,7 +39,7 @@
     border: 0.15em solid var(--brown);
     box-shadow: 0 0 2em 2em black;
 
-    animation: declarationAppear 2s backwards;
+    animation: declarationAppear 1.5s backwards;
 
     &::before,
     &::after {
@@ -62,11 +62,11 @@
         opacity: 0;
         top: 10em;
     }
-    30% {
+    40% {
         transform: scaleX(0.05) scaleY(1);
         top: 0;
     }
-    60% {
+    70% {
         transform: scaleX(1) scaleY(1);
     }
 }

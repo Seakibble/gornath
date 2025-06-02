@@ -27,6 +27,13 @@ let INTEL = [
 
 
     {
+        "title": "Pact",
+        "type": 'judge',
+        "text": "The entity that rules Hell is using Logus' hatred for Bokaz to bind him to his pact."
+    },
+
+
+    {
         "title":"Seals",
         "type": 'grey-ones',
         "text": "Logus has stopped maintaining the seals. The Grey Ones are coming..."
