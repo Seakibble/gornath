@@ -154,3 +154,10 @@
         }
     }
 }
+
+
+@media screen and (width < 1000px) {
+    #quests {
+        grid-template-columns: 25em 25em;
+    }
+}
