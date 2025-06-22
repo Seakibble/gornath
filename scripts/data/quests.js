@@ -174,4 +174,35 @@ let QUESTS = [
         ],
         "status": "open"
     },
+
+
+
+
+    {
+        "name": "Allies: Loego Nova",
+        "type": "xgornath",
+        "text": "We could get help from Loego Nova...",
+        "outcomes": [
+            "Loegoans send allies to help with the battle.",
+        ],
+        "status": "open"
+    },
+    {
+        "name": "Allies: Grauhuli Mercenaries",
+        "type": "xgornath",
+        "text": "We could get help from some of the itinerant mercenary magicians of Grauhul...",
+        "outcomes": [
+            "The Grauhuli mercenaries join Gornath to fight Logus.",
+        ],
+        "status": "open"
+    },
+    {
+        "name": "Allies: The Fellblades",
+        "type": "xgornath",
+        "text": "We could get help from Castle Ord...",
+        "outcomes": [
+            "We get knights of New Zarellia to help fight the demons.",
+        ],
+        "status": "open"
+    },
 ]

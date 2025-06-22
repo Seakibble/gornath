@@ -301,6 +301,7 @@ let game = {
                             case 'main': text = 'Main Story'; break
                             case 'personal': text = 'Personal Missions'; break
                             case 'necropolis': text = 'Within the Necropolis'; break
+                            case 'xgornath': text = 'Within Gornath'; break
                         }
                         if (type != null) {
                             questList += "</div>"
