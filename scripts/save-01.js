@@ -5,53 +5,54 @@ let events = {
   "cards": {
     "locked": [],
     "unlocked": [
-      1,
-      2,
-      5,
-      6,
-      8,
-      9,
-      10,
-      12,
-      13,
-      15,
-      16,
-      18,
-      20,
-      24,
-      [
-        19
-      ]
+      12
     ],
     "scheduled": [],
     "inPlay": [
-      7,
-      11,
-      14
+      2,
+      15
     ],
     "discarded": [
       "0",
       "4",
       "23",
-      "21"
+      "21",
+      "14",
+      "7",
+      "24",
+      "6",
+      "5",
+      "8",
+      "1",
+      "20",
+      "18",
+      "13",
+      "9"
     ]
   },
-  "gateCooldown": 0,
-  "restCooldown": -2,
-  "day": 5,
+  "gateCooldown": -1,
+  "restCooldown": -9,
+  "day": 12,
   "stats": {
-    "loyalty": 5,
-    "warriors": 13,
-    "order": 9,
-    "reverence": 6,
-    "salvage": 3,
+    "loyalty": 9,
+    "warriors": 10,
+    "order": 3,
+    "reverence": 9,
+    "salvage": 6,
     "wealth": 1,
     "intel": 0
   },
-  "projects": [],
-  "newProjects": [
-    7,
-    8
+  "projects": [
+    5,
+    10
   ],
-  "intelligence": []
+  "newProjects": [],
+  "intelligence": [
+    5,
+    6,
+    16,
+    22,
+    0,
+    1
+  ]
 }

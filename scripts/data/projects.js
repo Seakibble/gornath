@@ -269,10 +269,10 @@ let PROJECTS = [
             "order": 0,
             "reverence": 0,
             "salvage": 0,
-            "wealth": 10,
+            "wealth": 4,
             "intel": 0,
         },
-        "text": "The Gornathi arms are not suited for fighting demons and are unable to overcome their innate resistance. We can invest in sanctifying their weapons with holy water to make them more effective.",
+        "text": "The Gornathi arms are not suited for fighting demons and are unable to overcome their innate resistance. We can invest in sanctifying their weapons with holy water to make them more effective. With the silver that Enkitum has acquired, the cost of this process will be rendered much cheaper.",
         "return": {
             "loyalty": 0,
             "warriors": 0,

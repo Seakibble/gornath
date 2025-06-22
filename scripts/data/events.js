@@ -984,6 +984,36 @@ let EVENTS = [
                         "unlocks": ""
                     }
                 ]
+            },
+            {
+                "title": "Intervene Personally",
+                "test": "DC 15 Attack",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 3,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -2,
+                        "loyalty": 0,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 1,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
             }
         ],
         "id": 13
