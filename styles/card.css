@@ -487,6 +487,10 @@
     /* display: grid; */
     transform: scale(0.9);
 
+    & .sheen {
+        display: none;
+    }
+
     & .card-bumper {
         --size: 0.45;
 

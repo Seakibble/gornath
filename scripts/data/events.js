@@ -1458,7 +1458,7 @@ let EVENTS = [
                     {
                         "name": "",
                         "warriors": 0,
-                        "loyalty": 0,
+                        "loyalty": -1,
                         "order": -1,
                         "reverence": -4,
                         "salvage": 0,
@@ -1867,5 +1867,400 @@ let EVENTS = [
             }
         ],
         "id": 26
+    },
+    {
+        "title": "Grauball Competition",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "Abeni has organized a friendly Grauball competition to raise spirits. Today's the day of the finals!",
+        "options": [
+            {
+                "title": "Support the Gornathi team",
+                "test": "40% chance of success",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Support the Grauhuli team",
+                "test": "60% chance of success",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": -2,
+                        "order": 2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": 4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 1,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Fix the match",
+                "test": "DC 20 Deception",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": "28"
+                    }
+                ]
+            }
+        ],
+        "id": 27
+    },
+    {
+        "title": "Grauball Scandal",
+        "type": "crisis",
+        "rarity": "common",
+        "priority": "immediate",
+        "locked": true,
+        "scheduled": "",
+        "text": "Our deception has been revealed! The people are up in arms about this development!",
+        "options": [
+            {
+                "title": "Downplay it",
+                "test": "DC 20 Persuasion",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -3,
+                        "order": -3,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Ignore this nonsense",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": -2,
+                        "order": -2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 28
+    },
+    {
+        "title": "Gift Shop Takeover",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "Quivicar has managed to buy the Gornath Gift Shop! Perhaps we could use this to acquire more funds?",
+        "options": [
+            {
+                "title": "Promote the Gift Shop",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 5,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Condemn this capitalistic warfare!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Quivicar will be angry",
+                        "unlocks": "30"
+                    }
+                ]
+            }
+        ],
+        "id": 29
+    },
+    {
+        "title": "Quivicar's Revenge",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "high",
+        "locked": true,
+        "scheduled": "",
+        "text": "The mangy kobold has replaced all the classic Gift Shop merchandise - such as the Lesser Beings Group Attack Playset and the \"I went to Gornath and all I got was this lousy tankard\" tankards - with Grauhuli-themed merch, like a poseable Boris the Condor action figure and an \"It's a shame what happened to Grauhul\" mug.",
+        "options": [
+            {
+                "title": "Deny affiliation with Quivicar",
+                "test": "DC 20 Deception",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "25% chance Quivicar Leaves Gornath",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Bribe him",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -3,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 30
+    },
+    {
+        "title": "Innovation",
+        "type": "unworthy",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "The adherent in our midst has offered to refine our magimecha materials. This will provide an enormous boost to our salvage, but there are many within Gornath that would find his methods abhorrent.",
+        "options": [
+            {
+                "title": "Refine the salvage!",
+                "outcomes": [
+                    {
+                        "name": "A little",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": -3,
+                        "salvage": 3,
+                        "wealth": -1,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Some ",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": -4,
+                        "salvage": 6,
+                        "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "A lot",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": -6,
+                        "salvage": 9,
+                        "wealth": -3,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Publicly condemn Iron Sorcery",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 3,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Unworthy will not be pleased",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 31
+    },
+    {
+        "title": "The Megaraptoid",
+        "type": "corpus",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "A group of warriors want to go out into the wilderness to hunt a megaraptoid - a huge wild magimechanoid beast of notorious ferocity. Will we assist them?  ",
+        "options": [
+            {
+                "title": "It shall be a glorious hunt!",
+                "test": "Encounter",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 8,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Rare magimecha components",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Now is not the time",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 32
     }
 ]

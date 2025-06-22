@@ -26,11 +26,11 @@ let INTEL = [
     },
 
 
-    {
-        "title": "Pact",
-        "type": 'judge',
-        "text": "The entity that rules Hell is using Logus' hatred for Bokaz to bind him to his pact."
-    },
+    // {
+    //     "title": "Pact",
+    //     "type": 'judge',
+    //     "text": "The entity that rules Hell is using Logus' hatred for Bokaz to bind him to his pact."
+    // },
 
 
     {
@@ -79,12 +79,12 @@ let INTEL = [
     },
     {
         "title":"Onyx Brutes",
-        "type": 'demon',
+        "type": 'onyx',
         "text": "Logus will bring 10 onyx brutes."
     },
     {
         "title":"Fire Support",
-        "type": 'demon',
+        "type": 'onyx',
         "text": "The brutes' role will be to stay back and pick off enemies at range."
     },
     {
@@ -102,16 +102,16 @@ let INTEL = [
         "type": 'juggernaut',
         "text": "The juggernauts' role will be to lead powerful strikes against the Gornathi defences in attempts to obliterate the front lines."
     },
-    {
-        "title":"Lies",
-        "type": 'demon',
-        "text": "Two of these cards contain false information."
-    },
-    {
-        "title":"Traitor",
-        "type": 'demon',
-        "text": "Someone you know within Gornath is planning to betray you."
-    },
+    // {
+    //     "title":"Lies",
+    //     "type": 'demon',
+    //     "text": "Two of these cards contain false information."
+    // },
+    // {
+    //     "title":"Traitor",
+    //     "type": 'demon',
+    //     "text": "Someone you know within Gornath is planning to betray you."
+    // },
 
 
     {

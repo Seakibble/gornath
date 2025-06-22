@@ -92,7 +92,7 @@
 
 #quests {
     display: grid;
-    grid-template-columns: 20em 1fr;
+    grid-template-columns: 25em 1fr;
     overflow-y: auto;
 
     & .quest__list {
@@ -101,17 +101,17 @@
 
         & h2 {
             /* background-color: black; */
-            font-size: 1.5em;
-            padding: 1em 15px 0.2em;  
+            font-size: 1.75em;
+            padding: 1.5em 15px 0.2em;  
             /* position: sticky; */
             /* top: -1px; */
         }
 
         & .quest__item {
-            font-size: 1.1em;
+            font-size: 1.25em;
             padding: 0.2em 15px;
             border-left: 0 solid transparent;
-            background: black;
+            /* background: black; */
             color: var(--green);
             transition: background 0.15s, color 0.15s, border 0.15s, filter 0.15s;
             font-family: "Marcellus SC", "Crimson Pro", serif;
@@ -132,7 +132,7 @@
 
 
     & .quest__details {
-        font-size: 1.2em;
+        font-size: 1.4em;
         padding: 1em;
         /* background: var(--darkbrown); */
 

@@ -23,7 +23,7 @@ let QUESTS = [
         "status": "open"
     },
     {
-        "name": "Heresey and Iron",
+        "name": "Heresy and Iron",
         "type": "main",
         "text": "Apostate, the exiled adherent leader of The Heretics has made her base within the very source of demonkind - Hell. Until she is killed, no doubt her Iron Sorcery will be put to work to make the demons even more dangerous.",
         "outcomes": [
