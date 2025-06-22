@@ -78,6 +78,16 @@
     display: grid;
     grid-gap: 1em;
     place-content: start;
+
+    & .valueAdjust h2 {
+        margin-bottom: 0.25em;
+    }
+    & .valueAdjust button {
+        font-size: 1.5em;
+        padding: 0em;
+        width: 2em;
+        height: 2em;
+    }
 }
 
 #quests {

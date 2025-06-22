@@ -21,7 +21,7 @@
     </div>
 
     <script src="scripts/constants.js"></script>
-    <script src="scripts/events.js"></script>
+    <script src="scripts/data/events.js"></script>
     <script>
         // --- Type color generation ---
         function stringToColor(str, idx, total) {
@@ -35,13 +35,13 @@
             return map;
         }
         function getAllTypes() {
-            let set = new Set(events.map(e => e.type));
+            let set = new Set(EVENTS.map(e => e.type));
             return Array.from(set);
         }
 
         // --- Numeric keys detection ---
         function getNumericKeys() {
-            for (const event of events) {
+            for (const event of EVENTS) {
                 for (const opt of event.options) {
                     if (opt.outcomes && opt.outcomes.length) {
                         return Object.keys(opt.outcomes[0]).filter(
@@ -85,35 +85,35 @@
         }
 
         // --- Main rendering logic ---
-        let originalEvents = JSON.parse(JSON.stringify(events));
+        let originalEvents = JSON.parse(JSON.stringify(EVENTS));
         let $eventsList = document.getElementById('events-list');
         let $detailsPanel = document.getElementById('details-panel');
         let selectedIdx = 0;
         let typeColors = getTypeColors(getAllTypes());
 
         function isEventEdited(idx) {
-            return JSON.stringify(events[idx]) !== JSON.stringify(originalEvents[idx]);
+            return JSON.stringify(EVENTS[idx]) !== JSON.stringify(originalEvents[idx]);
         }
 
         function renderList(selected) {
             let types = getAllTypes();
             typeColors = getTypeColors(types);
             let html = '<ul>';
-            for (let i = 0; i < events.length; i++) {
+            for (let i = 0; i < EVENTS.length; i++) {
                 let edited = isEventEdited(i);
-                let type = events[i].type;
-                let priority = events[i].priority
-                if (!priority) events[i].priority = 'standard'
+                let type = EVENTS[i].type;
+                let priority = EVENTS[i].priority
+                if (!priority) EVENTS[i].priority = 'standard'
                 console.log(priority)
                 let color = typeColors[type] || "#888";
                 let badgeText = type // .slice(0,5).toUpperCase();
                 let badgeFg = getContrastYIQ(color);
-                html += `<li data-idx="${i}" class=" ${i === selected ? 'selected ' : ''}${edited ? 'edited ' : ''} ${events[i].locked ? "locked": ''}">
+                html += `<li data-idx="${i}" class=" ${i === selected ? 'selected ' : ''}${edited ? 'edited ' : ''} ${EVENTS[i].locked ? "locked": ''}">
                     <span class="event-list-id">${i}</span>
-                    <span class="event-rarity rarity-${events[i].rarity.toLowerCase()}"></span>
-                    <span class="event-list-title">${events[i].title}${edited ? '<span class="event-list-edited">*</span>' : ''}</span>
+                    <span class="event-rarity rarity-${EVENTS[i].rarity.toLowerCase()}"></span>
+                    <span class="event-list-title">${EVENTS[i].title}${edited ? '<span class="event-list-edited">*</span>' : ''}</span>
                     <div class='event-badges'>
-                        <span class='event-list-type'>${events[i].scheduled ? ICONS['scheduled'] : ''}</span><span class='event-list-type'>${ICONS[priority]}</span><span class='event-list-type'>${ICONS[badgeText]}</span>
+                        <span class='event-list-type'>${EVENTS[i].scheduled ? ICONS['scheduled'] : ''}</span><span class='event-list-type'>${ICONS[priority]}</span><span class='event-list-type'>${ICONS[badgeText]}</span>
                     </div>
                 </li>`;
 
@@ -134,7 +134,7 @@
 
         function renderStatsPanel() {
             // Gather stats
-            const totalEvents = events.length;
+            const totalEvents = EVENTS.length;
             const typeCounts = {};
             const rarityCounts = {};
             const numericKeys = getNumericKeys();
@@ -144,7 +144,7 @@
             // Initialize sums
             numericKeys.forEach(k => outcomeSum[k] = 0);
 
-            for (const event of events) {
+            for (const event of EVENTS) {
                 // Type counts
                 typeCounts[event.type] = (typeCounts[event.type] || 0) + 1;
                 // Rarity counts
@@ -218,13 +218,13 @@
         // Add this to get all unique rarities in use, fallback to some defaults
         function getAllRarities() {
             const defaults = ['common', 'uncommon', 'rare', 'special'];
-            const found = new Set(events.map(e => e.rarity).filter(Boolean));
+            const found = new Set(EVENTS.map(e => e.rarity).filter(Boolean));
             defaults.forEach(r => found.add(r));
             return Array.from(found).sort();
         }
 
         function renderDetails(idx) {
-            let event = events[idx];
+            let event = EVENTS[idx];
             let types = getAllTypes();
             let rarities = getAllRarities();
             let priorities = ['standard', 'high', 'immediate'];
@@ -502,7 +502,7 @@
         }
 
         document.getElementById('copy-btn').onclick = function() {
-            let json = 'let events = ' + JSON.stringify(events, null, 4);
+            let json = 'let EVENTS = ' + JSON.stringify(EVENTS, null, 4);
             navigator.clipboard.writeText(json).then(() => {
                 this.textContent = "Copied!";
                 setTimeout(() => { this.textContent = "Copy Event Data"; }, 1200);
@@ -529,16 +529,16 @@
                         unlocks: ""
                     }]
                 }],
-                id: events.length > 0 ? Math.max(...events.map(e => e.id || 0)) + 1 : 0
+                id: EVENTS.length > 0 ? Math.max(...EVENTS.map(e => e.id || 0)) + 1 : 0
             };
         }
 
         // Add event button handler
         document.getElementById('add-event-btn').onclick = function() {
             let newEvent = getDefaultEvent();
-            events.push(newEvent);
+            EVENTS.push(newEvent);
             originalEvents.push(JSON.parse(JSON.stringify(newEvent)));
-            selectedIdx = events.length - 1;
+            selectedIdx = EVENTS.length - 1;
             renderList(selectedIdx);
             renderDetails(selectedIdx);
             // Optionally, focus the title input for immediate editing

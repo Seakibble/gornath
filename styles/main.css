@@ -117,10 +117,12 @@ main {
 
 button {
     font-family: 'Marcellus SC', 'Crimson Pro', serif;
-    color:var(--crimson);
-    font-size: 1.2em;
-    border: 4px solid var(--crimson);
+    
+    --color: var(--crimson);
+    color: var(--color);
+    border: 4px solid var(--color);
     background-color: black;
+    font-size: 1.2em;
     font-weight: bold;
     border-radius: 5px;
     padding: 5px 10px;
@@ -131,14 +133,19 @@ button {
 
     cursor: url('../images/cursor-hover.png'), pointer;
 
+    &.blue { --color: var(--blue); }
+    &.green { --color: var(--green); }
+    &.orange { --color: var(--orange); }
+    &.orangered { --color: var(--orangered); }
+
     &:hover {
-        background: var(--crimson);
+        background: var(--color);
         color: black;
         /* transform: translateY(-5px); */
     }
     &:disabled {
         background: #333;
-        color: var(--crimson);
+        color: var(--color);
         filter:grayscale(1);
 
         &:hover {

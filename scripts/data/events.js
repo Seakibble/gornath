@@ -1026,6 +1026,36 @@ let EVENTS = [
                         "unlocks": ""
                     }
                 ]
+            },
+            {
+                "title": "Recruit Volunteers to Help",
+                "test": "DC 15 Stability",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -4,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -7,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
             }
         ],
         "id": 14

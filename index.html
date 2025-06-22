@@ -55,6 +55,20 @@
             <section id="menu__settings" class="menu box">
                 <h1>🎛️ Settings</h1>
                 <div class="menu__settings">
+                    <div class="valueAdjust">
+                        <h2>Salvage</h2> <button class="orangered" onclick="game.changeStat('salvage', -1); game.saveData()">-1</button>
+                        <button class="green" onclick="game.changeStat('salvage', 1); game.saveData()">+1</button>
+                    </div>
+                    <div class="valueAdjust">
+                        <h2>Wealth</h2> <button class="orangered" onclick="game.changeStat('wealth', -1); game.saveData()">-1</button>
+                        <button class="green" onclick="game.changeStat('wealth', 1); game.saveData()">+1</button>
+                    </div>
+                    <div class="valueAdjust">
+                        <h2>Intel</h2> <button class="orangered" onclick="game.changeStat('intel', -1); game.saveData()">-1</button>
+                        <button class="green" onclick="game.changeStat('intel', 1); game.saveData()">+1</button>
+                    </div>
+                    <br>
+                    <button class="blue" onclick="game.copyData(this)">Copy Data</button>
                     <button onclick="game.clearData()">Clear Data!</button>
                 </div>
             </section>

@@ -11,7 +11,7 @@ let game = {
         reverence: 12,
         salvage: 3,
         wealth: 3,
-        intel: 7,
+        intel: 0,
     },
     data: {
         flags: [],
@@ -22,9 +22,9 @@ let game = {
             inPlay: [],
             discarded: [],
         },
-        gateCooldown: 3,
+        gateCooldown: 1,
         restCooldown: -1,
-        day: 2,
+        day: 4,
         stats: {
             loyalty: 0,
             warriors: 0,
@@ -92,12 +92,12 @@ let game = {
         }
 
         let x = Math.floor(Math.random() * 3) + 1
-        let y = Math.floor(Math.random() * 3) + 1
-        if (y > x) x = y
+        // let y = Math.floor(Math.random() * 3) + 1
+        // if (y > x) x = y
 
-        if (game.data.day === 3) x = 2
+        // if (game.data.day === 3) x = 2
+        // y = 0
 
-        y = 0
         for(let i = scheduledCards.length -1; i >= 0; i--) {
             this.drawCard(scheduledCards, i)
             x--
@@ -113,7 +113,7 @@ let game = {
         }
         
         for (let i = 0; i < x; i++) {
-            this.drawCard(game.data.cards.unlocked, i+y)
+            this.drawCard(game.data.cards.unlocked, i+x)
         }
     },
     drawCard(deck, cardNum = 0) {
@@ -126,6 +126,22 @@ let game = {
         this.data.cards.inPlay.push(cardIndex)
         this.checkCards()
 
+    },
+    forceEvent(id) {
+        let $card = makeCard(EVENTS[id])
+
+        this.elements.$panel.appendChild($card)
+        this.data.cards.inPlay.push(id)
+        let isInUnlockedDeck = this.data.cards.unlocked.findIndex(x => x == id)
+        if (isInUnlockedDeck) {
+            this.data.cards.unlocked.splice(isInUnlockedDeck, 1)
+        }
+
+        let isInLockedDeck = this.data.cards.locked.findIndex(x => x == id)
+        if (isInLockedDeck) {
+            this.data.cards.locked.splice(isInLockedDeck, 1)
+        }
+        this.checkCards()
     },
     checkCards: function() {
         if (this.data.cards.inPlay.length > 0) {
@@ -477,7 +493,6 @@ let game = {
         $selected.classList.add('selected')
         
         let quest = QUESTS.find((quest) => quest.id == id)
-        console.log(id, quest)
 
         this.elements.$questDetails.innerHTML = `
             <h2>${quest.name}</h2>
@@ -520,7 +535,6 @@ let game = {
         if (this.undoStack.length > 0) { 
             while (actions > 0 && this.undoStack.length > 0) {
                 this.data = this.undoStack.pop()
-                console.log(actions, this.data.action)
                 actions--
             }
             this.saveData()
@@ -581,6 +595,13 @@ let game = {
             localStorage.clear()
             location.reload()
         }
+    },
+    copyData: function($btn) {
+        let json = 'let events = ' + JSON.stringify(this.data, null, 2);
+        navigator.clipboard.writeText(json).then(() => {
+            $btn.textContent = "Copied!";
+            setTimeout(() => { $btn.textContent = "Copy Data"; }, 1200);
+        })
     },
     initCountdown: function() {
         this.elements.$countdown = document.getElementById('countdown')
@@ -674,11 +695,19 @@ let game = {
         this.changeStat('wealth', game.initialStats.wealth)
         this.changeStat('intel', game.initialStats.intel)
     },
+    initAudio: function () {
+        this.sfx.flip = document.getElementById('audio_flip')
+        this.sfx.place = document.getElementById('audio_place')
+        this.sfx.deal0 = document.getElementById('audio_deal_0')
+        this.sfx.deal1 = document.getElementById('audio_deal_1')
+        this.sfx.deal2 = document.getElementById('audio_deal_2')
+    },
     initEvents: function() {
         let i = 0
         for (e of EVENTS) {
             e.id = i
             i++
+
             if (e.scheduled) {
                 game.data.cards.scheduled.push(e.id)
             } else if (e.locked) {
@@ -737,7 +766,6 @@ let game = {
 
         this.elements.$declaration = document.getElementById('declaration')
         this.elements.$declaration.addEventListener('animationend', (e) => {
-            console.log(e.target.classList)
             if (e.target.classList.contains('declaration__outer')) {
                 e.target.remove()
             }

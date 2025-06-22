@@ -258,5 +258,31 @@ let PROJECTS = [
         }, 
         "declaration": ["Entrances Mined","(Just don't forget they're there...)"],
         "callback": ""
+    },
+    {
+        "name": "Sanctification Rites",
+        "requires": "",
+        "time": 6,
+        "cost": {
+            "loyalty": 0,
+            "warriors": 0,
+            "order": 0,
+            "reverence": 0,
+            "salvage": 0,
+            "wealth": 10,
+            "intel": 0,
+        },
+        "text": "The Gornathi arms are not suited for fighting demons and are unable to overcome their innate resistance. We can invest in sanctifying their weapons with holy water to make them more effective.",
+        "return": {
+            "loyalty": 0,
+            "warriors": 0,
+            "order": 0,
+            "reverence": 0,
+            "salvage": 0,
+            "wealth": 0,
+            "intel": 0,
+        }, 
+        "declaration": ["Wepaons Sanctified","The demons won't know what hit them"],
+        "callback": ""
     }
 ]

@@ -244,13 +244,11 @@ function resolve(button) {
                 game.data.flags.push(flag)
             }
 
-            console.log(game.data.newProjects)
             for(project of PROJECTS) {
                 if (flag === project.requires) {
                     game.data.newProjects.push(project.id)
                 }
             }
-            console.log(game.data.newProjects)
             if (game.data.newProjects.length > 0) {
                 game.alert('projects')
             }
@@ -283,7 +281,6 @@ function extractFromDeck(deck, id) {
 }
 
 function findInDeck(deck, id) {
-    console.log(deck, id)
     return deck.findIndex((card)=>{
         console.log(card, id)
         return parseInt(card) === parseInt(id)})
