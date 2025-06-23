@@ -532,6 +532,8 @@ let game = {
         let quest = QUESTS.find((q)=>{ return q.id == id })
         if (!this.data.quests.includes(id)) {
             this.data.quests.push(id)
+        } else {
+            this.data.quests.splice(this.data.quests.findIndex((q) => {q.id == id}),1)
         }
 
         SFX.mediumSting.play()
@@ -552,8 +554,8 @@ let game = {
             }
 
             $el.scrollIntoView()
-            this.saveData()
         }
+        this.saveData()
     },
     toggleMenu: function(menu = '') {
         this.elements.$settingsTab.classList.remove('visible')
@@ -791,6 +793,9 @@ let game = {
         for (e of QUESTS) {
             e.id = i
             i++
+            if (this.data.quests.includes(e.id)) {
+                e.status = 'complete'
+            }
         }
     },
     init: function() {
