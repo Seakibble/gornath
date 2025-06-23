@@ -116,6 +116,10 @@
             transition: background 0.15s, color 0.15s, border 0.15s, filter 0.15s;
             font-family: "Marcellus SC", "Crimson Pro", serif;
 
+            &.quest--complete {
+                color: var(--grey);
+            }
+
             &.selected {
                 border-left: 0.5em solid var(--beige);
                 background: var(--darkbrown);
@@ -151,6 +155,11 @@
         & p {
             text-indent: 0;
             padding-left: 15px;
+        }
+
+        & button {
+            margin-top: 2em;
+            font-size: 0.8em;
         }
     }
 }

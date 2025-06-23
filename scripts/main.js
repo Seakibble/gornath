@@ -35,12 +35,13 @@ let game = {
             intel: 0,
         },
         projects: [],
+        quests: [],
         newProjects: [],
         intelligence: [],
     },
     undoStack: [],
     elements: {},
-    nextDay: function () {
+    nextDay: function () {includes
         if (this.data.cards.inPlay > 0) {
             alert("CARDS STILL IN PLAY")
             return
@@ -289,34 +290,50 @@ let game = {
                 this.elements.$questDetails.innerHTML = ''
                 
                 QUESTS.sort((a, b) => {
-                    return a.type === b.type ? 0 : a.type > b.type ? 1 : -1
+                    if (a.type > b.type) return 1
+                    else if (a.type < b.type) return -1
+                    else if (a.name > b.name) return 1
+                    else if (a.name < b.name) return -1
+                    else return 0
+                })
+
+                QUESTS.sort((a, b) => {
+                    if (a.status == 'open' && b.status == 'complete') return -1
+                    else if (a.status == 'closed' && b.status == 'open') return 1
+                    else return 0
                 })
                 
                 let questList = ''
                 let type = null
+                let status = null
                 for (quest of QUESTS) {
-                    if (type != quest.type) {
-                        let text = quest.type
-                        switch(quest.type) {
-                            case 'main': text = 'Main Story'; break
-                            case 'personal': text = 'Personal Missions'; break
-                            case 'necropolis': text = 'Within the Necropolis'; break
-                            case 'xgornath': text = 'Within Gornath'; break
-                        }
-                        if (type != null) {
-                            questList += "</div>"
-                        }
-                        questList += `<div><h2>${text}</h2>`
-                        type = quest.type
+                    let text = quest.type
+                    switch(quest.type) {
+                        case 'main': text = 'Main Story'; break
+                        case 'personal': text = 'Personal Missions'; break
+                        case 'necropolis': text = 'Within the Necropolis'; break
+                        case 'xgornath': text = 'Within Gornath'; break
                     }
+                    if (quest.status == 'complete') {
+                        text = "Completed"
+                    }
+
+                    if (quest.status == 'open' && type != quest.type 
+                        || quest.status == 'complete' && status == 'open') {
+                        questList += `<h2>${text}</h2>`
+                    }
+
+                    type = quest.type
+                    status = quest.status                        
+ 
                     questList += `
-                    <div id="quest-${quest.id}" class='quest__item quest--${quest.type}' data-id=${quest.id}>
+                    <div id="quest-${quest.id}" class='quest__item quest--${quest.type} quest--${quest.status}' data-id=${quest.id}>
                         ${quest.name}
                     </div>`
                 }
                 this.elements.$questList.innerHTML = questList + '</div>'
                 
-                this.selectQuest(0)
+                this.selectQuest(QUESTS[0].id)
                 break
             case 'projects':
                 this.alertClear('projects')
@@ -425,7 +442,6 @@ let game = {
                     this.elements.$allies.appendChild($card)
                 }
                 break
-
         }
     },
     isAffordable: function(pro) {
@@ -485,6 +501,11 @@ let game = {
         if ($selected) {
             $selected.classList.remove('selected')
         }
+        if (id == null) {
+            this.elements.$questDetails.innerHTML = ''
+            return
+        }
+        
         $selected = document.getElementById('quest-'+id)
 
         if (!$selected) {
@@ -495,11 +516,44 @@ let game = {
         
         let quest = QUESTS.find((quest) => quest.id == id)
 
+        let toggleStatus = 'Mark as Completed'
+        if (quest.status == 'complete') {
+            toggleStatus = 'Mark as Open'
+        }
+
         this.elements.$questDetails.innerHTML = `
             <h2>${quest.name}</h2>
             <p>${quest.text}</p>
             <h3>Possible Outcomes</h3>
-            <ul><li>${quest.outcomes.join("</li><li>")}</li></ul>`
+            <ul><li>${quest.outcomes.join("</li><li>")}</li></ul>
+            <button onclick="game.toggleQuest(${quest.id})">${toggleStatus}</button>`
+    },
+    toggleQuest(id) {
+        let quest = QUESTS.find((q)=>{ return q.id == id })
+        if (!this.data.quests.includes(id)) {
+            this.data.quests.push(id)
+        }
+
+        SFX.mediumSting.play()
+        if (quest.status == 'open') {
+            quest.status = 'complete'
+
+            this.populateMenu('quests')
+            this.selectQuest(null)
+        } else {
+            quest.status = 'open'
+            this.populateMenu('quests')
+            this.selectQuest(quest.id)
+
+            let $el = document.getElementById(`quest-${quest.id}`)
+
+            while ($el.tagName !== 'H2') {
+                $el = $el.previousSibling
+            }
+
+            $el.scrollIntoView()
+            this.saveData()
+        }
     },
     toggleMenu: function(menu = '') {
         this.elements.$settingsTab.classList.remove('visible')
@@ -805,6 +859,11 @@ let game = {
             this.initCountdown()
             this.initEvents()
         }
+
+        if (this.data.quests == undefined) {
+            this.data.quests = []
+        }
+        
         this.checkUndo()
     }
 }
