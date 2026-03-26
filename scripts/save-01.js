@@ -1,18 +1,33 @@
-let events = {
+function LOAD() { game.data = {
   "flags": [
     "unworthy"
   ],
   "cards": {
-    "locked": [],
+    "locked": [
+      30,
+      28,
+      26,
+      25,
+      19,
+      17,
+      3
+    ],
     "unlocked": [
-      12
+      37,
+      32,
+      29,
+      [
+        34
+      ]
     ],
     "scheduled": [],
-    "inPlay": [
-      2,
-      15
-    ],
+    "inPlay": [],
     "discarded": [
+      10,
+      11,
+      16,
+      22,
+      27,
       "0",
       "4",
       "23",
@@ -27,24 +42,40 @@ let events = {
       "20",
       "18",
       "13",
-      "9"
+      "9",
+      "2",
+      "15",
+      "12",
+      "33",
+      "36",
+      "39",
+      "38",
+      "31",
+      "35"
     ]
   },
-  "gateCooldown": -1,
-  "restCooldown": -9,
-  "day": 12,
+  "gateCooldown": 4,
+  "restCooldown": -15,
+  "day": 18,
   "stats": {
-    "loyalty": 9,
-    "warriors": 10,
-    "order": 3,
-    "reverence": 9,
-    "salvage": 6,
-    "wealth": 1,
+    "loyalty": 13,
+    "warriors": 11,
+    "order": 5,
+    "reverence": 5,
+    "salvage": 0,
+    "wealth": 5,
     "intel": 0
   },
   "projects": [
     5,
-    10
+    10,
+    1,
+    7
+  ],
+  "quests": [
+    8,
+    5,
+    17
   ],
   "newProjects": [],
   "intelligence": [
@@ -53,6 +84,12 @@ let events = {
     16,
     22,
     0,
-    1
-  ]
-}
+    1,
+    18,
+    19,
+    7,
+    2
+  ],
+  "action": "Unlock Intel \"Orizilexia\"",
+  "undoStack": []
+} }

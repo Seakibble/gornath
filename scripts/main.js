@@ -41,7 +41,7 @@ let game = {
     },
     undoStack: [],
     elements: {},
-    nextDay: function () {includes
+    nextDay: function () {
         if (this.data.cards.inPlay > 0) {
             alert("CARDS STILL IN PLAY")
             return
@@ -93,11 +93,10 @@ let game = {
         }
 
         let x = Math.floor(Math.random() * 3) + 1
-        // let y = Math.floor(Math.random() * 3) + 1
-        // if (y > x) x = y
-
-        // if (game.data.day === 3) x = 2
-        // y = 0
+        let y = Math.floor(Math.random() * 3) + 1
+        if (y < x) { 
+            x = y 
+        }
 
         for(let i = scheduledCards.length -1; i >= 0; i--) {
             this.drawCard(scheduledCards, i)
@@ -107,7 +106,7 @@ let game = {
         if (game.data.cards.unlocked.length < x) {
             x = game.data.cards.unlocked.length
             
-            if (x = 0) {
+            if (x == 0) {
                 alert("OUT OF CARDS!")
                 return
             }
@@ -526,7 +525,7 @@ let game = {
             <p>${quest.text}</p>
             <h3>Possible Outcomes</h3>
             <ul><li>${quest.outcomes.join("</li><li>")}</li></ul>
-            <button onclick="game.toggleQuest(${quest.id})">${toggleStatus}</button>`
+            <button class="blue" onclick="game.toggleQuest(${quest.id})">${toggleStatus}</button>`
     },
     toggleQuest(id) {
         let quest = QUESTS.find((q)=>{ return q.id == id })
@@ -536,10 +535,10 @@ let game = {
             this.data.quests.splice(this.data.quests.findIndex((q) => {q.id == id}),1)
         }
 
-        SFX.mediumSting.play()
         if (quest.status == 'open') {
             quest.status = 'complete'
-
+            SFX.mediumSting.play()
+            this.declaration('Quest Complete!', 'One step closer to victory...')
             this.populateMenu('quests')
             this.selectQuest(null)
         } else {
@@ -640,6 +639,10 @@ let game = {
             return false
         }
     },
+    loadSaveFile: function() {
+        LOAD()
+        this.saveData()
+    },
     saveData: function() {
         localStorage.setItem('data', JSON.stringify(this.data))
         localStorage.setItem('undo', JSON.stringify(this.undoStack))
@@ -654,11 +657,95 @@ let game = {
         }
     },
     copyData: function($btn) {
-        let json = 'let events = ' + JSON.stringify(this.data, null, 2);
+        let json = 'function LOAD() { game.data = ' + JSON.stringify(this.data, null, 2) + ' }';
         navigator.clipboard.writeText(json).then(() => {
             $btn.textContent = "Copied!";
             setTimeout(() => { $btn.textContent = "Copy Data"; }, 1200);
         })
+    },
+    verifyCardCount: function() {
+        console.log("--------------")
+        console.log("Total: " + EVENTS.length)
+        console.log("In Play: " + game.data.cards.inPlay)
+        console.log("Unlocked: " + game.data.cards.unlocked)
+        console.log("Scheduled: " + game.data.cards.scheduled)
+        console.log("Locked: " + game.data.cards.locked)
+        console.log("Discarded: " + game.data.cards.discarded)
+        console.log("--------------")
+    },
+    cardBreakdown: function() {
+        console.log("--------------")
+
+        console.log('Total: ', (this.data.cards.unlocked.length + this.data.cards.locked.length + this.data.cards.scheduled.length + this.data.cards.inPlay.length + this.data.cards.discarded.length), '/', EVENTS.length)
+
+
+        let unlocked = ''
+        let locked = ''
+        let scheduled = ''
+        let inPlay = ''
+        let discarded = ''
+        for (const card of this.data.cards.unlocked) { 
+            unlocked += '\n  ' + card + ': ' + EVENTS[card].title 
+        }
+        console.log('Unlocked', this.data.cards.unlocked.length, unlocked)
+        
+        for (const card of this.data.cards.locked) { 
+            locked += '\n  ' + card + ': ' + EVENTS[card].title 
+        }
+        console.log('Locked', this.data.cards.locked.length, locked)
+
+        for (const card of this.data.cards.scheduled) { 
+            scheduled += '\n  ' + card + ': ' + EVENTS[card].title 
+        }
+        console.log('Scheduled', this.data.cards.scheduled.length, scheduled)
+
+        for (const card of this.data.cards.inPlay) { 
+            inPlay += '\n  ' + card + ': ' + EVENTS[card].title 
+        }
+        console.log('In Play', this.data.cards.inPlay.length, inPlay)
+
+        for (const card of this.data.cards.discarded) { 
+            discarded += '\n  ' + card + ': ' + EVENTS[card].title 
+        }
+        console.log('Discarded', this.data.cards.discarded.length, discarded)
+
+        console.log("--------------")
+
+    },
+    addNewCards: function () {
+        this.initEvents()
+
+        for(const discarded of this.data.cards.discarded) {
+            for (let i = 0; i < this.data.cards.unlocked.length; i++) {
+                if (this.data.cards.unlocked[i] == discarded) {
+                    this.data.cards.unlocked.splice(i, 1)
+                }
+            }
+            for (let i = 0; i < this.data.cards.locked.length; i++) {
+                if (this.data.cards.locked[i] == discarded) {
+                    this.data.cards.locked.splice(i, 1)
+                }
+            }
+            for (let i = 0; i < this.data.cards.scheduled.length; i++) {
+                if (this.data.cards.scheduled[i] == discarded) {
+                    this.data.cards.scheduled.splice(i, 1)
+                }
+            }
+        }
+
+        this.data.cards.unlocked = this.clearDuplicates(this.data.cards.unlocked)
+        this.data.cards.locked = this.clearDuplicates(this.data.cards.locked)
+        this.data.cards.scheduled = this.clearDuplicates(this.data.cards.scheduled)
+    },
+    clearDuplicates: function(deck) {
+        let newDeck = []
+        for (let i = deck.length-1; i >= 0; i--) {
+            if (!newDeck.includes(deck[i])) {
+                newDeck.push(deck[i])
+            }
+        }
+        
+        return newDeck
     },
     initCountdown: function() {
         this.elements.$countdown = document.getElementById('countdown')
@@ -679,13 +766,13 @@ let game = {
         for (let i = 0; i < this.data.day; i++) {
             setTimeout(()=>{
                 this.elements.$pips[i].classList.add('active')
-            }, i * 200 + 500)
+            }, i * 80 + 500)
             
             if (i == this.data.day - 1) {
                 setTimeout(() => {
                     this.elements.$pips[i].classList.add('now')
                     this.elements.$next.disabled = false
-                }, i * 200 + 800)
+                }, i * 80 + 800)
             }
         }
 
@@ -693,12 +780,12 @@ let game = {
             this.elements.$gate.disabled = true
             setTimeout(() => {
                 this.addIcon('gate', this.data.day + this.data.gateCooldown)
-            }, this.data.day * 200 + 1500)
+            }, this.data.day * 80 + 1500)
         }
 
         setTimeout(() => {
             this.addIcon('logus', 29)
-        }, this.data.day * 200 + 1500)
+        }, this.data.day * 80 + 1500)
 
         for (let i = 0; i < this.days; i++) {
             if (i < 10) {

@@ -2069,7 +2069,7 @@ let EVENTS = [
         "text": "Quivicar has managed to buy the Gornath Gift Shop! Perhaps we could use this to acquire more funds?",
         "options": [
             {
-                "title": "Promote the Gift Shop",
+                "title": "Promote the Quivicar's Gift Shop",
                 "outcomes": [
                     {
                         "name": "",
@@ -2086,7 +2086,7 @@ let EVENTS = [
                 ]
             },
             {
-                "title": "Condemn this capitalistic warfare!",
+                "title": "Condemn this capitalist warfare!",
                 "outcomes": [
                     {
                         "name": "",
@@ -2099,6 +2099,23 @@ let EVENTS = [
                         "intel": 0,
                         "other": "Quivicar will be angry",
                         "unlocks": "30"
+                    }
+                ]
+            },
+            {
+                "title": "Do Nothing",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 1,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
                     }
                 ]
             }
@@ -2215,6 +2232,23 @@ let EVENTS = [
                 ]
             },
             {
+                "title": "Reject Unworthy's Offer",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "Unworthy will not be pleased",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
                 "title": "Publicly condemn Iron Sorcery",
                 "outcomes": [
                     {
@@ -2226,7 +2260,7 @@ let EVENTS = [
                         "salvage": 0,
                         "wealth": 0,
                         "intel": 0,
-                        "other": "Unworthy will not be pleased",
+                        "other": "???",
                         "unlocks": ""
                     }
                 ]
@@ -2292,5 +2326,538 @@ let EVENTS = [
             }
         ],
         "id": 32
+    },
+    {
+        "title": "The Wobbly Compass",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "A group of delvers have appeared and offered to kill some demons on Gornath's behalf. Should we allow them to help?",
+        "options": [
+            {
+                "title": "Send them to the Depths",
+                "test": "d100",
+                "outcomes": [
+                    {
+                        "name": "1-25",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "???",
+                        "unlocks": "34"
+                    },
+                    {
+                        "name": "26-80",
+                        "warriors": 2,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "81-95",
+                        "warriors": 5,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 1,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "96-00",
+                        "warriors": 8,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 7,
+                        "intel": 3,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Have them join the Warriors",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 2,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 33
+    },
+    {
+        "title": "The Wayward Compass",
+        "type": "crisis",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": true,
+        "scheduled": "",
+        "text": "The Wobbly Compass has returned and has raided our defences. They must be in league with the Demons now!",
+        "options": [
+            {
+                "title": "Oh no!",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": -2,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 34
+    },
+    {
+        "title": "Bake Sale",
+        "type": "opportunity",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "One of Gornath's residents, Old Man Fibbious, has offered to run a bake sale to raise funds for the city.",
+        "options": [
+            {
+                "title": "By all means!",
+                "test": "d4",
+                "outcomes": [
+                    {
+                        "name": "1",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "2",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 1,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "3",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 3,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "4",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 8,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Raise interest",
+                "test": "DC 15 Performance",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 35
+    },
+    {
+        "title": "Mountainfolk Training",
+        "type": "galdarians",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "The Galdarians have watched our warriors train and have boasted they can improve our effectiveness. ",
+        "options": [
+            {
+                "title": "Have them design a training regimen",
+                "test": "DC 18 Warriors",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 4,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": -2,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Politely tell them to screw off",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Show off our heroes skill",
+                "test": "DC 18 Athletics",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 1,
+                        "loyalty": 1,
+                        "order": 1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 36
+    },
+    {
+        "title": "Duel of the Fates",
+        "type": "fight",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "Rumours are spreading over who amongst the party would win if they were to fight each other. Do you have the bravery to find out...?",
+        "options": [
+            {
+                "title": "Let's find out!",
+                "outcomes": [
+                    {
+                        "name": "Eideron",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 5,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Erlag",
+                        "warriors": 5,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Enkitum",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 5,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Atanasya",
+                        "warriors": 1,
+                        "loyalty": 1,
+                        "order": 1,
+                        "reverence": 1,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 1,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Corpus",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 5,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Let the rumours die out",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 37
+    },
+    {
+        "title": "God's Hammer",
+        "type": "galdarians",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "Static electricity fills the air around you...",
+        "options": [
+            {
+                "title": "???",
+                "outcomes": [
+                    {
+                        "name": "???",
+                        "warriors": 0,
+                        "loyalty": 0,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "???",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 38
+    },
+    {
+        "title": "The Chief's Birthday",
+        "type": "dilemma",
+        "rarity": "common",
+        "priority": "standard",
+        "locked": false,
+        "scheduled": "",
+        "text": "It's the chief's birthday! Ordinarily this would be a cause for celebration, but under current circumstances, it may not be as well received as normal.",
+        "options": [
+            {
+                "title": "Throw a feast",
+                "test": "DC 15 Loyalty",
+                "outcomes": [
+                    {
+                        "name": "Pass",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 2,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "Fail",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": -2,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Do nothing",
+                "outcomes": [
+                    {
+                        "name": "",
+                        "warriors": 0,
+                        "loyalty": -1,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            },
+            {
+                "title": "Put on a show in Bokaz' Honour",
+                "test": "DC 20 Performance (x3)",
+                "outcomes": [
+                    {
+                        "name": "3 Successes",
+                        "warriors": 0,
+                        "loyalty": 4,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "2 Successes",
+                        "warriors": 0,
+                        "loyalty": 2,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "1 Success",
+                        "warriors": 0,
+                        "loyalty": 1,
+                        "order": 0,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    },
+                    {
+                        "name": "No Successes",
+                        "warriors": 0,
+                        "loyalty": -2,
+                        "order": -1,
+                        "reverence": 0,
+                        "salvage": 0,
+                        "wealth": 0,
+                        "intel": 0,
+                        "other": "",
+                        "unlocks": ""
+                    }
+                ]
+            }
+        ],
+        "id": 39
     }
 ]
